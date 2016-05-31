@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.light_blue-blue.min.css" />
+    <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+    <script src="phonegap.js"></script>
+    <style>
+        @font-face {
+            font-family: "Droid";
+            src: url(fuentes/CantataOne-Regular.ttf)
+        }
+        
+        body {
+            background-image: url('img/fondo.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+        }
+        
+        #contenido {
+            width: 70%;
+            height: 60%;
+            position: absolute;
+            top: 20%;
+            left: 15%;
+        }
+        
+        #img_banner {
+            width: 100%;
+            height: auto;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div style="background:rgb(68,138,255);height:45px;color:#FFF;font-size:22px;display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;font-family:'Droid'">
+        <center> Bienvenido a </center>
+    </div>
+    <div id="contenido">
+        <img id="img_banner" src="img/logo.png">
+        <center>
+            <h6 style="color:#222;margin-top:-2%;font-size:12px;font-family:'Droid';font-weight: bold;">Bienvenido a la aplicación de servicio de atención al cliente.</h6>
+
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="width:90%;margin-bottom:3%">
+                Cliente
+            </button>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="width:90%;margin-bottom:3%">
+                No Cliente
+            </button>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" style="width:90%;margin-bottom:3%">
+                Denuncias
+            </button>
+        </center>
+        <!-- Colored FAB button -->
+        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="margin-left:20%;margin-top:5%">
+            <i class="material-icons">local_phone</i>
+        </button>
+        <!-- Colored FAB button -->
+        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" style="float:right;margin-right:20%;margin-top:5%">
+            <i class="material-icons">person_pin_circle</i>
+        </button>
+    </div>
+</body>
+
+</html>
