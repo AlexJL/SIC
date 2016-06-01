@@ -32,43 +32,43 @@
                 Bienvenidos a
             </center>
         </div>
-        <div id="contenido">
-            <div id="contenedor-logo">
-                <img id="logo" src="img/logo.png" />
-            </div>
-            <center>
-                <p id="titulo-app" style="font-family:'Yanone Kaffeesatz'">Bienvenido a la aplicación de servicio de atención al cliente.</p>
-            </center>
-            <div class="button raised blue" onclick="irLogin()" style="height:35px">
-                <div class="center" fit>Clientes</div>
-                <paper-ripple fit></paper-ripple>
-            </div>
-            <div class="button raised blue" onclick="irNoClientes()" style="height:35px">
-                <div class="center" fit>No Clientes</div>
-                <paper-ripple fit></paper-ripple>
-            </div>
-            <div class="button raised blue" onclick="camara(1)" style="height:35px">
-                <div class="center" fit>Denuncias</div>
-                <paper-ripple fit></paper-ripple>
-            </div>
-            <div class="fab red" style="background:#6EA976 !important">
-                <a href="tel://044480555" style="color:#FFF">
-                    <core-icon icon="add">
-
-                        <i class="fa fa-volume-control-phone fa-2x" aria-hidden="true" style="margin-left: 25px;margin-top: 15px;text-shadow:none"></i>
-                    </core-icon>
-                    <paper-ripple class="circle recenteringTouch" fit>
-                    </paper-ripple>
-                </a>
-            </div>
-            <div class="fab blue" style="background:#6EA976 !important" onclick="mapa(1)">
-
-                <core-icon icon="mail">
-                    <i class="fa fa-street-view fa-2x" aria-hidden="true" style="margin-left: 22px;margin-top: 15px;text-shadow:none"></i>
-                </core-icon>
-                <paper-ripple class="circle recenteringTouch" fit></paper-ripple>
-            </div>
+        <!--<div id="contenido">-->
+        <div id="contenedor-logo">
+            <img id="logo" src="img/logo.png" />
         </div>
+        <center>
+            <p id="titulo-app" style="font-family:'Yanone Kaffeesatz'">Bienvenido a la aplicación de servicio de atención al cliente.</p>
+        </center>
+        <div class="button raised blue" onclick="irLogin()" style="height:35px">
+            <div class="center" fit>Clientes</div>
+            <paper-ripple fit></paper-ripple>
+        </div>
+        <div class="button raised blue" onclick="irNoClientes()" style="height:35px">
+            <div class="center" fit>No Clientes</div>
+            <paper-ripple fit></paper-ripple>
+        </div>
+        <div class="button raised blue" onclick="camara(1)" style="height:35px">
+            <div class="center" fit>Denuncias</div>
+            <paper-ripple fit></paper-ripple>
+        </div>
+        <div class="fab red" style="background:#6EA976 !important">
+            <a href="tel://044480555" style="color:#FFF">
+                <core-icon icon="add">
+
+                    <i class="fa fa-volume-control-phone fa-2x" aria-hidden="true" style="margin-left: 25px;margin-top: 15px;text-shadow:none"></i>
+                </core-icon>
+                <paper-ripple class="circle recenteringTouch" fit>
+                </paper-ripple>
+            </a>
+        </div>
+        <div class="fab blue" style="background:#6EA976 !important" onclick="mapa(1)">
+
+            <core-icon icon="mail">
+                <i class="fa fa-street-view fa-2x" aria-hidden="true" style="margin-left: 22px;margin-top: 15px;text-shadow:none"></i>
+            </core-icon>
+            <paper-ripple class="circle recenteringTouch" fit></paper-ripple>
+        </div>
+        <!--</div>-->
         <div id="footer">
             Sedalib S.A.
         </div>
@@ -80,25 +80,25 @@
             <span class="banner">Login</span>
         </div>
         <div data-role="content">
-            <div id="contenido1">
-                <label for="">Correo Electronico</label>
-                <input data-role="none" class="input_login" type="text" style="background:rgba(1,1,1,0);margin-bottom:15px;text-shadow:none" placeholder="Escriba su correo">
-                <label for="">Contraseña</label>
-                <input data-role="none" class="input_login" type="password" style="background:rgba(1,1,1,0);margin-bottom:20px" placeholder="Escriba su contraseña">
-                <div class="button raised blue" onclick="irclientes()" style="height:40px">
-                    <div class="center" fit>Ingresar</div>
-                    <paper-ripple fit></paper-ripple>
-                </div>
-                <div class="button raised blue" onclick="" style="height:40px;background:#6EA976 !important">
-                    <div class="center" fit>Registrate</div>
-                    <paper-ripple fit></paper-ripple>
-                </div>
-                <div style="margin-top:-10px">
-                    <center>
-                        <h4>¿Se te olvido la Contraseña? &nbsp;&nbsp;<a style="font-size:20px"> Entra Aquí</a></h4>
-                    </center>
-                </div>
+            <!--<div id="contenido1">-->
+            <label for="">Correo Electronico</label>
+            <input data-role="none" class="input_login" type="text" style="background:rgba(1,1,1,0);margin-bottom:15px;text-shadow:none" placeholder="Escriba su correo">
+            <label for="">Contraseña</label>
+            <input data-role="none" class="input_login" type="password" style="background:rgba(1,1,1,0);margin-bottom:20px" placeholder="Escriba su contraseña">
+            <div class="button raised blue" onclick="irclientes()" style="height:40px">
+                <div class="center" fit>Ingresar</div>
+                <paper-ripple fit></paper-ripple>
             </div>
+            <div class="button raised blue" onclick="" style="height:40px;background:#6EA976 !important">
+                <div class="center" fit>Registrate</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
+            <div style="margin-top:-10px">
+                <center>
+                    <h4>¿Se te olvido la Contraseña? &nbsp;&nbsp;<a style="font-size:20px"> Entra Aquí</a></h4>
+                </center>
+            </div>
+            <!--</div>-->
         </div>
         <div data-role="footer" data-position="fixed"></div>
     </div>
