@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
     <widget xmlns   = "http://www.w3.org/ns/widgets"
         xmlns:gap   = "http://phonegap.com/ns/1.0"
-        id          = "com.sedalib.jleon"
+        id          = "com.sedalib.sic"
         versionCode = "1" 
         version     = "2.0.0" >
 
     <!-- versionCode is optional and Android only -->
 
-    <name>SIC_beta</name>
+    <name>SIC</name>
 
     <description>
         Sistema de Información movil
     </description>
 
-    <author href="https://www.sedalib.com.pe" email="jleon@sedalib.com">
+    <author href="https://www.sedalib.com.pe" email="aleon.ortecho@hotmail.com">
         SGII - Sedalib S.A.
     </author>
         
