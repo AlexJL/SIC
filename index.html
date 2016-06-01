@@ -82,10 +82,10 @@
         <div data-role="content">
             <div id="contenido1">
                 <label for="">Correo Electronico</label>
-                <input data-role="none" class="input_login" type="text" style="background:rgba(1,1,1,0);margin-bottom:15px;text-shadow:none" placeholder="Escriba su correo">
+                <input data-role="none" class="input_login" id="txt-email" type="text" style="background:rgba(1,1,1,0);margin-bottom:15px;text-shadow:none" placeholder="Escriba su correo">
                 <label for="">Contraseña</label>
-                <input data-role="none" class="input_login" type="password" style="background:rgba(1,1,1,0);margin-bottom:20px" placeholder="Escriba su contraseña">
-                <div class="button raised blue" onclick="irclientes()" style="height:40px">
+                <input data-role="none" id="txt-pass" class="input_login" type="password" style="background:rgba(1,1,1,0);margin-bottom:20px" placeholder="Escriba su contraseña">
+                <div class="button raised blue" onclick="login()" style="height:40px">
                     <div class="center" fit>Ingresar</div>
                     <paper-ripple fit></paper-ripple>
                 </div>
@@ -157,7 +157,9 @@
     -->
     <div data-role="page" id="usuarios">
         <div data-role="header" style="height:45px">
-            <h1>SIC</h1>
+            <h1 style="font-family: 'Yanone Kaffeesatz';    font-size: 28px;
+    text-shadow: none;
+    margin-top: 6px;">SIC</h1>
             <a href="#left-panel" data-role="none" style="color:#FFF;margin-left: 10px;margin-top: 5px;">
                 <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
             </a>
@@ -165,24 +167,93 @@
         <!-- /header -->
 
         <div data-role="content">
+            <div class="card1">
+                <table width="100%">
+                    <tr>
+                        <td colspan="2" style="    font-size: 24px;
+    text-align: center;">
+                            Debe: <span style="color:#296fb7;font-size:30px" id="cantidad_cliente"> </span> Recibo(s)
+                            <br> Deuda: S./ <span style="color:#296fb7;font-size:30px" id="deuda_cliente"> 20.00</span>
+                            <br>
+                            <img src="img/alegre.gif">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align:center">
+                            <span style="    font-size: 18px;
+    letter-spacing: 1px;float:ri">Fch. Vencimiento: </span>
+                            <span style="    letter-spacing: 1.5px;
+    color:#296fb7;font-size:26px" id="vencimiento"> </span></td>
+                    </tr>
 
+                    <tr>
+                        <td colspan="2" style="text-align:center"><span style="    font-size: 18px;
+    letter-spacing: 1px;padding-left:10px">Fch. Corte: </span>
+                            <span style="    letter-spacing: 1.5px;
+                                     color:#296fb7;font-size:26px" id="corte"></span></td>
+                    </tr>
+                </table>
+                <script>
+                    if (localStorage.getItem("cantidad_cliente")) {
+                        document.getElementById("cantidad_cliente").innerHTML = localStorage.getItem("cantidad_cliente");
+                    }
+                    if (localStorage.getItem("fchVencimiento_cliente") && localStorage.getItem("fchCorte_cliente")) {
+                        document.getElementById("vencimiento").innerHTML = localStorage.getItem("fchVencimiento_cliente");
+                        document.getElementById("corte").innerHTML = localStorage.getItem("fchCorte_cliente");
+                    } else {
+                        document.getElementById("vencimiento").innerHTML = "AL DÍA";
+                        document.getElementById("corte").innerHTML = "AL DÍA";
+                    }
+
+                </script>
+            </div>
+            <table id="tabla">
+                <tr>
+                    <th>
+                        <a onclick="camara(3)"><img src="img/denuncia1.png">
+                            <h1>DENUNCIAS</h1></a>
+                    </th>
+                    <th>
+                        <a onclick="pagos()"><img src="img/pagosonline.png">
+                            <h1>PAGOS ONLINE</h1></a>
+                    </th>
+                    <th>
+                        <a href="tel:044480555"><img src="img/llamar1.png">
+                            <h1>EMERGENCIA</h1></a>
+                    </th>
+                </tr>
+            </table>
         </div>
         <!-- /content -->
 
         <div data-role="panel" id="left-panel" data-scroll="y">
             <div id="contenido4">
-                <div id="left" style="width:35%;float:left;height:70px;display: flex;
+                <div id="left" style="    float: left;
+    height: 70px;
+    width: 70px;
+    display: flex;
     justify-content: center;
     align-content: center;
-    flex-direction: column;">
-                    <img src="img/albun.png" style="width:60%;height:90%;margin-left: 18%;">
+    flex-direction: column;
+    background: rgba(41, 111, 183, 0.5);
+    border-radius: 70px 70px;
+    margin-top: -10px;">
+                    <img src="img/sedalito.png" style="width:60%;height:90%;margin-left: 20%;">
                 </div>
                 <div id="right" style="float:right;width:62%;height:70px;display: flex;
     justify-content: center;
     align-content: center;
     flex-direction: column;text-shadow:none">
-                    <span style="color:#000;font-size:16px">Pedro Ruiz</span>
-                    <span style="color:#222;font-size:14px">18013801445</span>
+                    <span style="color:#000;font-size:16px" id="nombre_cliente"></span>
+
+                    <span style="color:#222;font-size:14px" id="suministro_cliente"></span>
+                    <script>
+                        if (localStorage.getItem("nombre_cliente")) {
+                            document.getElementById("nombre_cliente").innerHTML = localStorage.getItem("nombre_cliente");
+                            document.getElementById("suministro_cliente").innerHTML = localStorage.getItem("codigo_cliente");
+                        }
+
+                    </script>
                 </div>
             </div>
             <hr style="    border: none;
@@ -198,138 +269,214 @@
                     <li id="dato-menu1" class="hvr-rectangle-out" class="lista-menu">
                         <a id="enlace1" href="#estado-cuenta" onclick="estadoCuenta()">
                             <img src="img/cuenta.png" />
-                            <h3 id="text-menu">Estado de Cuenta</h3>
+                            <h3 id="text-menu" style="margin-left: -40px;">Estado de Cuenta</h3>
                         </a>
                     </li>
                     <li id="dato-menu3" class="hvr-rectangle-out" class="lista-menu">
                         <a onclick="dondepagar(1)">
                             <img src="img/dondepagar.png" />
-                            <h3 id="text-menu">Donde Pagar</h3>
+                            <h3 id="text-menu" style="margin-left: -40px;">Donde Pagar</h3>
                         </a>
                     </li>
                     <li id="dato-menu4" class="hvr-rectangle-out" class="lista-menu">
                         <a href="#consultas">
                             <img src="img/consultas.png" />
-                            <h3 id="text-menu">Consultas</h3>
+                            <h3 id="text-menu" style="margin-left: -40px;">Consultas</h3>
                         </a>
                     </li>
                     <li id="dato-menu5" class="hvr-rectangle-out" class="lista-menu">
                         <a id="ayuda1" rel="external" onclick="mapa(3)">
                             <img src="img/mapa1.png" />
-                            <h3 id="text-menu">Lugares de Atención</h3>
+                            <h3 id="text-menu" style="margin-left: -40px;">Lugares de Atención</h3>
                         </a>
                     </li>
                     <li id="dato-menu6" class="hvr-rectangle-out" class="lista-menu">
                         <a onclick="noticias(2)" id="noticias-registrado">
                             <img src="img/noticias1.png" />
-                            <h3 id="text-menu">Noticias</h3>
+                            <h3 id="text-menu" style="margin-left: -40px;">Noticias</h3>
                         </a>
                     </li>
                     <li id="dato-menu7" class="hvr-rectangle-out" class="lista-menu">
                         <a onclick="salirApp()">
                             <img src="img/salir.png" />
-                            <h3 id="text-menu">Cerrar Sesión</h3>
+                            <h3 id="text-menu" style="margin-left: -40px;">Cerrar Sesión</h3>
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
         <!-- /panel -->
-        <style>
-            #dato-menu1 .ui-icon,
-            #dato-menu2 .ui-icon,
-            #dato-menu3 .ui-icon,
-            #dato-menu4 .ui-icon,
-            #dato-menu5 .ui-icon,
-            #dato-menu6 .ui-icon,
-            #dato-menu7 .ui-icon {
-                margin-top: -22px !important
-            }
-            
-            #dato-menu,
-            #dato-menu1,
-            #dato-menu2,
-            #dato-menu3,
-            #dato-menu4,
-            #dato-menu5,
-            #dato-menu6,
-            #dato-menu7,
-            #lista-menu2 {
-                background: #FFF;
-                border: 0px;
-                color: #727272 !important;
-                font-family: 'Yanone Kaffeesatz';
-                text-transform: uppercase
-            }
-            
-            #dato-menu1,
-            #dato-menu2,
-            #dato-menu3,
-            #dato-menu4,
-            #dato-menu5,
-            #dato-menu6,
-            #dato-menu7,
-            #lista-menu2 {
-                height: 50px !important
-            }
-            
-            #text-menu:hover {
-                color: #296fb7 !important
-            }
-            
-            #dato-menu1:hover,
-            #dato-menu2:hover,
-            #dato-menu3:hover,
-            #dato-menu4:hover,
-            #dato-menu5:hover,
-            #dato-menu6:hover,
-            #dato-menu7:hover,
-            #lista-menu2:hover {
-                background: #F0F0F0 !important
-            }
-            
-            #dato-menu {
-                border-bottom: solid 1px #BBB !important;
-                border-top: solid 1px #BBB !important;
-                border-top-width: 1px !important;
-                text-transform: uppercase;
-                width: 220px !important
-            }
-            
-            #dato-menu img {
-                margin-left: 8px;
-                margin-top: 5px
-            }
-            
-            #dato-menu h3 {
-                margin-bottom: 0;
-                margin-left: 40px;
-                margin-top: 0
-            }
-            
-            #dato-menu2 a h3,
-            #dato-menu1 a h3,
-            #dato-menu4 a h3,
-            #dato-menu5 a h3,
-            #dato-menu6 a h3,
-            #dato-menu3 a h3,
-            #dato-menu7 a h3,
-            #lista-menu2 a h3 {
-                color: #727272 !important;
-            }
-            
-            #dato-menu1 a img,
-            #dato-menu2 a img,
-            #dato-menu3 a img,
-            #dato-menu4 a img,
-            #dato-menu5 a img,
-            #dato-menu6 a img,
-            #dato-menu7 a img {
-                margin-left: 6px !important;
-                margin-top: 10px !important
-            }
+    </div>
 
-        </style>
+
+    <!--
+    --
+    -- Estado de Cuenta
+    --
+    -->
+    <div data-role="page" id="estadoCuenta">
+        <div data-role="header" data-position="fixed">
+            <a href="#usuarios" data-role="none"><img data-role="none" src="img/back.png"></a>
+            <span class="banner"><img src="img/logo.png" height="50"></span>
+        </div>
+        <div data-role="content">
+            <h3 id="rec-pend" data-role="none">Información del Cliente</h3>
+            <hr class="sub-hr">
+            <div id="datos-generales">
+                <p class="nota1">
+                    <i class="subnota1">Suministro</i>
+                    <STRONG>
+						<i class="subnota2" id="suministro"></i>
+					</STRONG>
+                </p>
+                <p class="nota1">
+                    <i class="subnota1">Usuario</i>
+                    <STRONG>
+						<i class="subnota2" id="usuario"></i>
+					</STRONG>
+                </p>
+                <p class="nota1">
+                    <i class="subnota1">Localidad</i>
+                    <STRONG>
+						<i class="subnota2" id="localidad"></i>
+					</STRONG>
+                </p>
+                <p class="nota1">
+                    <i class="subnota1">Dirección</i>
+                    <STRONG>
+						<i class="subnota2" id="direccion"></i>
+					</STRONG>
+                </p>
+                <p class="nota1">
+                    <i class="subnota1">Estado Conexión</i>
+                    <STRONG>
+						<i class="subnota2" id="conexion"></i>
+					</STRONG>
+                </p>
+                <p class="nota1">
+                    <i class="subnota1">Tarifa</i>
+                    <STRONG>
+						<i class="subnota2" id="tarifa"></i>
+					</STRONG>
+                </p>
+                <p class="nota1">
+                    <i class="subnota1">Medidor</i>
+                    <STRONG>
+						<i class="subnota2" id="medidor"></i>
+					</STRONG>
+                </p>
+                <p class="nota1">
+                    <i class="subnota1" style="color:#296fb7">(A) TOTAL RECIBOS PENDIENTES </i>
+                    <STRONG>
+						<i class="subnota2" id="recibospendientes"></i>
+					</STRONG>
+                </p>
+                <p class="nota1">
+                    <i class="subnota1" style="color:#296fb7">(B) TOTAL NOTAS DÉBITO </i>
+                    <STRONG>
+						<i class="subnota2" id="notasdebito"></i>
+					</STRONG>
+                </p>
+                <p class="nota1">
+                    <i class="subnota1" style="color:#296fb7">(C) TOTAL NOTAS CRÉDITO </i>
+                    <STRONG>
+						<i class="subnota2" id="notascredito"></i>
+					</STRONG>
+                </p>
+                <p class="nota1">
+                    <i class="subnota1" style="color:#296fb7">(D) DEUDA CAPITAL (A+B-C) </i>
+                    <STRONG>
+						<i class="subnota2" id="deudacapital"></i>
+					</STRONG>
+                </p>
+                <p class="nota1">
+                    <i class="subnota1" style="color:#296fb7">(E) TOTAL CUOTAS POR EMITIR </i>
+                    <STRONG>
+						<i class="subnota2" id="cuotasemitir"></i>
+					</STRONG>
+                </p>
+                <p class="nota1">
+                    <i class="subnota1" style="color:#296fb7">(F) TOTAL GASTOS COBRANZA + IGV</i>
+                    <STRONG>
+						<i class="subnota2" id="tgastoscobranza"></i>
+					</STRONG>
+                </p>
+                <p class="nota1">
+                    <i class="subnota1" style="color:#296fb7">(G) TOTAL INTERÉS</i>
+                    <STRONG>
+						<i class="subnota2" id="interese"></i>
+					</STRONG>
+                </p>
+                <p class="nota1">
+                    <i class="subnota1" style="color:#296fb7">(H) TOTAL INTERÉS IGV</i>
+                    <STRONG>
+						<i class="subnota2" id="totalinterese"></i>
+					</STRONG>
+                </p>
+                <p class="nota1">
+                    <i class="subnota1">
+						<i style="color:#FF0000;font-style:normal">TOTAL DEUDA</i> (D+E+F+G+H)
+                    </i>
+                    <STRONG>
+						<i class="subnota2" id="deudatotal"></i>
+					</STRONG>
+                </p>
+            </div>
+            <table id="table1">
+                <tr>
+                    <th>
+                        <a onclick="recibospendientes(1)">
+                            <img src="img/recibo.png">
+                            <br>
+                            <span>RECIBOS PENDIENTES</span>
+                        </a>
+                    </th>
+                    <th>
+                        <a onclick="consumos(1)">
+                            <img src="img/grafico.png">
+                            <br>
+                            <span>CONSUMOS</span></a>
+                    </th>
+                    <th>
+                        <a onclick="cuotasxemitir(1)">
+                            <img src="img/cuotasxemitir.png">
+                            <br>
+                            <span>CUOTAS POR EMITIR</span>
+                        </a>
+                    </th>
+                </tr>
+            </table>
+            <i id="informacion">La información aun no incluye los pagos realizados depués del 
+				<strong>
+					<i id="fpago"></i>. Ignore la deuda si está al día en sus pagos.
+            </strong>
+            </i>
+            <script>
+                document.getElementById("suministro").innerHTML = localStorage.getItem("clicodigo");
+                document.getElementById("usuario").innerHTML = localStorage.getItem("clinombre");
+                document.getElementById("localidad").innerHTML = localStorage.getItem("localidad");
+                document.getElementById("direccion").innerHTML = localStorage.getItem("direccion");
+                document.getElementById("conexion").innerHTML = localStorage.getItem("conexion");
+                document.getElementById("tarifa").innerHTML = localStorage.getItem("tarifa");
+                document.getElementById("medidor").innerHTML = localStorage.getItem("medidor");
+                document.getElementById("medidor").innerHTML = localStorage.getItem("medidor");
+                document.getElementById("medidor").innerHTML = localStorage.getItem("medidor");
+                document.getElementById("recibospendientes").innerHTML = localStorage.getItem("recibospendientes");
+                document.getElementById("notasdebito").innerHTML = localStorage.getItem("notasdebito");
+                document.getElementById("notascredito").innerHTML = localStorage.getItem("notascredito");
+                document.getElementById("deudacapital").innerHTML = localStorage.getItem("deudacapital");
+                document.getElementById("cuotasemitir").innerHTML = localStorage.getItem("cuotasemitir");
+                document.getElementById("tgastoscobranza").innerHTML = localStorage.getItem("tgastoscobranza");
+                document.getElementById("interese").innerHTML = localStorage.getItem("interese");
+                document.getElementById("totalinterese").innerHTML = localStorage.getItem("totalinterese");
+                document.getElementById("deudatotal").innerHTML = localStorage.getItem("deudatotal");
+                document.getElementById("fpago").innerHTML = localStorage.getItem("fecha") + " - " + localStorage.getItem("hora");
+
+            </script>
+        </div>
+        <div data-role="footer" data-position="fixed" class="footer-page">
+            <h3 class="empresa">&copy; Sedalib S.A. - 2016</h3>
+        </div>
     </div>
 </body>
 

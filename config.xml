@@ -22,7 +22,7 @@
 
         <preference name="permissions" value="none" />
         <preference name="phonegap-version" value="3.7.0" />
-        <preference name="orientation" value="default" />
+        <preference name="orientation" value="portrait" />
         <preference name="target-device" value="universal" />
         <preference name="fullscreen" value="true" />
         <preference name="webviewbounce" value="true" />
@@ -37,7 +37,7 @@
         <preference name="android-minSdkVersion" value="15" />
         <preference name="android-installLocation" value="auto" />
         <preference name="SplashScreen" value="screem" />
-        <preference name="SplashScreenDelay" value="9000" />
+        <preference name="SplashScreenDelay" value="7000" />
         <gap:plugin name="org.apache.cordova.battery-status" />
         <gap:plugin name="org.apache.cordova.camera" />
         <gap:plugin name="org.apache.cordova.media-capture" />

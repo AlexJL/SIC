@@ -257,6 +257,89 @@
 **Pagina de Usuarios
 **********************************************************/
 
+#dato-menu1 .ui-icon,
+#dato-menu2 .ui-icon,
+#dato-menu3 .ui-icon,
+#dato-menu4 .ui-icon,
+#dato-menu5 .ui-icon,
+#dato-menu6 .ui-icon,
+#dato-menu7 .ui-icon {
+    margin-top: -22px !important
+}
+#dato-menu,
+#dato-menu1,
+#dato-menu2,
+#dato-menu3,
+#dato-menu4,
+#dato-menu5,
+#dato-menu6,
+#dato-menu7,
+#lista-menu2 {
+    background: #FFF;
+    border: 0px;
+    color: #727272 !important;
+    font-family: 'Yanone Kaffeesatz';
+    text-transform: uppercase
+}
+#dato-menu1,
+#dato-menu2,
+#dato-menu3,
+#dato-menu4,
+#dato-menu5,
+#dato-menu6,
+#dato-menu7,
+#lista-menu2 {
+    height: 50px !important
+}
+#text-menu:hover {
+    color: #296fb7 !important
+}
+#dato-menu1:hover,
+#dato-menu2:hover,
+#dato-menu3:hover,
+#dato-menu4:hover,
+#dato-menu5:hover,
+#dato-menu6:hover,
+#dato-menu7:hover,
+#lista-menu2:hover {
+    background: #F0F0F0 !important
+}
+#dato-menu {
+    border-bottom: solid 1px #BBB !important;
+    border-top: solid 1px #BBB !important;
+    border-top-width: 1px !important;
+    text-transform: uppercase;
+    width: 220px !important
+}
+#dato-menu img {
+    margin-left: 8px;
+    margin-top: 5px
+}
+#dato-menu h3 {
+    margin-bottom: 0;
+    margin-left: 40px;
+    margin-top: 0
+}
+#dato-menu2 a h3,
+#dato-menu1 a h3,
+#dato-menu4 a h3,
+#dato-menu5 a h3,
+#dato-menu6 a h3,
+#dato-menu3 a h3,
+#dato-menu7 a h3,
+#lista-menu2 a h3 {
+    color: #727272 !important;
+}
+#dato-menu1 a img,
+#dato-menu2 a img,
+#dato-menu3 a img,
+#dato-menu4 a img,
+#dato-menu5 a img,
+#dato-menu6 a img,
+#dato-menu7 a img {
+    margin-left: 6px !important;
+    margin-top: 10px !important
+}
 usuarios .ui-body-c {
     border: solid 1px #FFF !important
 }
@@ -282,4 +365,32 @@ usuarios .ui-body-c {
     position: absolute;
     left: 5%;
     font-family: 'Yanone Kaffeesatz';
+}
+.card1 {
+    position: relative;
+    display: inline-block;
+    width: 90%;
+    height: 240px;
+    vertical-align: top;
+    background-color: #fff;
+    box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24);
+    left: 5%;
+    background: #4CAF50 !important;
+    text-shadow: none;
+    font-family: 'Yanone Kaffeesatz';
+    color: #FFF;
+}
+#tabla {
+    margin-top: 20px;
+    width: 100%
+}
+#tabla tr th {
+    width: 33%
+}
+#tabla tr th h1 {
+    font-family: 'Yanone Kaffeesatz';
+    font-size: 15px
+}
+#tabla tr th a {
+    text-decoration: none
 }

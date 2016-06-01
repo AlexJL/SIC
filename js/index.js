@@ -76,13 +76,13 @@ function verDialogo() {
     }
 }
 
-function irclientes() {
+/*function irclientes() {
     $.mobile.changePage("#usuarios", {
         transition: "",
         reverse: true,
         changeHash: true
     });
-}
+}*/
 
 function irLogin() {
     $.mobile.changePage("#login", {
@@ -175,97 +175,141 @@ function login() {
 }
 
 function onSuccess(data) {
-    if (data == "$$$$$$$$$$$$0$$$$$$") {
-        alert("USUARIO O CONTRASEÑA INVALIDO");
-        $.mobile.changePage("index.html#login", {
-            reverse: false,
-            changeHash: true
-        });
+    a = JSON.parse(data);
+    console.log(a);
+    if (a[0] == 0) {
+        //usuauio invalido
     } else {
-        var j = 0;
-        clinombre = "";
-        clicodigo = "";
-        clisuministro = "";
-        clideuda = "";
-        clifechavencimiento = "";
-        clicantidad = "";
-        clifechacorte = "";
-        clihora = "";
-        clifecha = "";
-        clidireccion;
-        for (var i = 0; i < data.length; i++) {
-            if (data.charAt(i) != "$" && j == 0) {
-                clifecha = clifecha + data.charAt(i);
-            } else if (data.charAt(i) != "$" && j == 1) {
-                clihora = clihora + data.charAt(i);
-            } else if (data.charAt(i) != "$" && j == 2) {
-                clidireccion = clidireccion + data.charAt(i);
-            } else if (data.charAt(i) != "$" && j == 3) {
-                clicodigo = clicodigo + data.charAt(i);
-            } else if (data.charAt(i) != "$" && j == 4) {
-                if (data.charCodeAt(i) >= 48 && data.charCodeAt(i) <= 57) {
-                    clisuministro = clisuministro + data.charAt(i);
-                } else {
-                    clinombre = clinombre + data.charAt(i);
-                }
-            } else if (data.charAt(i) != "$" && j == 5) {
-                clideuda = clideuda + data.charAt(i);
-            } else if (data.charAt(i) != "$" && j == 6) {
-                clicantidad = clicantidad + data.charAt(i);
-            } else if (data.charAt(i) != "$" && j == 7) {
-                clifechavencimiento = clifechavencimiento + data.charAt(i);
-            } else if (data.charAt(i) != "$" && j == 8) {
-                clifechacorte = clifechacorte + data.charAt(i)
-            } else {
-                j++;
-                i++;
-            }
-        }
-        localStorage.setItem("clicodigo", clicodigo);
-        localStorage.setItem("clisuministro", clisuministro);
-        localStorage.setItem("clinombre", clinombre);
-        localStorage.setItem("clideuda", parseFloat(clideuda));
-        localStorage.setItem("clicantidad", clicantidad);
-        localStorage.setItem("clifechavencimiento", clifechavencimiento);
-        localStorage.setItem("clifechacorte", clifechacorte);
-        localStorage.setItem("clidireccion", clidireccion);
-        var dia1 = clifecha.substring(0, 2);
-        var mes1 = clifecha.substring(3, 6);
-        var anio1 = clifecha.substring(7, 10);
-        mes1 = cambiarMes(mes1);
-        localStorage.setItem("clifecha", dia1 + "-" + mes1 + "-" + anio1);
-        localStorage.setItem("clihora", clihora);
-        document.getElementById("nom-user").innerHTML = localStorage.getItem("clinombre");
-        document.getElementById("cantrecibos").innerHTML = localStorage.getItem('clicantidad');
-        if (localStorage.getItem("clideuda") == "0") {
-            document.getElementById("deuda-actual").innerHTML = "0.00";
-            document.getElementById("fecha1").innerHTML = "AL DÍA";
-            document.getElementById("fecha2").innerHTML = "AL DÍA";
+        if (a.length > 7) {
+            localStorage.setItem('fecha_actualizacion', a[0])
+            localStorage.setItem('hora_actualizacion', a[1])
+            localStorage.setItem('direccion_cliente', a[2])
+            localStorage.setItem('codigo_cliente', a[3])
+            localStorage.setItem('deuda_cliente', a[5])
+            localStorage.setItem('cantidad_cliente', a[6])
+            localStorage.setItem('fchVencimiento_cliente', a[7])
+            localStorage.setItem('fchCorte_cliente', a[8])
+            separar_nombre(a[4]);
         } else {
-            var deuda = Math.round(localStorage.getItem("clideuda") * 100) / 100;
-            document.getElementById("deuda-actual").innerHTML = deuda;
-            document.getElementById("fecha1").innerHTML = localStorage.getItem("clifechavencimiento");
-            document.getElementById("fecha2").innerHTML = localStorage.getItem("clifechacorte");
+            localStorage.setItem('fecha_actualizacion', a[0])
+            localStorage.setItem('hora_actualizacion', a[1])
+            localStorage.setItem('direccion_cliente', a[2])
+            localStorage.setItem('codigo_cliente', a[3])
+            localStorage.setItem('deuda_cliente', a[5])
+            localStorage.setItem('cantidad_cliente', a[6])
+            separar_nombre(a[4]);
         }
-        if (localStorage.getItem('clicantidad') == 0) {
-            document.getElementById('deuda').style.background = "#01FF02";
-            document.getElementById('cara').src = "img/alegre.gif";
-        } else if (localStorage.getItem('cant') > 0 || localStorage.getItem('cant') <= 2) {
-            document.getElementById('deuda').style.background = "#FFFC00";
-            document.getElementById('deuda-cliente').style.color = "#000";
-            document.getElementById('cara').src = "img/triste.gif";
-        } else {
-            document.getElementById('deuda').style.background = "#FE0002";
-            document.getElementById('cara').src = "img/triste.gif";
-        }
-        $.mobile.changePage("#usuarios", {
-            transition: "",
-            reverse: true,
-            changeHash: true
-        });
-        verPagos(localStorage.getItem("clicodigo"));
+
     }
+    document.getElementById("suministro_cliente").innerHTML = localStorage.getItem("codigo_cliente");
+    document.getElementById("cantidad_cliente").innerHTML = localStorage.getItem("cantidad_cliente");
+    document.getElementById("deuda_cliente").innerHTML = localStorage.getItem("deuda_cliente");
+    if (localStorage.getItem("fchVencimiento_cliente") && localStorage.getItem("fchCorte_cliente")) {
+        document.getElementById("vencimiento").innerHTML = localStorage.getItem("fchVencimiento_cliente");
+        document.getElementById("corte").innerHTML = localStorage.getItem("fchCorte_cliente");
+    } else {
+        document.getElementById("vencimiento").innerHTML = "AL DÍA";
+        document.getElementById("corte").innerHTML = "AL DÍA";
+    }
+
+    /*/ if (data == "$$$$$$$$$$$$0$$$$$$") {
+         alert("USUARIO O CONTRASEÑA INVALIDO");
+         $.mobile.changePage("index.html#login", {
+             reverse: false,
+             changeHash: true
+         });
+     } else {
+         clidireccion;
+         for (var i = 0; i < data.length; i++) {
+             if (data.charAt(i) != "$" && j == 0) {
+                 clifecha = clifecha + data.charAt(i);
+             } else if (data.charAt(i) != "$" && j == 1) {
+                 clihora = clihora + data.charAt(i);
+             } else if (data.charAt(i) != "$" && j == 2) {
+                 clidireccion = clidireccion + data.charAt(i);
+             } else if (data.charAt(i) != "$" && j == 3) {
+                 clicodigo = clicodigo + data.charAt(i);
+             } else if (data.charAt(i) != "$" && j == 4) {
+                 if (data.charCodeAt(i) >= 48 && data.charCodeAt(i) <= 57) {
+                     clisuministro = clisuministro + data.charAt(i);
+                 } else {
+                     clinombre = clinombre + data.charAt(i);
+                 }
+             } else if (data.charAt(i) != "$" && j == 5) {
+                 clideuda = clideuda + data.charAt(i);
+             } else if (data.charAt(i) != "$" && j == 6) {
+                 clicantidad = clicantidad + data.charAt(i);
+             } else if (data.charAt(i) != "$" && j == 7) {
+                 clifechavencimiento = clifechavencimiento + data.charAt(i);
+             } else if (data.charAt(i) != "$" && j == 8) {
+                 clifechacorte = clifechacorte + data.charAt(i)
+             } else {
+                 j++;
+                 i++;
+             }
+         }
+         /*localStorage.setItem("clicodigo", clicodigo);
+         localStorage.setItem("clisuministro", clisuministro);
+         localStorage.setItem("clinombre", clinombre);
+         localStorage.setItem("clideuda", parseFloat(clideuda));
+         localStorage.setItem("clicantidad", clicantidad);
+         localStorage.setItem("clifechavencimiento", clifechavencimiento);
+         localStorage.setItem("clifechacorte", clifechacorte);
+         localStorage.setItem("clidireccion", clidireccion);
+         var dia1 = clifecha.substring(0, 2);
+         var mes1 = clifecha.substring(3, 6);
+         var anio1 = clifecha.substring(7, 10);
+         mes1 = cambiarMes(mes1);
+         localStorage.setItem("clifecha", dia1 + "-" + mes1 + "-" + anio1);
+         localStorage.setItem("clihora", clihora);
+         document.getElementById("nom-user").innerHTML = localStorage.getItem("clinombre");
+         document.getElementById("cantrecibos").innerHTML = localStorage.getItem('clicantidad');
+         if (localStorage.getItem("clideuda") == "0") {
+             document.getElementById("deuda-actual").innerHTML = "0.00";
+             document.getElementById("fecha1").innerHTML = "AL DÍA";
+             document.getElementById("fecha2").innerHTML = "AL DÍA";
+         } else {
+             var deuda = Math.round(localStorage.getItem("clideuda") * 100) / 100;
+             document.getElementById("deuda-actual").innerHTML = deuda;
+             document.getElementById("fecha1").innerHTML = localStorage.getItem("clifechavencimiento");
+             document.getElementById("fecha2").innerHTML = localStorage.getItem("clifechacorte");
+         }
+         if (localStorage.getItem('clicantidad') == 0) {
+             document.getElementById('deuda').style.background = "#01FF02";
+             document.getElementById('cara').src = "img/alegre.gif";
+         } else if (localStorage.getItem('cant') > 0 || localStorage.getItem('cant') <= 2) {
+             document.getElementById('deuda').style.background = "#FFFC00";
+             document.getElementById('deuda-cliente').style.color = "#000";
+             document.getElementById('cara').src = "img/triste.gif";
+         } else {
+             document.getElementById('deuda').style.background = "#FE0002";
+             document.getElementById('cara').src = "img/triste.gif";
+         }*/
+    $.mobile.changePage("#usuarios", {
+        transition: "",
+        reverse: true,
+        changeHash: true
+    });
+    //verPagos(localStorage.getItem("clicodigo"));
 }
+
+function separar_nombre(a) {
+    var suministro_cliente = "";
+    var nombre_cliente = "";
+    for (var i = 0; i < a.length; i++) {
+        if (a.charCodeAt(i) >= 48 && a.charCodeAt(i) <= 57) {
+            suministro_cliente = suministro_cliente + a.charAt(i);
+        } else {
+            nombre_cliente = nombre_cliente + a.charAt(i);
+        }
+    }
+    localStorage.setItem('suministro_cliente', suministro_cliente)
+    localStorage.setItem('nombre_cliente', nombre_cliente)
+    document.getElementById("nombre_cliente").innerHTML = localStorage.getItem("nombre_cliente");
+
+}
+
+
 
 function verPagos(cod) {
     $.ajax({
@@ -295,16 +339,21 @@ function salirApp() {
 }
 
 function estadoCuenta() {
-    var codigo = localStorage.getItem('clicodigo');
-    $.ajax({
-        type: "POST",
-        url: conexion + "estado-cuenta.php",
-        data: ({
-            cod: codigo
-        }),
-        cache: false,
-        dataType: "text",
-        success: onSuccess1
+    /* var codigo = localStorage.getItem('clicodigo');
+     $.ajax({
+         type: "POST",
+         url: conexion + "estado-cuenta.php",
+         data: ({
+             cod: codigo
+         }),
+         cache: false,
+         dataType: "text",
+         success: onSuccess1
+     });*/
+    $.mobile.changePage("#estadoCuenta", {
+        transition: "",
+        reverse: true,
+        changeHash: true
     });
 }
 
