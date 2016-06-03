@@ -60,40 +60,38 @@
                 Bienvenidos a
             </center>
         </div>
-        <div id="contenido">
-            <div id="contenedor-logo">
-                <img id="logo" src="img/logo.png" />
-            </div>
-            <center>
-                <p id="titulo-app">Bienvenido a la aplicación de servicio de atención al cliente.</p>
-            </center>
-            <div class="button raised blue" onclick="irLogin()" style="height:35px">
-                <div class="center" fit>Clientes</div>
-                <paper-ripple fit></paper-ripple>
-            </div>
-            <div class="button raised blue" onclick="irNoClientes()" style="height:35px">
-                <div class="center" fit>No Clientes</div>
-                <paper-ripple fit></paper-ripple>
-            </div>
-            <div class="button raised blue" onclick="camara(1)" style="height:35px">
-                <div class="center" fit>Denuncias</div>
-                <paper-ripple fit></paper-ripple>
-            </div>
-            <div class="fab green">
-                <a href="tel://044480555">
-                    <core-icon icon="add">
-                        <i id="icon_phone" class="fa fa-volume-control-phone fa-2x" aria-hidden="true"></i>
-                    </core-icon>
-                    <paper-ripple class="circle recenteringTouch" fit>
-                    </paper-ripple>
-                </a>
-            </div>
-            <div class="fab green1" onclick="mapa(1)">
-                <core-icon icon="mail">
-                    <i class="fa fa-street-view fa-2x" id="icon_map" aria-hidden="true"></i>
+        <div id="contenedor-logo">
+            <img id="logo" src="img/logo.png" />
+        </div>
+        <center>
+            <p id="titulo-app">Bienvenido a la aplicación de servicio de atención al cliente.</p>
+        </center>
+        <div class="button raised blue" onclick="irLogin()" style="height:35px">
+            <div class="center" fit>Clientes</div>
+            <paper-ripple fit></paper-ripple>
+        </div>
+        <div class="button raised blue" onclick="irNoClientes()" style="height:35px">
+            <div class="center" fit>No Clientes</div>
+            <paper-ripple fit></paper-ripple>
+        </div>
+        <div class="button raised blue" onclick="camara(1)" style="height:35px">
+            <div class="center" fit>Denuncias</div>
+            <paper-ripple fit></paper-ripple>
+        </div>
+        <div class="fab green">
+            <a href="tel://044480555">
+                <core-icon icon="add">
+                    <i id="icon_phone" class="fa fa-volume-control-phone fa-2x" aria-hidden="true"></i>
                 </core-icon>
-                <paper-ripple class="circle recenteringTouch" fit></paper-ripple>
-            </div>
+                <paper-ripple class="circle recenteringTouch" fit>
+                </paper-ripple>
+            </a>
+        </div>
+        <div class="fab green1" onclick="mapa(1)">
+            <core-icon icon="mail">
+                <i class="fa fa-street-view fa-2x" id="icon_map" aria-hidden="true"></i>
+            </core-icon>
+            <paper-ripple class="circle recenteringTouch" fit></paper-ripple>
         </div>
         <div id="footer">
             Sedalib S.A.
@@ -112,26 +110,26 @@
             <span class="banner">Login</span>
         </div>
         <div data-role="content">
-            <div id="contenido1">
-                <label for="">Correo Electronico</label>
-                <input data-role="none" class="input_login" id="txt-email" type="text" placeholder="Escriba su correo">
-                <label for="">Contraseña</label>
-                <input data-role="none" id="txt-pass" class="input_login" type="password" placeholder="Escriba su contraseña">
-                <div class="button raised blue" id="login_ingresar" onclick="login()">
-                    <div class="center" fit>Ingresar</div>
-                    <paper-ripple fit></paper-ripple>
-                </div>
-                <div class="button raised blue" id="login_registrar" onclick="irRegistro()">
-                    <div class="center" fit>Registrate</div>
-                    <paper-ripple fit></paper-ripple>
-                </div>
-                <div id="login_olvido">
-                    <center>
-                        <h4>¿Se te olvido la Contraseña? &nbsp;&nbsp;<a> Entra Aquí</a></h4>
-                    </center>
-                </div>
+
+            <label for="">Correo Electronico</label>
+            <input data-role="none" class="input_login" id="txt-email" type="text" placeholder="Escriba su correo">
+            <label for="">Contraseña</label>
+            <input data-role="none" id="txt-pass" class="input_login" type="password" placeholder="Escriba su contraseña">
+            <div class="button raised blue" id="login_ingresar" onclick="login()">
+                <div class="center" fit>Ingresar</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
+            <div class="button raised blue" id="login_registrar" onclick="irRegistro()">
+                <div class="center" fit>Registrate</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
+            <div id="login_olvido">
+                <center>
+                    <h4>¿Se te olvido la Contraseña? &nbsp;&nbsp;<a> Entra Aquí</a></h4>
+                </center>
             </div>
         </div>
+
         <div data-role="footer" data-position="fixed"></div>
     </div>
 

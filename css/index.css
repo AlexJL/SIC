@@ -254,7 +254,11 @@ mapa_header {
 **/
 
 #login_header {
-    height: 45px
+    height: 45px;
+    margin-bottom: 20px;
+}
+#login {
+    font-family: 'Yanone Kaffeesatz';
 }
 #login_back {
     text-decoration: none;
@@ -271,7 +275,6 @@ mapa_header {
     position: absolute;
     left: 10%;
     top: 20%;
-    font-family: 'Yanone Kaffeesatz';
 }
 #txt-email {
     background: rgba(1, 1, 1, 0);

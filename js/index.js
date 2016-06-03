@@ -283,6 +283,7 @@ function onSuccess1(data) {
     localStorage.setItem("deudacapital", "S./" + deudacapital);
     localStorage.setItem("cuotasemitir", "S./" + datospersonales[10]);
     var tgastoscobranza = parseFloat(datospersonales[11]) + parseFloat(datospersonales[12]);
+    tgastoscobranza = Math.round(tgastoscobranza * 100) / 100;
     localStorage.setItem("tgastoscobranza", "S./" + tgastoscobranza);
     localStorage.setItem("interese", "S./" + datospersonales[13]);
     localStorage.setItem("totalinterese", "S./" + datospersonales[14]);
