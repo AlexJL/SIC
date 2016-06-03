@@ -5,27 +5,55 @@
     <meta charset="utf-8" />
     <title>Sistema de Información al Cliente</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <!-- CSS archivos ---->
+    <!-- 
+    --
+    -- CSS archivos
+    --    
+    -->
+    <!-- Css creados para el aplicativo: Todo el css manual-->
     <link href="css/index.css" type="text/css" rel="stylesheet" />
+    <!-- Framework para que se dapte a dispositivos moviles -->
     <link href="css/jquery.mobile-1.3.2.min.css" type="text/css" rel="stylesheet" />
+    <!-- Tema realizado para el Framework Jquery Mobile en la pagina https://themeroller.jquerymobile.com -->
     <link rel="stylesheet" href="css/temaOficial.min.css" />
+    <!-- Fuente utilizada para el aplicativo obtenida de google fonts-->
     <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:700' rel='stylesheet' type='text/css' />
+    <!-- Fuente de iconos para el aplicativo -->
     <link rel="stylesheet" href="css/font-awesome.min.css">
-    <!-- JS arvhivos -->
+    <!-- Css de el plugin de Alertas -->
+    <link rel="stylesheet" href="css/sweetalert.css">
+    <!-- 
+    --
+    -- JS arvhivos 
+    --
+    -->
+    <!-- Framework de Jquery --->
     <script src="js/jquery-1.9.1.min.js"></script>
+    <!-- Archivo creado para los eventos propios del aplicativo -->
     <script src="js/index.js" type="text/javascript"></script>
+    <!-- Plugin para las alertas del aplicativo -->
+    <script src="js/sweetalert.min.js" type="text/javascript"></script>
+    <!-- Framework para que el aplicativo se adapte a movil -->
     <script src="js/jquery.mobile-1.3.2.min.js" type="text/javascript"></script>
+    <!-- Plugin para google maps -->
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <!-- Plugin de Gmaps -->
     <script type="text/javascript" src="js/gmaps.js"></script>
+    <!-- Plugin de phonegp que nos permitira usar la arquitectura de la app-->
     <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
     <script>
+        //variable de conexión al servidor para realizar las onsultas
         var conexion = "http://pekin.sedalib.com.pe:90/SIC/";
 
     </script>
 </head>
 
 <body onload="onLoad();">
-    <!--- Página principal de la app -->
+    <!--- 
+    --
+    -- Página principal de la app. Pagina que cargara al inciar la app. 
+    --
+    -->
     <div data-role="page" id="inicio">
         <div id="header">
             <center>
@@ -37,7 +65,7 @@
                 <img id="logo" src="img/logo.png" />
             </div>
             <center>
-                <p id="titulo-app" style="font-family:'Yanone Kaffeesatz'">Bienvenido a la aplicación de servicio de atención al cliente.</p>
+                <p id="titulo-app">Bienvenido a la aplicación de servicio de atención al cliente.</p>
             </center>
             <div class="button raised blue" onclick="irLogin()" style="height:35px">
                 <div class="center" fit>Clientes</div>
@@ -51,20 +79,18 @@
                 <div class="center" fit>Denuncias</div>
                 <paper-ripple fit></paper-ripple>
             </div>
-            <div class="fab red" style="background:#6EA976 !important">
-                <a href="tel://044480555" style="color:#FFF">
+            <div class="fab green">
+                <a href="tel://044480555">
                     <core-icon icon="add">
-
-                        <i class="fa fa-volume-control-phone fa-2x" aria-hidden="true" style="margin-left: 25px;margin-top: 15px;text-shadow:none"></i>
+                        <i id="icon_phone" class="fa fa-volume-control-phone fa-2x" aria-hidden="true"></i>
                     </core-icon>
                     <paper-ripple class="circle recenteringTouch" fit>
                     </paper-ripple>
                 </a>
             </div>
-            <div class="fab blue" style="background:#6EA976 !important" onclick="mapa(1)">
-
+            <div class="fab green1" onclick="mapa(1)">
                 <core-icon icon="mail">
-                    <i class="fa fa-street-view fa-2x" aria-hidden="true" style="margin-left: 22px;margin-top: 15px;text-shadow:none"></i>
+                    <i class="fa fa-street-view fa-2x" id="icon_map" aria-hidden="true"></i>
                 </core-icon>
                 <paper-ripple class="circle recenteringTouch" fit></paper-ripple>
             </div>
@@ -73,29 +99,35 @@
             Sedalib S.A.
         </div>
     </div>
-    <!-- Página para Ingresar a la App --->
+    <!--- 
+    --
+    -- Página de login En la caul te permitira registrarte  o ingresar a la app 
+    --
+    -->
     <div data-role="page" id="login">
-        <div data-role="header" data-position="fixed" style="height: 45px">
-            <a data-role="none" href="#" onclick="volverInicio()" style="text-decoration:none;color:#FFF"><i class="fa fa-arrow-left fa-2x" aria-hidden="true" style="margin-top:5px;margin-left:5px;text-shadow:none"></i></a>
+        <div data-role="header" data-position="fixed" id="login_header">
+            <a data-role="none" id="login_back" onclick="volverInicio()">
+                <i class="fa fa-arrow-left fa-2x" aria-hidden="true" id="login_icon"></i>
+            </a>
             <span class="banner">Login</span>
         </div>
         <div data-role="content">
             <div id="contenido1">
                 <label for="">Correo Electronico</label>
-                <input data-role="none" class="input_login" id="txt-email" type="text" style="background:rgba(1,1,1,0);margin-bottom:15px;text-shadow:none" placeholder="Escriba su correo">
+                <input data-role="none" class="input_login" id="txt-email" type="text" placeholder="Escriba su correo">
                 <label for="">Contraseña</label>
-                <input data-role="none" id="txt-pass" class="input_login" type="password" style="background:rgba(1,1,1,0);margin-bottom:20px" placeholder="Escriba su contraseña">
-                <div class="button raised blue" onclick="login()" style="height:40px">
+                <input data-role="none" id="txt-pass" class="input_login" type="password" placeholder="Escriba su contraseña">
+                <div class="button raised blue" id="login_ingresar" onclick="login()">
                     <div class="center" fit>Ingresar</div>
                     <paper-ripple fit></paper-ripple>
                 </div>
-                <div class="button raised blue" onclick="" style="height:40px;background:#6EA976 !important">
+                <div class="button raised blue" id="login_registrar" onclick="irRegistro()">
                     <div class="center" fit>Registrate</div>
                     <paper-ripple fit></paper-ripple>
                 </div>
-                <div style="margin-top:-10px">
+                <div id="login_olvido">
                     <center>
-                        <h4>¿Se te olvido la Contraseña? &nbsp;&nbsp;<a style="font-size:20px"> Entra Aquí</a></h4>
+                        <h4>¿Se te olvido la Contraseña? &nbsp;&nbsp;<a> Entra Aquí</a></h4>
                     </center>
                 </div>
             </div>
@@ -103,14 +135,46 @@
         <div data-role="footer" data-position="fixed"></div>
     </div>
 
-    <!-----------
-    **
-    **Página para los clientes no registrados
-    **
-    -------------------->
+    <!--- 
+    --
+    -- Página de Registro En la caul te permitira registrarte en la aplicación 
+    --
+    -->
+    <div data-role="page" id="registro">
+        <div data-role="header" data-position="fixed">
+            <a data-role="none" id="login_back" onclick="volverLogin()">
+                <i class="fa fa-arrow-left fa-2x" aria-hidden="true" id="login_icon"></i>
+            </a>
+            <span class="banner">Registro</span>
+        </div>
+        <div data-role="content">
+            <div id="contenido3">
+                <!--<label for="">Nombre Clompleto</label>-->
+                <input data-role="none" class="input_login" id="registro_nombre" type="text" placeholder="Escriba su nombre">
+                <!--<label for="">Suministro</label>-->
+                <input data-role="none" class="input_login" id="registro_suministro" type="text" placeholder="Escriba su suministro">
+                <!--<label for="">Correo Electronico</label>-->
+                <input data-role="none" class="input_login" id="registro_correo" type="text" placeholder="Escriba su correo">
+                <input data-role="none" class="input_login" id="registro_dni" type="text" placeholder="Escriba su dni">
+                <input data-role="none" class="input_login" id="registro_celular" type="text" placeholder="Escriba su celular">
+                <div class="button raised blue" id="login_ingresar" onclick="registrar()">
+                    <div class="center" fit>Registrar</div>
+                    <paper-ripple fit></paper-ripple>
+                </div>
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed"></div>
+    </div>
+    <!--- 
+    --
+    -- Página de clientes No Registrados. En la cual te permitira usar servicios sin estar registrado 
+    --
+    -->
     <div data-role="page" id="noclientes">
-        <div data-role="header" data-position="fixed" style="height:45px">
-            <a data-role="none" href="#" onclick="volverInicio()" style="text-decoration:none;color:#FFF"><i class="fa fa-arrow-left fa-2x" aria-hidden="true" style="margin-top:5px;margin-left:5px;text-shadow:none"></i></a>
+        <div data-role="header" data-position="fixed" id="noclientes_header">
+            <a data-role="none" href="#" onclick="volverInicio()">
+                <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+            </a>
             <span class="banner">Servicios Sedalib</span>
         </div>
         <div data-role="content">
@@ -149,18 +213,158 @@
 
         </div>
     </div>
+    <!--- 
+    --
+    -- Página de donde Pagar. En la caul te permitira visualizar las sucursales de donde se paga
+    --
+    -->
+    <div data-role="page" id="dondePagar">
+        <div data-role="header" data-postion="fixed" id="dondePagar_header">
+            <a data-role="none" href="#" onclick="regresar98()">
+                <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+            </a>
+            <span class="banner">Donde Pagar</span>
+        </div>
+        <div data-role="content">
+            <div id="pattern" class="pattern">
+                <ul class="list img-list" data-role="none">
+                    <li>
+                        <a href="#" class="inner">
+                            <div class="li-img">
+                                <img src="img/logo_bcp.jpg" alt="Banco de Credito del Perú" />
+                            </div>
+                            <div class="li-text">
+                                <h4 class="li-head">Banco de Crédito del Perú</h4>
+                                <p class="li-sub">Jr. Gamarra 562 - Trujillo.
+                                    <br> También en Agentes BCP</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="inner">
+                            <div class="li-img">
+                                <img src="img/logo_interbank.png" alt="Banco Interbank" />
+                            </div>
+                            <div class="li-text">
+                                <h4 class="li-head">Banco Interbank</h4>
+                                <p class="li-sub">Jr. Gamarra 463 - Trujillo
+                                    <br>También en sucursales</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="inner">
+                            <div class="li-img">
+                                <img src="img/logo_westernunion.png" alt="Western Union" />
+                            </div>
+                            <div class="li-text">
+                                <h4 class="li-head">Western Union</h4>
+                                <p class="li-sub">Jr. Astete 725 - Trujillo.
+                                    <br>También en el Mall Aventure Plaza</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="inner">
+                            <div class="li-img">
+                                <img src="img/logo_caja_trujillo.jpg" alt="Caja Trujillo" />
+                            </div>
+                            <div class="li-text">
+                                <h4 class="li-head">Caja Trujillo</h4>
+                                <p class="li-sub">Jr. Pizarro 458-460 - TRujillo
+                                    <br>También en Sucursales</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="inner">
+                            <div class="li-img">
+                                <img src="img/logo_hidrandina.jpg" alt="Hindrandina" />
+                            </div>
+                            <div class="li-text">
+                                <h4 class="li-head">Hidrandina</h4>
+                                <p class="li-sub">Av. España N° 1030 - Trujillo
+                                    <br>Tmabién en surcurlases de Hindrandina</p>
+                            </div>
+                        </a>
+                    </li>
 
+                    <li>
+                        <a href="#" class="inner">
+                            <div class="li-img">
+                                <img src="img/logo_banconacion.jpg" alt="Banco de la Nación" />
+                            </div>
+                            <div class="li-text">
+                                <h4 class="li-head">Banco de la Nación</h4>
+                                <p class="li-sub">Jr. Diego de Almagro 297 - Trujillo
+                                    <br>También en surcusales</p>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="inner">
+                            <div class="li-img">
+                                <img src="img/logo_SATT.png" alt="SATT" />
+                            </div>
+                            <div class="li-text">
+                                <h4 class="li-head">SATT</h4>
+                                <p class="li-sub">Bolivar N° 530-538 -Trujillo
+                                    <br>También en el Mall Aventure Plaza</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="inner">
+                            <div class="li-img">
+                                <img src="img/logo_movistar.jpg" alt="Teléfonica" />
+                            </div>
+                            <div class="li-text">
+                                <h4 class="li-head">Telefónica</h4>
+                                <p class="li-sub">Bolivar N°658 - Jr. Junín N°66 - Trujillo
+                                    <br>También en sucursales</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="inner">
+                            <div class="li-img">
+                                <img src="img/logo_nuestragente.png" alt="Caja Nuestra Gente" />
+                            </div>
+                            <div class="li-text">
+                                <h4 class="li-head">Caja Nuestra Gente </h4>
+                                <p class="li-sub">Independencia N° 527 - Trujillo
+                                    <br>También en Sucursales</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="inner">
+                            <div class="li-img">
+                                <img src="img/logo-BanBif.png" alt="Banco Interoamericano de Finanzas" />
+                            </div>
+                            <div class="li-text">
+                                <h4 class="li-head">BIF</h4>
+                                <p class="li-sub">Jr. Junin 479 - Trujilo
+                                    <br>También en sucursales</p>
+                            </div>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed"></div>
+    </div>
     <!--
     --
     -- Página de clientes ya registrados
     --
     -->
     <div data-role="page" id="usuarios">
-        <div data-role="header" style="height:45px">
-            <h1 style="font-family: 'Yanone Kaffeesatz';    font-size: 28px;
-    text-shadow: none;
-    margin-top: 6px;">SIC</h1>
-            <a href="#left-panel" data-role="none" style="color:#FFF;margin-left: 10px;margin-top: 5px;">
+        <div data-role="header" id="usuarios_header">
+            <h1>SIC</h1>
+            <a href="#left-panel" data-role="none">
                 <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
             </a>
         </div>
@@ -170,32 +374,31 @@
             <div class="card1">
                 <table width="100%">
                     <tr>
-                        <td colspan="2" style="    font-size: 24px;
-    text-align: center;">
-                            Debe: <span style="color:#296fb7;font-size:30px" id="cantidad_cliente"> </span> Recibo(s)
-                            <br> Deuda: S./ <span style="color:#296fb7;font-size:30px" id="deuda_cliente"> 20.00</span>
+                        <td colspan="2" id="colum_1">
+                            Debe: <span id="cantidad_cliente"></span> Recibo(s)
+                            <br> Deuda: S./ <span id="deuda_cliente"></span>
                             <br>
                             <img src="img/alegre.gif">
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2" style="text-align:center">
-                            <span style="    font-size: 18px;
-    letter-spacing: 1px;float:ri">Fch. Vencimiento: </span>
-                            <span style="    letter-spacing: 1.5px;
-    color:#296fb7;font-size:26px" id="vencimiento"> </span></td>
+                        <td colspan="2" class="column2">
+                            <span class="column2_span">Fch. Vencimiento: </span>
+                            <span id="vencimiento"> </span>
+                        </td>
                     </tr>
 
                     <tr>
-                        <td colspan="2" style="text-align:center"><span style="    font-size: 18px;
-    letter-spacing: 1px;padding-left:10px">Fch. Corte: </span>
-                            <span style="    letter-spacing: 1.5px;
-                                     color:#296fb7;font-size:26px" id="corte"></span></td>
+                        <td colspan="2" class="column2">
+                            <span class="column2_span">Fch. Corte: </span>
+                            <span id="corte"></span>
+                        </td>
                     </tr>
                 </table>
                 <script>
                     if (localStorage.getItem("cantidad_cliente")) {
                         document.getElementById("cantidad_cliente").innerHTML = localStorage.getItem("cantidad_cliente");
+                        document.getElementById("deuda_cliente").innerHTML = localStorage.getItem("deuda_cliente");
                     }
                     if (localStorage.getItem("fchVencimiento_cliente") && localStorage.getItem("fchCorte_cliente")) {
                         document.getElementById("vencimiento").innerHTML = localStorage.getItem("fchVencimiento_cliente");
@@ -228,25 +431,12 @@
 
         <div data-role="panel" id="left-panel" data-scroll="y">
             <div id="contenido4">
-                <div id="left" style="    float: left;
-    height: 70px;
-    width: 70px;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-direction: column;
-    background: rgba(41, 111, 183, 0.5);
-    border-radius: 70px 70px;
-    margin-top: -10px;">
-                    <img src="img/sedalito.png" style="width:60%;height:90%;margin-left: 20%;">
+                <div id="left">
+                    <img src="img/sedalito.png">
                 </div>
-                <div id="right" style="float:right;width:62%;height:70px;display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-direction: column;text-shadow:none">
-                    <span style="color:#000;font-size:16px" id="nombre_cliente"></span>
-
-                    <span style="color:#222;font-size:14px" id="suministro_cliente"></span>
+                <div id="right">
+                    <span id="nombre_cliente"></span>
+                    <span id="suministro_cliente"></span>
                     <script>
                         if (localStorage.getItem("nombre_cliente")) {
                             document.getElementById("nombre_cliente").innerHTML = localStorage.getItem("nombre_cliente");
@@ -256,14 +446,7 @@
                     </script>
                 </div>
             </div>
-            <hr style="    border: none;
-    /* height: 10px; */
-    width: 100%;
-    margin-top: 65px;
-    clear: both;
-    background: #296fb7;width: 115%;
-    margin-left: -20px;
-    height: 2px">
+            <hr id="hr_1">
             <div>
                 <ul data-role="listview">
                     <li id="dato-menu1" class="hvr-rectangle-out" class="lista-menu">
@@ -307,17 +490,17 @@
         </div>
         <!-- /panel -->
     </div>
-
-
     <!--
     --
     -- Estado de Cuenta
     --
     -->
     <div data-role="page" id="estadoCuenta">
-        <div data-role="header" data-position="fixed">
-            <a href="#usuarios" data-role="none"><img data-role="none" src="img/back.png"></a>
-            <span class="banner"><img src="img/logo.png" height="50"></span>
+        <div data-role="header" data-postion="fixed" id="estadoCuenta_header">
+            <a data-role="none" href="#" onclick="irUsuarios()">
+                <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+            </a>
+            <span class="banner">Estado de Cuenta</span>
         </div>
         <div data-role="content">
             <h3 id="rec-pend" data-role="none">Información del Cliente</h3>
@@ -452,8 +635,8 @@
             </strong>
             </i>
             <script>
-                document.getElementById("suministro").innerHTML = localStorage.getItem("clicodigo");
-                document.getElementById("usuario").innerHTML = localStorage.getItem("clinombre");
+                document.getElementById("suministro").innerHTML = localStorage.getItem("codigo_cliente");
+                document.getElementById("usuario").innerHTML = localStorage.getItem("nombre_cliente");
                 document.getElementById("localidad").innerHTML = localStorage.getItem("localidad");
                 document.getElementById("direccion").innerHTML = localStorage.getItem("direccion");
                 document.getElementById("conexion").innerHTML = localStorage.getItem("conexion");
@@ -473,6 +656,260 @@
                 document.getElementById("fpago").innerHTML = localStorage.getItem("fecha") + " - " + localStorage.getItem("hora");
 
             </script>
+        </div>
+        <div data-role="footer" data-position="fixed" class="footer_page">
+            <h3 class="empresa">&copy; Sedalib S.A. - 2016</h3>
+        </div>
+    </div>
+    <!--
+    --
+    -- Recibos Pendientes
+    --
+    -->
+    <div data-role="page" id="recibospendientes1">
+        <div data-role="header" data-position="fixed" id="recibos_header">
+            <a data-role="none" href="#" onclick="volver()">
+                <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+            </a>
+            <span class="banner">Recibos Pendientes</span>
+        </div>
+        <div data-role="content">
+            <h5 id="rpusuario">Cliente: 
+                 <i id="rpcliente"></i>
+			</h5>
+            <h5 id="rpdirec">Dirección: 
+				 <i id="rpdireccion"></i>
+			</h5>
+            <i id="rpfecha">La información aún no incluye los pagos realizados despúes  del 
+				 <i id="fecha_actual1"></i>
+            <strong>Ignore la deuda  si está al día en sus pagos.</strong>
+            </i>
+            <br>
+            <p id="rpnumero">
+                <i>
+				 	<i id="cantidad_recibos"></i> Recibo(s) Pendiente(s) de pago
+                </i>
+                <br>
+                <br>
+            </p>
+            <br>
+            <br>
+            <script>
+                document.getElementById('cantidad_recibos').innerHTML = localStorage.getItem("clicantidad");
+                document.getElementById('fecha_actual1').innerHTML = localStorage.getItem('clifecha') + " - " + localStorage.getItem("clihora");
+                document.getElementById('rpcliente').innerHTML = localStorage.getItem("clinombre");
+                document.getElementById('rpdireccion').innerHTML = localStorage.getItem("clidireccion");
+
+            </script>
+            <div id="recibos-pen">
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed" class="footer-page">
+            <h3 class="empresa">&copy; Sedalib S.A. - 2016</h3>
+        </div>
+    </div>
+    <!--
+    --
+    -- Consumos
+    --
+    -->
+    <div data-role="page" id="consumo">
+        <div data-role="header" data-position="fixed" id="consumos_header">
+            <a data-role="none" href="#" onclick="volver1()">
+                <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+            </a>
+            <span class="banner">Consumos</span>
+        </div>
+        <div data-role="content">
+            <h5 id="cusuario">Cliente: 
+				 <i id="ccliente"></i>
+			</h5>
+            <h5 id="cdirec">Dirección: 
+				 <i id="cdireccion"></i>
+			</h5>
+            <i id="cfecha">La información aún no incluye los pagos realizados despúes  del 
+				 <i id="fecha_actual3"></i>
+            <strong>Ignore la deuda  si está al día en sus pagos.</strong>
+            </i>
+            <script>
+                document.getElementById("ccliente").innerHTML = localStorage.getItem("clinombre");
+                document.getElementById("cdireccion").innerHTML = localStorage.getItem("clidireccion");
+                document.getElementById("fecha_actual3").innerHTML = localStorage.getItem("clifecha") + "-" + localStorage.getItem("clihora");
+
+            </script>
+            <p id="numero_consumos"><span id="num_consumos"></span> Últimos consumos</p>
+            <table id="tabla3"></table>
+        </div>
+        <div data-role="footer" data-position="fixed" class="footer-page">
+            <h3 class="empresa">&copy; Sedalib S.A. - 2016</h3>
+        </div>
+    </div>
+    <!--
+    --
+    -- Cuotas por Emitir
+    --
+    -->
+    <div data-role="page" id="cuotasxemitir">
+        <div data-role="header" data-position="fixed" id="cuotas_header">
+            <a data-role="none" href="#" onclick="volver2()">
+                <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+            </a>
+            <span class="banner">Cuotas Emitir</span>
+        </div>
+        <div data-role="content">
+            <h5 id="ceusuario">Cliente: 
+				 <i id="cecliente"></i>
+			</h5>
+            <h5 id="cedirec">Dirección: 
+				 <i id="cedireccion"></i>
+			</h5>
+            <i id="cefecha">La información aún no incluye los pagos realizados despúes  del 
+				 <i id="fecha_actual2"></i>
+            <strong>Ignore la deuda  si está al día en sus pagos.</strong>
+            </i>
+            <script>
+                document.getElementById('fecha_actual2').innerHTML = localStorage.getItem('fecha_actualizacion') + " - " + localStorage.getItem("hora_actualizacion");
+                document.getElementById('cecliente').innerHTML = localStorage.getItem("nombre_cliente");
+                document.getElementById('cedireccion').innerHTML = localStorage.getItem("direccion_cliente");
+
+            </script>
+            <p id="numerocuotas">Total: S./<span id="total"></span>
+                <br><span id="numcuotas"></span> cuotas por Emitir</p>
+            <table id="table2">
+            </table>
+        </div>
+        <div data-role="footer" data-position="fixed" class="footer-page">
+            <h3 class="empresa">&copy; Sedalib S.A. - 2016</h3>
+        </div>
+    </div>
+    <!--
+    --
+    -- Consultas
+    --
+    -->
+    <div data-role="page" id="consultas">
+        <div data-role="header" data-position="fixed" id="consultas_header">
+            <a data-role="none" href="#" onclick=" irUsuarios()">
+                <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+            </a>
+            <span class="banner">Consultas</span>
+        </div>
+        <div data-role="content">
+            <div class="botonera">
+                <a class="btn1" onclick="recibospendientes(2)">
+                    <span>
+                        <img src="img/recibo1.png">
+                    </span>
+                    <h2>RECIBOS PENDIENTES</h2>
+                </a>
+                <a class="btn2" onclick="consumos(2)">
+                    <span>
+                        <img src="img/grafico1.png">
+                    </span>
+                    <h2>HISTÓRICO CONSUMOS</h2>
+                </a>
+            </div>
+            <div class="botonera2">
+                <a class="btn1" onclick="cuotasxemitir(2)">
+                    <span>
+                        <img src="img/cuotasxemitir1.png">
+                    </span>
+                    <h2>CUOTAS POR EMITIR</h2>
+                </a>
+                <a class="btn2" onclick="reclamos()">
+                    <span>
+                        <img src="img/reclamos.png">
+                    </span>
+                    <h2>HITÓRICO RECLAMOS</h2>
+                </a>
+            </div>
+            <div class="botonera3">
+                <a class="btn1" onclick="hpagos()">
+                    <span>
+                        <img src="img/hpagos.png">
+                    </span>
+                    <h2>HISTÓRICO PAGOS</h2>
+                </a>
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed" class="footer-page">
+            <h3 class="empresa">&copy; Sedalib S.A. - 2016</h3>
+        </div>
+    </div>
+    <!--
+    --
+    -- Reclamos
+    --
+    -->
+    <div data-role="page" id="reclamos">
+        <div data-role="header" data-position="fixed" id="reclamos_header">
+            <a data-role="none" href="#consultas">
+                <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+            </a>
+            <span class="banner">Reclamos</span>
+        </div>
+        <div data-role="content">
+            <h5 id="rusuario">Cliente: 
+				 <i id="rcliente"></i>
+			</h5>
+            <h5 id="rdirec">Dirección: 
+				 <i id="rdireccion"></i>
+			</h5>
+            <i id="rfecha">La información aún no incluye los pagos realizados despúes  del 
+				 <i id="fecha_actual4"></i>
+            <strong>Ignore la deuda  si está al día en sus pagos.</strong>
+            </i>
+            <script>
+                document.getElementById("rcliente").innerHTML = localStorage.getItem("clinombre");
+                document.getElementById("rdireccion").innerHTML = localStorage.getItem("clidireccion");
+                document.getElementById("fecha_actual4").innerHTML = localStorage.getItem("clifecha") + "-" + localStorage.getItem("clihora");
+
+            </script>
+            <p id="numeroreclamos"><span id="numreclamos"></span> reclamos realizados</p>
+            <table id="tabla4"></table>
+        </div>
+        <div data-role="footer" data-position="fixed" class="footer-page">
+            <h3 class="empresa">&copy; Sedalib S.A. - 2016</h3>
+        </div>
+    </div>
+    <!--
+    --
+    -- Historico de Pagos
+    --
+    -->
+    <div data-role="page" id="historicopagos">
+        <div data-role="header" data-position="fixed" id="pagos_header">
+            <a data-role="none" href="#consultas">
+                <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+            </a>
+            <span class="banner">Pagos</span>
+        </div>
+        <div data-role="content">
+            <h5 id="pusuario">Cliente: 
+				 <i id="pcliente"></i>
+			</h5>
+            <h5 id="pdirec">Dirección: 
+				 <i id="pdireccion"></i>
+			</h5>
+            <i id="pfecha">La información aún no incluye los pagos realizados despúes  del 
+				 <i id="fecha_actual5"></i>
+            <strong>Ignore la deuda  si está al día en sus pagos.</strong>
+            </i>
+            <p id="leyenda">
+                <span>LEYENDA</span>
+                <br>
+                <span><button data-role="none" id="button"></button><span>Recibos Pagados despúes de laFecha Vencimiento.</span></span>
+                <br>
+                <span><button data-role="none" id="button2"></button><span>Recibos Pagados a tiempo.</span></span>
+            </p>
+            <script>
+                document.getElementById("pcliente").innerHTML = localStorage.getItem("clinombre");
+                document.getElementById("pdireccion").innerHTML = localStorage.getItem("clidireccion");
+                document.getElementById("fecha_actual5").innerHTML = localStorage.getItem("clifecha") + "-" + localStorage.getItem("clihora");
+
+            </script>
+            <p id="numeropagos"><span id="numpagos"></span> pagos realizados</p>
+            <table id="tabla5"></table>
         </div>
         <div data-role="footer" data-position="fixed" class="footer-page">
             <h3 class="empresa">&copy; Sedalib S.A. - 2016</h3>

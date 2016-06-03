@@ -1,4 +1,8 @@
-/*     CSS para la página Inicio                  */
+/**
+**
+** CSS para la página Inicio, para la primera pagina                  
+**
+*/
 
 #contenido {
     width: 80% !important;
@@ -45,7 +49,8 @@
     text-shadow: none;
 }
 #inicio,
-#login {
+#login,
+#registro {
     background-image: url('../img/fondo.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -57,7 +62,8 @@
 #titulo-app {
     color: #222;
     font-size: 0.9em !important;
-    text-shadow: none
+    text-shadow: none;
+    font-family: 'Yanone Kaffeesatz'
 }
 #header {
     background: #296fb7;
@@ -71,6 +77,9 @@
     font-family: 'Yanone Kaffeesatz';
     font-size: 22px;
 }
+
+/*Css para botones circulares*/
+
 .fab {
     margin-top: 3%;
     position: relative;
@@ -84,14 +93,32 @@
     transition-delay: 0.2s;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 }
-.fab.red {
+.fab.green {
     background-color: rgba(125, 132, 138, 0.73);
-    margin-left: 10%
+    margin-left: 10%;
+    background: #6EA976 !important
 }
-.fab.blue {
-    background-color: rgba(125, 132, 138, 0.73);
+.fab.green>a {
+    color: #FFF;
+    text-decoration: none
+}
+.fab.green>a:hover {
+    color: #FFF;
+}
+#icon_phone {
+    margin-left: 25px;
+    margin-top: 15px;
+    text-shadow: none
+}
+.fab.green1 {
+    background: #6EA976 !important;
     float: right;
     margin-right: 10%
+}
+#icon_map {
+    margin-left: 22px;
+    margin-top: 15px;
+    text-shadow: none
 }
 .fab:active {
     box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
@@ -103,6 +130,9 @@
 .fab > core-icon::shadow path {
     fill: #fff;
 }
+
+/* Css para el footer*/
+
 #footer {
     position: fixed;
     left: 0px;
@@ -124,8 +154,20 @@
     margin-bottom: -7%;
 }
 
-/****************************  Mapa   *****************************************/
+/**
+**
+**  Css para la pagina de Mapa.html   
+**
+**/
 
+mapa_header {
+    height: 45px
+}
+#icon_regresar {
+    margin-top: 5px;
+    margin-left: 5px;
+    text-shadow: none
+}
 .banner {
     display: block;
     text-align: center;
@@ -133,6 +175,11 @@
     text-shadow: none;
     font-family: 'Yanone Kaffeesatz';
     font-size: 24px;
+}
+#mapa_resenia {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: 'Yanone Kaffeesatz'
 }
 .card {
     position: relative;
@@ -143,10 +190,81 @@
     background-color: #fff;
     box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24);
     left: 5%;
+    margin-top: 10px
+}
+#info {
+    display: none;
+    margin-bottom: 10px;
+    width: 96%;
+    left: 2%
+}
+#mapa_titulo {
+    margin-top: 4px;
+    font-family: 'Yanone Kaffeesatz' !important;
+}
+.columna1 {
+    border-bottom: 1px solid #296fb7
+}
+.columna1_fila {
+    font-family: 'Yanone Kaffeesatz';
+    color: #296fb7;
+}
+.columna2 {
+    border-bottom: 1px solid #296fb7
+}
+.columna2_fila {
+    font-family: 'Yanone Kaffeesatz';
+    float: right;
+    margin-right: 10px;
+    text-align: right;
+}
+#color {
+    border: none;
+    width: 20px;
+    height: 5px;
+    vertical-align: middle;
+    margin-right: 10px
+}
+#titulo-maps1 {
+    font-family: 'Yanone Kaffeesatz';
+    color: #296fb7;
+    font-size: 20px;
+    margin-bottom: -10px;
+    margin-top: 2px;
+}
+#instructions {
+    font-family: 'Yanone Kaffeesatz';
+    list-style-image: url('../img/direccion.png');
+}
+#footer_mapa {
+    font-family: 'Yanone Kaffeesatz';
+    font-size: 20px;
+    text-shadow: none;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
 }
 
-/********************* Login ****************************************************/
+/**
+**
+**  Css para la pantalla de Login 
+**
+**/
 
+#login_header {
+    height: 45px
+}
+#login_back {
+    text-decoration: none;
+    color: #FFF
+}
+#login_icon {
+    margin-top: 5px;
+    margin-left: 5px;
+    text-shadow: none
+}
 #contenido1 {
     width: 80%;
     height: 70%;
@@ -154,6 +272,15 @@
     left: 10%;
     top: 20%;
     font-family: 'Yanone Kaffeesatz';
+}
+#txt-email {
+    background: rgba(1, 1, 1, 0);
+    margin-bottom: 15px;
+    text-shadow: none
+}
+#txt-pass {
+    background: rgba(1, 1, 1, 0);
+    margin-bottom: 20px
 }
 .group {
     position: relative;
@@ -174,12 +301,59 @@
     outline: none;
     border-bottom: 3px solid #296fb7;
 }
+#login_ingresar {
+    height: 40px;
+    margin-top: 20px !important;
+}
+#login_registrar {
+    height: 40px;
+    background: #6EA976 !important
+}
+#login_olvido {
+    margin-top: -10px
+}
+#login_olvido>a {
+    font-size: 20px
+}
+
+/**
+**
+**   Pagina de Registro
+**
+**/
+
+#contenido3 {
+    width: 90%;
+    margin-left: 5%;
+    font-family: 'Yanone Kaffeesatz';
+}
+#registro_nombre,
+#registro_suministro,
+#registro_correo,
+#registro_dni,
+#registro_celular {
+    background: rgba(1, 1, 1, 0);
+    margin-bottom: 20px
+}
 
 /**
 **
 **   Pagina de No clientes
+**
 **/
 
+#noclientes_header {
+    height: 45px
+}
+#noclientes_header>a {
+    text-decoration: none;
+    color: #FFF
+}
+#noclientes_header>i {
+    margin-top: 5px;
+    margin-left: 5px;
+    text-shadow: none
+}
 #contenido2 {
     width: 90%;
     height: 60%;
@@ -252,11 +426,123 @@
     margin-top: -5px;
 }
 
-/*********************************************************
+/**
+**
+**    NoClientes
+**
+**/
+
+#dondePagar_header {
+    height: 45px
+}
+#dondePagar_header>a {
+    text-decoration: none;
+    color: #FFF
+}
+#dondePagar_header>i {
+    margin-top: 5px;
+    margin-left: 5px;
+    text-shadow: none
+}
+.list {
+    margin-left: -20px !important
+}
+.list li {
+    border-collapse: collapse;
+    border-bottom: 1px solid #ccc;
+    display: table;
+    width: 100%
+}
+.inner {
+    display: table-row;
+    text-decoration: none;
+    overflow: hidden
+}
+.li-img {
+    display: table-cell;
+    padding-right: 1em;
+    vertical-align: middle;
+    width: 30%
+}
+.li-img img {
+    display: block;
+    height: auto;
+    width: 100%
+}
+.li-text {
+    display: table-cell;
+    vertical-align: middle;
+    width: 70%
+}
+.li-head {
+    font-family: 'Yanone Kaffeesatz';
+    font-size: 22px;
+    margin: 0;
+    text-shadow: none
+}
+.li-sub {
+    font-family: 'Yanone Kaffeesatz';
+    font-size: 16px;
+    margin: 0
+}
+@media all and (min-width: 45em) {
+    .list li {
+        float: left;
+        width: 50%
+    }
+}
+@media all and (min-width: 75em) {
+    .list li {
+        width: 33.33333%
+    }
+}
+
+/**
 **
 **Pagina de Usuarios
-**********************************************************/
+**
+**/
 
+#usuarios_header {
+    height: 45px
+}
+#usuarios_header>h1 {
+    font-family: 'Yanone Kaffeesatz';
+    font-size: 28px;
+    text-shadow: none;
+    margin-top: 6px;
+}
+#usuarios_header>a {
+    color: #FFF;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+#colum_1 {
+    font-size: 24px;
+    text-align: center;
+}
+#deuda_cliente,
+#cantidad_cliente {
+    color: #296fb7;
+    font-size: 30px
+}
+.column2 {
+    text-align: center
+}
+#vencimiento {
+    letter-spacing: 1.5px;
+    color: #296fb7;
+    font-size: 26px
+}
+.column2_span {
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+#corte {
+    letter-spacing: 1.5px;
+    color: #296fb7;
+    font-size: 26px
+}
 #dato-menu1 .ui-icon,
 #dato-menu2 .ui-icon,
 #dato-menu3 .ui-icon,
@@ -393,4 +679,700 @@ usuarios .ui-body-c {
 }
 #tabla tr th a {
     text-decoration: none
+}
+#left {
+    float: left;
+    height: 70px;
+    width: 70px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    background: rgba(41, 111, 183, 0.5);
+    border-radius: 70px 70px;
+    margin-top: -10px;
+}
+#left>img {
+    width: 60%;
+    height: 90%;
+    margin-left: 20%;
+}
+#right {
+    float: right;
+    width: 62%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-shadow: none;
+}
+#nombre_cliente {
+    color: #000;
+    font-size: 16px
+}
+#suministro_cliente {
+    color: #222;
+    font-size: 14px
+}
+#hr_1 {
+    border: none;
+    /* height: 10px; */
+    width: 100%;
+    margin-top: 65px;
+    clear: both;
+    background: #296fb7;
+    width: 115%;
+    margin-left: -20px;
+    height: 2px
+}
+
+/**
+**
+** Estado de Cuenta
+**
+**/
+
+#estadoCuenta_header {
+    height: 45px
+}
+#estadoCuenta_header>a {
+    text-decoration: none;
+    color: #FFF
+}
+#estadoCuenta_header>i {
+    margin-top: 5px;
+    margin-left: 5px;
+    text-shadow: none
+}
+#rec-pend {
+    font-family: 'Yanone Kaffeesatz';
+    font-size: 20px !important;
+    letter-spacing: 0.3px;
+    margin: 5px;
+    text-transform: uppercase
+}
+.sub-hr {
+    border: none;
+    background: #296fb7;
+    height: 2px;
+    margin-top: -5px
+}
+.nota1 {
+    border-bottom: rgba(41, 111, 183, 0.57) 1px solid
+}
+.subnota1 {
+    font-family: 'Yanone Kaffeesatz';
+    font-style: normal
+}
+.subnota2 {
+    float: right;
+    font-family: 'Yanone Kaffeesatz';
+    font-style: normal;
+    margin-right: 1px;
+    margin-top: -1px
+}
+#informacion {
+    margin-top: 5px
+}
+#informacion,
+#fpago {
+    font-family: 'Yanone Kaffeesatz';
+    font-style: normal
+}
+#table1 {
+    margin-bottom: 15px;
+    width: 100%
+}
+#table1 tr th {
+    font-family: 'Yanone Kaffeesatz';
+    width: 33%
+}
+#fecha_actual {
+    font-style: normal
+}
+.footer_page {
+    font-family: 'Yanone Kaffeesatz';
+}
+.empresa {
+    font-family: 'Yanone Kaffeesatz';
+    font-size: 16px !important;
+}
+
+/**
+**
+** Recibos Pendientes
+**
+**/
+
+#recibos_header {
+    height: 45px
+}
+#recibos_header>a {
+    text-decoration: none;
+    color: #FFF
+}
+#recibos_header>i {
+    margin-top: 5px;
+    margin-left: 5px;
+    text-shadow: none
+}
+#rpusuario,
+#ceusuario,
+#cusuario,
+#rusuario,
+#pusuario {
+    font-family: 'Yanone Kaffeesatz';
+    font-size: 18px !important;
+    margin-top: -5px
+}
+#rpusuario i,
+#ceusuario i,
+#cusuario i,
+#rusuario i,
+#pusuario i {
+    font-style: normal;
+    margin-left: 20px
+}
+#rpdirec,
+#cedirec,
+#cdirec,
+#rdirec,
+#pdirec {
+    font-family: 'Yanone Kaffeesatz';
+    font-size: 18px !important;
+    margin-bottom: 10px;
+    margin-top: -30px !important
+}
+#rpdirec i,
+#cedirec i,
+#cdirec i,
+#rdirec i,
+#pdirec i {
+    font-style: normal;
+    margin-left: 5px
+}
+#rpfecha,
+#cefecha,
+#cfecha,
+#rfecha,
+#pfecha {
+    font-family: 'Yanone Kaffeesatz';
+    font-style: normal;
+    font-size: 15px
+}
+#fecha_actual1,
+#fecha_actual2,
+#fecha_actual3,
+#fecha_actual4,
+#fecha_actual5 {
+    font-style: normal;
+    color: #990000
+}
+.numero-docum {
+    font-family: 'Yanone Kaffeesatz';
+    font-size: 19px !important;
+    font-weight: bold;
+    margin-top: 10px;
+    text-transform: uppercase
+}
+#rpnumero {
+    float: right;
+    margin-bottom: -10px
+}
+#rpnumero i {
+    font-family: 'Yanone Kaffeesatz';
+    font-style: normal;
+    font-size: 16px
+}
+#cantidad_recibos {
+    font-style: normal
+}
+numero-docum {
+    font-family: 'Yanone Kaffeesatz';
+    font-size: 19px !important;
+    font-weight: bold;
+    margin-top: 10px;
+    text-transform: uppercase
+}
+.bajo-doc {
+    background: #296fb7;
+    border: none;
+    height: 2px;
+    margin-top: -20px
+}
+.num-rec {
+    margin-top: -2px
+}
+.num-rec1,
+.monto-rec1,
+.femi-rec1,
+.fven-rec1 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    font-family: 'Yanone Kaffeesatz'
+}
+.num-rec2,
+.monto-rec2,
+.femi-rec2,
+.fven-rec2 {
+    float: right;
+    font-family: 'Yanone Kaffeesatz';
+    font-size: 18px;
+    font-style: normal
+}
+.num-rec,
+.monto-rec,
+.femi-rec,
+.fven-rec {
+    border-bottom: 1px solid rgba(41, 111, 183, 0.67);
+    margin-bottom: -10px;
+    margin-left: 10px
+}
+
+/**
+**
+** Consumos
+**
+**/
+
+#consumos_header {
+    height: 45px
+}
+#consumos_header>a {
+    text-decoration: none;
+    color: #FFF
+}
+#consumos_header>i {
+    margin-top: 5px;
+    margin-left: 5px;
+    text-shadow: none
+}
+#numero_consumos {
+    font-family: 'Yanone Kaffeesatz';
+    text-align: right
+}
+#numero_consumos span {
+    color: #990000
+}
+#tabla3 {
+    margin-top: 20px;
+    width: 100%
+}
+.col_amf1,
+.col_lam1,
+.col_vl1,
+.col_vf1,
+.col_tle1,
+.col_ref1 {
+    background: rgba(41, 161, 183, 0.48);
+    color: #990000 !important;
+    font-family: 'Yanone Kaffeesatz';
+    padding: 5px;
+    text-shadow: none
+}
+.col_amf,
+.col_lam,
+.col_vl,
+.col_vf,
+.col_tle,
+.col_ref {
+    background: rgba(41, 111, 183, 0.25);
+    font-family: 'Yanone Kaffeesatz';
+    text-shadow: none
+}
+@media screen and (max-width: 400px) {
+    .btn1 {
+        width: 42%
+    }
+    .btn2 {
+        width: 42%
+    }
+    .btn1 h2,
+    .btn2 h2 {
+        font-size: 16px
+    }
+    .subnota1 {
+        font-size: 11px !important
+    }
+    .subnota2 {
+        font-size: 13px !important
+    }
+    .col_ncon1,
+    .col_fcon1,
+    .col_ncuo1,
+    .col_amv1,
+    .col_total1,
+    .col_tcuo1,
+    .col_con1 {
+        font-size: 14px
+    }
+    .col_fp,
+    .col_fv,
+    .col_lugar,
+    .nro_recibo,
+    .col_pago,
+    .col_refer,
+    .col_conc {
+        font-size: 14px
+    }
+    .col_fcon1,
+    .col_tcuo1,
+    .col_con1,
+    .col_fv,
+    .col_refer,
+    .col_conc {
+        display: none !important
+    }
+    .col_amf1,
+    .col_lam1,
+    .col_vl1,
+    .col_vf1,
+    .col_tle1,
+    .col_ref1 {
+        font-size: 14px
+    }
+    .col_amf,
+    .col_lam,
+    .col_vl,
+    .col_vf,
+    .col_tle,
+    .col_ref {
+        font-size: 14px
+    }
+    .col_tle1,
+    .col_ref1,
+    .col_tle,
+    .col_ref {
+        display: none !important
+    }
+    .col_reg1,
+    .col_fin1,
+    .col_pro1,
+    .col_ins1,
+    .col_per1 {
+        display: none !important
+    }
+    .col_reg,
+    .col_fin,
+    .col_pro,
+    .col_ins,
+    .col_per {
+        display: none !important
+    }
+    .col_pfp1,
+    .col_pfv1,
+    .col_pfp,
+    .col_pfv {
+        display: none
+    }
+}
+@media screen and (max-width: 500px) {
+    #titulo-app {
+        font-size: 1.5em
+    }
+    .col_tcuo1,
+    .col_refer {
+        display: block
+    }
+    .col_fcon1,
+    .col_con1,
+    .col_fv,
+    .col_conc {
+        display: none
+    }
+    .col_tle1,
+    .col_ref1 {
+        display: none !important
+    }
+    .col_tle,
+    .col_ref {
+        display: none !important
+    }
+    .col_reg1,
+    .col_fin1,
+    .col_ins1,
+    .col_per1 {
+        display: none !important
+    }
+    .col_reg,
+    .col_fin,
+    .col_ins,
+    .col_per {
+        display: none !important
+    }
+    .col_pfp1,
+    .col_pfv1,
+    .col_pfp,
+    .col_pfv {
+        display: none
+    }
+    .button,
+    .button1,
+    .button2 {
+        font-size: 14px !important
+    }
+    .card1_1 h1 {
+        font-size: 16px !important
+    }
+}
+@media screen and (max-width: 600px) {
+    .subnota1 {
+        font-size: 14px
+    }
+    .subnota2 {
+        font-size: 15px
+    }
+    .col_fin1,
+    .col_per1,
+    .col_fin,
+    .col_per {
+        display: none !important
+    }
+    .col_pfp1,
+    .col_pfv1,
+    .col_pfp,
+    .col_pfv {
+        display: none
+    }
+    #cabezera {
+        left: 39.5% !IMPORTANT
+    }
+}
+@media screen and (max-width: 700px) {
+    .botonera3 a {
+        margin-top: -30px
+    }
+    .card1_2 p {
+        font-size: 14px !important
+    }
+}
+@media screen and (max-width: 900px) {
+    #titulo-app {
+        font-size: 2em
+    }
+    .subnota1 {
+        font-size: 15px !important
+    }
+    .subnota2 {
+        font-size: 16px
+    }
+    .botonera3 a {
+        margin-top: 20px !important
+    }
+    .col_fin1,
+    .col_per1,
+    .col_fin,
+    .col_per {
+        display: none !important
+    }
+}
+@media screen and (max-width: 1500px) {
+    .subnota1 {
+        font-size: 18px
+    }
+    .subnota2 {
+        font-size: 19px
+    }
+    #cabezera {
+        left: 42%
+    }
+    .card1_2 p {
+        font-size: 18px
+    }
+    .button,
+    .button1,
+    .button2 {
+        font-size: 20px
+    }
+    .card1_1 h1 {
+        font-size: 20px
+    }
+}
+
+/**
+**
+** Cuotas por Emitir
+**
+**/
+
+#cuotas_header {
+    height: 45px
+}
+#cuotas_header>a {
+    text-decoration: none;
+    color: #FFF
+}
+#cuotas_header>i {
+    margin-top: 5px;
+    margin-left: 5px;
+    text-shadow: none
+}
+#numerocuotas,
+#numeroreclamos,
+#numeropagos {
+    font-family: 'Yanone Kaffeesatz';
+    text-align: right
+}
+#numerocuotas span,
+#numeroreclamos span,
+#numeropagos span {
+    color: #990000
+}
+#table2 {
+    margin-top: 10px;
+    width: 100%
+}
+.col_ncon1,
+.col_fcon1,
+.col_ncuo1,
+.col_amv1,
+.col_total1,
+.col_tcuo1,
+.col_con1 {
+    background: rgba(41, 161, 183, 0.48);
+    color: #990000 !important;
+    font-family: 'Yanone Kaffeesatz';
+    padding: 5px;
+    text-shadow: none
+}
+.col_fp,
+.col_fv,
+.col_lugar,
+.nro_recibo,
+.col_pago,
+.col_refer,
+.col_conc {
+    background: rgba(41, 111, 183, 0.25);
+    font-family: 'Yanone Kaffeesatz';
+    text-shadow: none
+}
+
+/**
+**
+** Consultas
+**
+**/
+
+#consultas_header {
+    height: 45px
+}
+#consultas_header>a {
+    text-decoration: none;
+    color: #FFF
+}
+#consultas_header>i {
+    margin-top: 5px;
+    margin-left: 5px;
+    text-shadow: none
+}
+
+/**
+**
+** Reclamos
+**
+**/
+
+#reclamos_header {
+    height: 45px
+}
+#reclamos_header>a {
+    text-decoration: none;
+    color: #FFF
+}
+#reclamos_header>i {
+    margin-top: 5px;
+    margin-left: 5px;
+    text-shadow: none
+}
+#tabla4 {
+    margin-top: 15px;
+    width: 100%
+}
+.col_cod1,
+.col_des1,
+.col_reg1,
+.col_fin1,
+.col_pro1,
+.col_est1,
+.col_ins1,
+.col_per1 {
+    background: rgba(41, 161, 183, 0.48);
+    color: #990000 !important;
+    font-family: 'Yanone Kaffeesatz';
+    padding: 5px;
+    text-shadow: none
+}
+.col_cod,
+.col_des,
+.col_reg,
+.col_fin,
+.col_pro,
+.col_est,
+.col_ins,
+.col_per {
+    background: rgba(41, 111, 183, 0.25);
+    font-family: 'Yanone Kaffeesatz';
+    text-shadow: none
+}
+
+/**
+**
+** Pagos
+**
+**/
+
+#pagos_header {
+    height: 45px
+}
+#pagos_header>a {
+    text-decoration: none;
+    color: #FFF
+}
+#pagos_header>i {
+    margin-top: 5px;
+    margin-left: 5px;
+    text-shadow: none
+}
+#button {
+    background: #FFFFBF;
+    border: 0.5px solid #000;
+    height: 15px;
+    margin-left: 30px;
+    margin-right: 10px;
+    width: 20px
+}
+#button2 {
+    background: rgba(236, 245, 255, .9);
+    border: 0.5px solid #000;
+    height: 15px;
+    margin-left: 30px;
+    margin-right: 10px;
+    width: 20px
+}
+#leyenda span {
+    font-family: 'Yanone Kaffeesatz'
+}
+#tabla5 {
+    width: 100%
+}
+.col_pfp1,
+.col_pfv1,
+.col_plugar1,
+.nro_precibo1,
+.col_ppago1 {
+    background: rgba(41, 161, 183, 0.48);
+    color: #990000 !important;
+    font-family: 'Yanone Kaffeesatz';
+    padding: 5px;
+    text-shadow: none
+}
+.col_pfp,
+.col_pfv,
+.col_plugar,
+.nro_precibo,
+.col_ppago {
+    font-family: 'Yanone Kaffeesatz';
+    text-shadow: none
 }

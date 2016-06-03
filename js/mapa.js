@@ -75,7 +75,7 @@ $(document).ready(function () {
                     });
                 }
             });
-            document.getElementById("titulo-maps").innerHTML = "SEDE CENTRAL DE SEDALIB S.A.";
+            document.getElementById("mapa_titulo").innerHTML = "SEDE CENTRAL DE SEDALIB S.A.";
             document.getElementById('img-sede').src = "../img/sede-central.png";
             document.getElementById('direccion-sedalib').innerHTML = "Av. Federico Villarreal 1300 Urb. Semi Rústica El Bosque";
             document.getElementById('telefono-sedalib').innerHTML = "044 - 482335";
@@ -123,7 +123,7 @@ $(document).ready(function () {
                     });
                 }
             });
-            document.getElementById("titulo-maps").innerHTML = "SEDE EL PORVENIR DE SEDALIB S.A.";
+            document.getElementById("mapa_titulo").innerHTML = "SEDE EL PORVENIR DE SEDALIB S.A.";
             document.getElementById('img-sede').src = "../img/sede-porvenir.png";
             document.getElementById('direccion-sedalib').innerHTML = "Av. Micaela Bastidas Nº 1450";
             document.getElementById('telefono-sedalib').innerHTML = "044 - 410425 | 044 - 482336 Anexo: 409 ";
@@ -172,7 +172,7 @@ $(document).ready(function () {
                     });
                 }
             });
-            document.getElementById("titulo-maps").innerHTML = "SEDE HUAMÁN DE SEDALIB S.A.";
+            document.getElementById("mapa_titulo").innerHTML = "SEDE HUAMÁN DE SEDALIB S.A.";
             document.getElementById('img-sede').src = "../img/sede-victorLarco.png";
             document.getElementById('direccion-sedalib').innerHTML = "Esquina Av. Huamán / Manuel Seoane";
             document.getElementById('telefono-sedalib').innerHTML = "044 - 408308 | 044 - 482336 Anexo: 414";
@@ -221,7 +221,7 @@ $(document).ready(function () {
                     });
                 }
             });
-            document.getElementById("titulo-maps").innerHTML = "SEDE HUANCHACO DE SEDALIB S.A.";
+            document.getElementById("mapa_titulo").innerHTML = "SEDE HUANCHACO DE SEDALIB S.A.";
             document.getElementById('img-sede').src = "../img/sede-huanchaco.png";
             document.getElementById('direccion-sedalib').innerHTML = "Los Pinos Nº 142";
             document.getElementById('telefono-sedalib').innerHTML = "044 - 461202 | 044 - 482336 Anexo: 412";
@@ -270,7 +270,7 @@ $(document).ready(function () {
                     });
                 }
             });
-            document.getElementById("titulo-maps").innerHTML = "SEDE LA ESPERANZA DE SEDALIB S.A.";
+            document.getElementById("mapa_titulo").innerHTML = "SEDE LA ESPERANZA DE SEDALIB S.A.";
             document.getElementById('img-sede').src = "../img/sede-esperanza.png";
             document.getElementById('direccion-sedalib').innerHTML = "Av. Tahuantinsuyo Cuadra 17   ";
             document.getElementById('telefono-sedalib').innerHTML = "044 - 272253 | 044 - 482336 Anexo: 406-407";
@@ -319,7 +319,7 @@ $(document).ready(function () {
                     });
                 }
             });
-            document.getElementById("titulo-maps").innerHTML = "SEDE MOCHE DE SEDALIB S.A.";
+            document.getElementById("mapa_titulo").innerHTML = "SEDE MOCHE DE SEDALIB S.A.";
             document.getElementById('img-sede').src = "../img/sede-moche.png";
             document.getElementById('direccion-sedalib').innerHTML = "Francisco Bolognesi Nº 504";
             document.getElementById('telefono-sedalib').innerHTML = "465172 - 482336 Anexo: 416";
@@ -368,7 +368,7 @@ $(document).ready(function () {
                     });
                 }
             });
-            document.getElementById("titulo-maps").innerHTML = "SEDE PUERTO MALABRIGO DE SEDALIB S.A.";
+            document.getElementById("mapa_titulo").innerHTML = "SEDE PUERTO MALABRIGO DE SEDALIB S.A.";
             document.getElementById('img-sede').src = "../img/sede_puerto.png";
             document.getElementById('direccion-sedalib').innerHTML = "Alfonso Ugarte N° 617";
             document.getElementById('telefono-sedalib').innerHTML = "576202";
@@ -416,7 +416,7 @@ $(document).ready(function () {
                     });
                 }
             });
-            document.getElementById("titulo-maps").innerHTML = "SEDE SALAVERRY DE SEDALIB S.A.";
+            document.getElementById("mapa_titulo").innerHTML = "SEDE SALAVERRY DE SEDALIB S.A.";
             document.getElementById('img-sede').src = "../img/sede_salaverry.png";
             document.getElementById('direccion-sedalib').innerHTML = "Jr. Córdova Nº 313";
             document.getElementById('telefono-sedalib').innerHTML = "437529 - 482336 Anexo: 411";
@@ -465,7 +465,7 @@ $(document).ready(function () {
                     });
                 }
             });
-            document.getElementById("titulo-maps").innerHTML = "SEDE CHOCOPE DE SEDALIB S.A.";
+            document.getElementById("mapa_titulo").innerHTML = "SEDE CHOCOPE DE SEDALIB S.A.";
             document.getElementById('img-sede').src = "../img/sede_chocope.png";
             document.getElementById('direccion-sedalib').innerHTML = "Diego de Mora Nº 174";
             document.getElementById('telefono-sedalib').innerHTML = "542221";
@@ -513,7 +513,7 @@ $(document).ready(function () {
                     });
                 }
             });
-            document.getElementById("titulo-maps").innerHTML = "SEDE CHEPÉN DE SEDALIB S.A.";
+            document.getElementById("mapa_titulo").innerHTML = "SEDE CHEPÉN DE SEDALIB S.A.";
             document.getElementById('img-sede').src = "../img/sede_chepen.png";
             document.getElementById('direccion-sedalib').innerHTML = "Calle Manco Capac Nº 05";
             document.getElementById('telefono-sedalib').innerHTML = "562258";
