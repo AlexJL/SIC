@@ -126,13 +126,11 @@ function login() {
     localStorage.setItem('email', email);
     var password = $("#txt-pass").val();
     localStorage.setItem('password', password);
+
     $.ajax({
         type: "POST",
         url: conexion + "login1.php",
-        data: ({
-            correo: email,
-            contrasenia: password
-        }),
+        data: "correo=" + email + "&contrasenia=" + password,
         cache: false,
         dataType: "text",
         success: onSuccess
@@ -142,7 +140,7 @@ function login() {
 function onSuccess(data) {
     a = JSON.parse(data);
     console.log(a);
-    if (a[0] == 0) {
+    if (a.length < 1) {
         //usuario No valido
         swal("Usuario no Registrado");
     } else {
@@ -167,15 +165,22 @@ function onSuccess(data) {
         }
 
         document.getElementById("suministro_cliente").innerHTML = localStorage.getItem("codigo_cliente");
-        document.getElementById("cantidad_cliente").innerHTML = localStorage.getItem("cantidad_cliente");
+
         document.getElementById("deuda_cliente").innerHTML = localStorage.getItem("deuda_cliente");
-        if (localStorage.getItem("fchVencimiento_cliente") && localStorage.getItem("fchCorte_cliente")) {
-            document.getElementById("vencimiento").innerHTML = localStorage.getItem("fchVencimiento_cliente");
-            document.getElementById("corte").innerHTML = localStorage.getItem("fchCorte_cliente");
-        } else {
+        if (localStorage.getItem('deuda_cliente') == 0) {
             document.getElementById("vencimiento").innerHTML = "AL DÍA";
             document.getElementById("corte").innerHTML = "AL DÍA";
+            document.getElementById("cantidad_cliente").innerHTML = 0;
+        } else {
+            if (localStorage.getItem("fchVencimiento_cliente") && localStorage.getItem("fchCorte_cliente")) {
+                document.getElementById("vencimiento").innerHTML = localStorage.getItem("fchVencimiento_cliente");
+                document.getElementById("corte").innerHTML = localStorage.getItem("fchCorte_cliente");
+                document.getElementById("cantidad_cliente").innerHTML = localStorage.getItem("cantidad_cliente");
+            } else {
+                document.getElementById("vencimiento").innerHTML = "AL DÍA";
+                document.getElementById("corte").innerHTML = "AL DÍA";
 
+            }
         }
 
         $.mobile.changePage("#usuarios", {
@@ -358,8 +363,42 @@ function volverLogin() {
     });
 }
 
-function registrar() {}
+function registrar() {
+    var rnombre = document.getElementsByName("rnombre")[0].value;
+    var rcorreo = document.getElementsByName("rcorreo")[0].value;
+    var rsuministro = document.getElementsByName("rsuministro")[0].value;
+    var rcelular = document.getElementsByName("rcelular")[0].value;
+    var rdni = document.getElementsByName("rdni")[0].value;
+    registrarBD(rnombre, rcorreo, rsuministro, rcelular, rdni);
+    /*if (rnombre == "" || rnombre == "NOMBRE COMPLETO" || rcorreo == "" || rcorreo == "CORREO" || rsuministro == "" || rsuministro == "SUMINISTRO" || rcelular == "" || rcelular == "CELULAR" || rdni == "" || rdni == "DNI") {
+        alert("Rellene todos los campos correctamente");
+    } else {
+        if (rcorreo.indexOf("@") == -1) {
+            alert("correo no valido");
+        } else if (rdni.length != 8) {
+            alert("DNI incorrecto, ingrese uno válido");
+        } else {*/
+    //
+    /* }
+    }*/
 
+}
+
+
+function registrarBD(a, b, c, d, e) {
+    $.ajax({
+        type: "POST",
+        url: "http://pekin.sedalib.com.pe:90/SIC/correo.php",
+        data: "nombre=" + a + "&email=" + b + "&suministro=" + c + "&tel=" + d + "&dni=" + e,
+        cache: false,
+        dataType: "text",
+        success: onSuccess8
+    });
+}
+
+function onSuccess8(data) {
+    alert(data);
+}
 /**
  **
  ** Funciones para la pantalla de no Clientes. index.html#noclientes
@@ -666,6 +705,18 @@ function salirApp() {
     });
 
     //Destruir variables
+    localStorage.removeItem("nombre_cliente");
+    localStorage.removeItem("direccion_cliente");
+    localStorage.removeItem("fecha_actualizacion");
+    localStorage.removeItem("hora_actualizacion");
+    localStorage.removeItem("codigo_cliente");
+    localStorage.removeItem("deuda_cliente");
+    localStorage.removeItem("cantidad_cliente");
+    localStorage.removeItem("fchVencimiento_cliente");
+    localStorage.removeItem("fchCorte_cliente");
+    $("#txt-email").val("");
+    $("#txt-pass").val("");
+
 }
 
 

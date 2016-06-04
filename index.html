@@ -68,15 +68,15 @@
         </center>
         <div class="button raised blue" onclick="irLogin()" style="height:35px">
             <div class="center" fit>Clientes</div>
-            <paper-ripple fit></paper-ripple>
+            <!--<paper-ripple fit></paper-ripple>-->
         </div>
         <div class="button raised blue" onclick="irNoClientes()" style="height:35px">
             <div class="center" fit>No Clientes</div>
-            <paper-ripple fit></paper-ripple>
+            <!--<paper-ripple fit></paper-ripple>-->
         </div>
         <div class="button raised blue" onclick="camara(1)" style="height:35px">
             <div class="center" fit>Denuncias</div>
-            <paper-ripple fit></paper-ripple>
+            <!--<paper-ripple fit></paper-ripple>-->
         </div>
         <div class="fab green">
             <a href="tel://044480555">
@@ -148,13 +148,13 @@
         <div data-role="content">
             <div id="contenido3">
                 <!--<label for="">Nombre Clompleto</label>-->
-                <input data-role="none" class="input_login" id="registro_nombre" type="text" placeholder="Escriba su nombre">
+                <input data-role="none" class="input_login" id="registro_nombre" name="rnombre" type="text" placeholder="Escriba su nombre">
                 <!--<label for="">Suministro</label>-->
-                <input data-role="none" class="input_login" id="registro_suministro" type="text" placeholder="Escriba su suministro">
+                <input data-role="none" class="input_login" id="registro_suministro" name="rsuministro" type="text" placeholder="Escriba su suministro">
                 <!--<label for="">Correo Electronico</label>-->
-                <input data-role="none" class="input_login" id="registro_correo" type="text" placeholder="Escriba su correo">
-                <input data-role="none" class="input_login" id="registro_dni" type="text" placeholder="Escriba su dni">
-                <input data-role="none" class="input_login" id="registro_celular" type="text" placeholder="Escriba su celular">
+                <input data-role="none" class="input_login" id="registro_correo" name="rcorreo" type="text" placeholder="Escriba su correo">
+                <input data-role="none" class="input_login" id="registro_dni" name="rdni" type="text" placeholder="Escriba su dni">
+                <input data-role="none" class="input_login" id="registro_celular" name="rcelular" type="text" placeholder="Escriba su celular">
                 <div class="button raised blue" id="login_ingresar" onclick="registrar()">
                     <div class="center" fit>Registrar</div>
                     <paper-ripple fit></paper-ripple>
@@ -394,16 +394,26 @@
                     </tr>
                 </table>
                 <script>
-                    if (localStorage.getItem("cantidad_cliente")) {
-                        document.getElementById("cantidad_cliente").innerHTML = localStorage.getItem("cantidad_cliente");
+                    if (localStorage.getItem("codigo_cliente")) {
+                        document.getElementById("suministro_cliente").innerHTML = localStorage.getItem("codigo_cliente");
+
                         document.getElementById("deuda_cliente").innerHTML = localStorage.getItem("deuda_cliente");
                     }
-                    if (localStorage.getItem("fchVencimiento_cliente") && localStorage.getItem("fchCorte_cliente")) {
-                        document.getElementById("vencimiento").innerHTML = localStorage.getItem("fchVencimiento_cliente");
-                        document.getElementById("corte").innerHTML = localStorage.getItem("fchCorte_cliente");
-                    } else {
+
+                    if (localStorage.getItem('deuda_cliente') == 0) {
                         document.getElementById("vencimiento").innerHTML = "AL DÍA";
                         document.getElementById("corte").innerHTML = "AL DÍA";
+                        document.getElementById("cantidad_cliente").innerHTML = 0;
+                    } else {
+                        if (localStorage.getItem("fchVencimiento_cliente") && localStorage.getItem("fchCorte_cliente")) {
+                            document.getElementById("vencimiento").innerHTML = localStorage.getItem("fchVencimiento_cliente");
+                            document.getElementById("corte").innerHTML = localStorage.getItem("fchCorte_cliente");
+                            document.getElementById("cantidad_cliente").innerHTML = localStorage.getItem("cantidad_cliente");
+                        } else {
+                            document.getElementById("vencimiento").innerHTML = "AL DÍA";
+                            document.getElementById("corte").innerHTML = "AL DÍA";
+
+                        }
                     }
 
                 </script>
