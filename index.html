@@ -78,7 +78,7 @@
             <div class="center" fit>Denuncias</div>
             <!--<paper-ripple fit></paper-ripple>-->
         </div>
-        <div class="fab green">
+        <!--<div class="fab green">
             <a href="tel://044480555">
                 <core-icon icon="add">
                     <i id="icon_phone" class="fa fa-volume-control-phone fa-2x" aria-hidden="true"></i>
@@ -92,7 +92,7 @@
                 <i class="fa fa-street-view fa-2x" id="icon_map" aria-hidden="true"></i>
             </core-icon>
             <paper-ripple class="circle recenteringTouch" fit></paper-ripple>
-        </div>
+        </div>-->
         <div id="footer">
             Sedalib S.A.
         </div>
@@ -369,14 +369,14 @@
         <!-- /header -->
 
         <div data-role="content">
-            <div class="card1">
+            <div id="carta" class="card1">
                 <table width="100%">
                     <tr>
                         <td colspan="2" id="colum_1">
                             Debe: <span id="cantidad_cliente"></span> Recibo(s)
                             <br> Deuda: S./ <span id="deuda_cliente"></span>
                             <br>
-                            <img src="img/alegre.gif">
+                            <img id="carita" src="img/alegre.gif">
                         </td>
                     </tr>
                     <tr>
@@ -414,6 +414,15 @@
                             document.getElementById("corte").innerHTML = "AL DÍA";
 
                         }
+                    }
+                    if (localStorage.getItem('deuda_cliente') == 0) {
+                        $("#carta").css("background-color", "#4caf50");
+                    } else if (localStorage.getItem('cantidad_cliente') > 0 && localStorage.getItem('cantidad_cliente') < 3) {
+                        $("#carta").css("background-color", "#ffeb3b");
+                        $("#carita").attr("src", "../img/triste.gif")
+                    } else if (localStorage.getItem('cantidad_cliente') > 2) {
+                        $("#carta").css("background-color", "#f44336");
+                        $("#carita").attr("src", "../img/triste.gif")
                     }
 
                 </script>
@@ -504,7 +513,7 @@
     --
     -->
     <div data-role="page" id="estadoCuenta">
-        <div data-role="header" data-postion="fixed" id="estadoCuenta_header">
+        <div data-role="header" id="estadoCuenta_header">
             <a data-role="none" href="#" onclick="irUsuarios()">
                 <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
             </a>
@@ -665,9 +674,6 @@
 
             </script>
         </div>
-        <div data-role="footer" data-position="fixed" class="footer_page">
-            <h3 class="empresa">&copy; Sedalib S.A. - 2016</h3>
-        </div>
     </div>
     <!--
     --
@@ -675,7 +681,7 @@
     --
     -->
     <div data-role="page" id="recibospendientes1">
-        <div data-role="header" data-position="fixed" id="recibos_header">
+        <div data-role="header" id="recibos_header">
             <a data-role="none" href="#" onclick="volver()">
                 <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
             </a>
@@ -712,9 +718,6 @@
             <div id="recibos-pen">
             </div>
         </div>
-        <div data-role="footer" data-position="fixed" class="footer-page">
-            <h3 class="empresa">&copy; Sedalib S.A. - 2016</h3>
-        </div>
     </div>
     <!--
     --
@@ -722,7 +725,7 @@
     --
     -->
     <div data-role="page" id="consumo">
-        <div data-role="header" data-position="fixed" id="consumos_header">
+        <div data-role="header" id="consumos_header">
             <a data-role="none" href="#" onclick="volver1()">
                 <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
             </a>
@@ -748,9 +751,6 @@
             <p id="numero_consumos"><span id="num_consumos"></span> Últimos consumos</p>
             <table id="tabla3"></table>
         </div>
-        <div data-role="footer" data-position="fixed" class="footer-page">
-            <h3 class="empresa">&copy; Sedalib S.A. - 2016</h3>
-        </div>
     </div>
     <!--
     --
@@ -758,7 +758,7 @@
     --
     -->
     <div data-role="page" id="cuotasxemitir">
-        <div data-role="header" data-position="fixed" id="cuotas_header">
+        <div data-role="header" id="cuotas_header">
             <a data-role="none" href="#" onclick="volver2()">
                 <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
             </a>
@@ -786,9 +786,6 @@
             <table id="table2">
             </table>
         </div>
-        <div data-role="footer" data-position="fixed" class="footer-page">
-            <h3 class="empresa">&copy; Sedalib S.A. - 2016</h3>
-        </div>
     </div>
     <!--
     --
@@ -796,7 +793,7 @@
     --
     -->
     <div data-role="page" id="consultas">
-        <div data-role="header" data-position="fixed" id="consultas_header">
+        <div data-role="header" id="consultas_header">
             <a data-role="none" href="#" onclick=" irUsuarios()">
                 <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
             </a>
@@ -840,9 +837,6 @@
                 </a>
             </div>
         </div>
-        <div data-role="footer" data-position="fixed" class="footer-page">
-            <h3 class="empresa">&copy; Sedalib S.A. - 2016</h3>
-        </div>
     </div>
     <!--
     --
@@ -850,7 +844,7 @@
     --
     -->
     <div data-role="page" id="reclamos">
-        <div data-role="header" data-position="fixed" id="reclamos_header">
+        <div data-role="header" id="reclamos_header">
             <a data-role="none" href="#consultas">
                 <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
             </a>
@@ -876,9 +870,6 @@
             <p id="numeroreclamos"><span id="numreclamos"></span> reclamos realizados</p>
             <table id="tabla4"></table>
         </div>
-        <div data-role="footer" data-position="fixed" class="footer-page">
-            <h3 class="empresa">&copy; Sedalib S.A. - 2016</h3>
-        </div>
     </div>
     <!--
     --
@@ -886,7 +877,7 @@
     --
     -->
     <div data-role="page" id="historicopagos">
-        <div data-role="header" data-position="fixed" id="pagos_header">
+        <div data-role="header" id="pagos_header">
             <a data-role="none" href="#consultas">
                 <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
             </a>
@@ -918,9 +909,6 @@
             </script>
             <p id="numeropagos"><span id="numpagos"></span> pagos realizados</p>
             <table id="tabla5"></table>
-        </div>
-        <div data-role="footer" data-position="fixed" class="footer-page">
-            <h3 class="empresa">&copy; Sedalib S.A. - 2016</h3>
         </div>
     </div>
 </body>

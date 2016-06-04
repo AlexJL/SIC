@@ -182,7 +182,15 @@ function onSuccess(data) {
 
             }
         }
-
+        if (localStorage.getItem('deuda_cliente') == 0) {
+            $("#carta").css("background-color", "#4caf50");
+        } else if (localStorage.getItem('cantidad_cliente') > 0 && localStorage.getItem('cantidad_cliente') < 3) {
+            $("#carta").css("background-color", "#ffeb3b");
+            $("#carita").attr("src", "../img/triste.gif")
+        } else if (localStorage.getItem('cantidad_cliente') > 2) {
+            $("#carta").css("background-color", "#f44336");
+            $("#carita").attr("src", "../img/triste.gif")
+        }
         $.mobile.changePage("#usuarios", {
             transition: "",
             reverse: true,
