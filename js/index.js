@@ -161,9 +161,10 @@ function onSuccess(data) {
             localStorage.setItem('deuda_cliente', a[5])
             localStorage.setItem('cantidad_cliente', a[6])
             separar_nombre(a[4]);
-            document.getElementById("suministro_cliente").innerHTML = localStorage.getItem("codigo_cliente");
-
-            document.getElementById("deuda_cliente").innerHTML = localStorage.getItem("deuda_cliente");
+            
+        }
+        document.getElementById("suministro_cliente").innerHTML = localStorage.getItem("codigo_cliente");
+                    document.getElementById("deuda_cliente").innerHTML = localStorage.getItem("deuda_cliente");
             if (localStorage.getItem('deuda_cliente') == 0) {
                 document.getElementById("vencimiento").innerHTML = "AL DÍA";
                 document.getElementById("corte").innerHTML = "AL DÍA";
@@ -181,6 +182,7 @@ function onSuccess(data) {
             }
             if (localStorage.getItem('deuda_cliente') == 0) {
                 $("#carta").css("background-color", "#4caf50");
+                $("#carita").attr("src", "../img/alegre.gif")
             } else if (localStorage.getItem('cantidad_cliente') > 0 && localStorage.getItem('cantidad_cliente') < 3) {
                 $("#carta").css("background-color", "#ffeb3b");
                 $("#carita").attr("src", "../img/triste.gif")
@@ -188,14 +190,13 @@ function onSuccess(data) {
                 $("#carta").css("background-color", "#f44336");
                 $("#carita").attr("src", "../img/triste.gif")
             }
-            $.mobile.changePage("#usuarios", {
+        verPagos(localStorage.getItem("codigo_cliente"));
+
+        $.mobile.changePage("#usuarios", {
                 transition: "",
                 reverse: true,
                 changeHash: true
             });
-        }
-        verPagos(localStorage.getItem("codigo_cliente"));
-
     }
 
 }
