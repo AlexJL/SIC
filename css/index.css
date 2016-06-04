@@ -11,6 +11,69 @@
     left: 10%;
     top: 10%;
 }
+.btn-inicio {
+    color: #FFF !important;
+    background-color: #2489ce;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    box-shadow: 0px 9px 0px #748899, 0px 9px 25px rgba(0, 0, 0, .7);
+    -webkit-box-shadow: 0px 9px 0px #748899, 0px 9px 25px rgba(0, 0, 0, .7);
+    -moz-box-shadow: 0px 9px 0px #748899, 0px 9px 25px rgba(0, 0, 0, .7);
+    display: block;
+    font-family: 'Yanone Kaffeesatz';
+    font-size: 2em;
+    font-weight: 700;
+    margin: 15px auto;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: none;
+    transition: all .1s ease;
+    -webkit-transition: all .1s ease;
+    -moz-transition: all .1s ease;
+    -ms-transition: all .1s ease;
+    -o-transition: all .1s ease;
+    padding: 4px;
+    position: relative;
+    width: 80%
+}
+.btn-inicio:active {
+    box-shadow: 0px 3px 0px rgba(215, 215, 215, 1), 0px 3px 6px rgba(0, 0, 0, .9);
+    -webkit-box-shadow: 0px 3px 0px rgba(215, 215, 215, 1), 0px 3px 6px rgba(0, 0, 0, .9);
+    -moz-box-shadow: 0px 3px 0px rgba(215, 215, 215, 1), 0px 3px 6px rgba(0, 0, 0, .9);
+    position: relative;
+    top: 6px
+}
+.menu {
+    padding-left: 5px;
+    padding-top: 10px
+}
+#btn-foto,
+#btn-galeria {
+    background-color: #6EA976 !important;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 26px 26px 72px -8px rgba(0, 0, 0, 0.68);
+    -webkit-box-shadow: 26px 26px 72px -8px rgba(0, 0, 0, 0.68);
+    -moz-box-shadow: 26px 26px 72px -8px rgba(0, 0, 0, 0.68);
+    float: left;
+    height: 80px;
+    margin: 10px;
+    width: 80px
+}
+#btn-foto {
+    background-image: url(../img/mapa.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    float: right;
+    margin-right: 20%
+}
+#btn-galeria {
+    background-image: url(../img/llamar.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    margin-left: 20%
+}
 .button {
     display: inline-block;
     position: relative;
@@ -51,10 +114,11 @@
 #inicio,
 #login,
 #registro {
-    background-image: url('../img/fondo.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
+    background: url(../img/fondo.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 #logo {
     width: 100%

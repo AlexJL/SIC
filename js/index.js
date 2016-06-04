@@ -140,8 +140,7 @@ function login() {
 function onSuccess(data) {
     a = JSON.parse(data);
     console.log(a);
-    if (a.length < 1) {
-        //usuario No valido
+    if (a.length == 0) {
         swal("Usuario no Registrado");
     } else {
         if (a.length > 7) {
@@ -162,42 +161,43 @@ function onSuccess(data) {
             localStorage.setItem('deuda_cliente', a[5])
             localStorage.setItem('cantidad_cliente', a[6])
             separar_nombre(a[4]);
-        }
+            document.getElementById("suministro_cliente").innerHTML = localStorage.getItem("codigo_cliente");
 
-        document.getElementById("suministro_cliente").innerHTML = localStorage.getItem("codigo_cliente");
-
-        document.getElementById("deuda_cliente").innerHTML = localStorage.getItem("deuda_cliente");
-        if (localStorage.getItem('deuda_cliente') == 0) {
-            document.getElementById("vencimiento").innerHTML = "AL DÍA";
-            document.getElementById("corte").innerHTML = "AL DÍA";
-            document.getElementById("cantidad_cliente").innerHTML = 0;
-        } else {
-            if (localStorage.getItem("fchVencimiento_cliente") && localStorage.getItem("fchCorte_cliente")) {
-                document.getElementById("vencimiento").innerHTML = localStorage.getItem("fchVencimiento_cliente");
-                document.getElementById("corte").innerHTML = localStorage.getItem("fchCorte_cliente");
-                document.getElementById("cantidad_cliente").innerHTML = localStorage.getItem("cantidad_cliente");
-            } else {
+            document.getElementById("deuda_cliente").innerHTML = localStorage.getItem("deuda_cliente");
+            if (localStorage.getItem('deuda_cliente') == 0) {
                 document.getElementById("vencimiento").innerHTML = "AL DÍA";
                 document.getElementById("corte").innerHTML = "AL DÍA";
+                document.getElementById("cantidad_cliente").innerHTML = 0;
+            } else {
+                if (localStorage.getItem("fchVencimiento_cliente") && localStorage.getItem("fchCorte_cliente")) {
+                    document.getElementById("vencimiento").innerHTML = localStorage.getItem("fchVencimiento_cliente");
+                    document.getElementById("corte").innerHTML = localStorage.getItem("fchCorte_cliente");
+                    document.getElementById("cantidad_cliente").innerHTML = localStorage.getItem("cantidad_cliente");
+                } else {
+                    document.getElementById("vencimiento").innerHTML = "AL DÍA";
+                    document.getElementById("corte").innerHTML = "AL DÍA";
 
+                }
             }
+            if (localStorage.getItem('deuda_cliente') == 0) {
+                $("#carta").css("background-color", "#4caf50");
+            } else if (localStorage.getItem('cantidad_cliente') > 0 && localStorage.getItem('cantidad_cliente') < 3) {
+                $("#carta").css("background-color", "#ffeb3b");
+                $("#carita").attr("src", "../img/triste.gif")
+            } else if (localStorage.getItem('cantidad_cliente') > 2) {
+                $("#carta").css("background-color", "#f44336");
+                $("#carita").attr("src", "../img/triste.gif")
+            }
+            $.mobile.changePage("#usuarios", {
+                transition: "",
+                reverse: true,
+                changeHash: true
+            });
         }
-        if (localStorage.getItem('deuda_cliente') == 0) {
-            $("#carta").css("background-color", "#4caf50");
-        } else if (localStorage.getItem('cantidad_cliente') > 0 && localStorage.getItem('cantidad_cliente') < 3) {
-            $("#carta").css("background-color", "#ffeb3b");
-            $("#carita").attr("src", "../img/triste.gif")
-        } else if (localStorage.getItem('cantidad_cliente') > 2) {
-            $("#carta").css("background-color", "#f44336");
-            $("#carita").attr("src", "../img/triste.gif")
-        }
-        $.mobile.changePage("#usuarios", {
-            transition: "",
-            reverse: true,
-            changeHash: true
-        });
+        verPagos(localStorage.getItem("codigo_cliente"));
+
     }
-    verPagos(localStorage.getItem("codigo_cliente"));
+
 }
 
 function separar_nombre(a) {
