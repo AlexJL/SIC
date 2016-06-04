@@ -4,45 +4,19 @@
 **
 */
 
-#contenido {
-    width: 80% !important;
-    height: 70%;
-    position: absolute;
-    left: 10%;
-    top: 10%;
-}
 .btn-inicio {
     color: #FFF !important;
-    background-color: #2489ce;
-    border-radius: 8px;
-    -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
-    box-shadow: 0px 9px 0px #748899, 0px 9px 25px rgba(0, 0, 0, .7);
-    -webkit-box-shadow: 0px 9px 0px #748899, 0px 9px 25px rgba(0, 0, 0, .7);
     -moz-box-shadow: 0px 9px 0px #748899, 0px 9px 25px rgba(0, 0, 0, .7);
     display: block;
     font-family: 'Yanone Kaffeesatz';
     font-size: 2em;
-    font-weight: 700;
     margin: 15px auto;
     text-align: center;
-    text-decoration: none;
+    width: 80%;
+    background: #296fb7;
     text-shadow: none;
-    transition: all .1s ease;
-    -webkit-transition: all .1s ease;
-    -moz-transition: all .1s ease;
-    -ms-transition: all .1s ease;
-    -o-transition: all .1s ease;
-    padding: 4px;
-    position: relative;
-    width: 80%
-}
-.btn-inicio:active {
-    box-shadow: 0px 3px 0px rgba(215, 215, 215, 1), 0px 3px 6px rgba(0, 0, 0, .9);
-    -webkit-box-shadow: 0px 3px 0px rgba(215, 215, 215, 1), 0px 3px 6px rgba(0, 0, 0, .9);
-    -moz-box-shadow: 0px 3px 0px rgba(215, 215, 215, 1), 0px 3px 6px rgba(0, 0, 0, .9);
-    position: relative;
-    top: 6px
+    box-shadow: 0px 3px 3px rgba(34, 34, 68, 0.5);
 }
 .menu {
     padding-left: 5px;
