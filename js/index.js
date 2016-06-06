@@ -1478,9 +1478,9 @@ function registrarBD(a, b, c, d, e) {
     });
 }
 */
-function onSuccess8(data) {
+/*function onSuccess8(data) {
     alert(data);
-}
+}*/
 
 
 
