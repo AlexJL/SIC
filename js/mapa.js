@@ -375,7 +375,7 @@ $(document).ready(function () {
             document.getElementById('horario-of').style.display = "none";
             document.getElementById('horario2-sedalib').innerHTML = "Lun a Vie 8:00a.m. a 1:00p.m. y 3:00p.m. a 6:00p.m. y Sáb 8:00a.m. a 1:00p.m. Sólo Cobranza";
             document.getElementById('color-sedalib').innerHTML = "Morado";
-            //document.getElementById('color').style.background = "#7401DF";
+            document.getElementById('color').style.background = "#7401DF";
             //document.getElementById('btn_llegar').style.background = "#7401DF";
             var distancia = verDistancia(latitud, longitud, postionLatitud[8], postionLongitud[8]);
             document.getElementById('distancia').innerHTML = distancia + "km";
