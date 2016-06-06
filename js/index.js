@@ -126,7 +126,6 @@ function login() {
     localStorage.setItem('email', email);
     var password = $("#txt-pass").val();
     localStorage.setItem('password', password);
-
     $.ajax({
         type: "POST",
         url: conexion + "login1.php",
@@ -138,9 +137,102 @@ function login() {
 }
 
 function onSuccess(data) {
-    a = JSON.parse(data);
+    if(data == "$$$$$$$$$$$$$$$$0"){
+        swal("Usuario no Registrado");
+    }else{
+        var j = 0;
+        clinombre = "";
+        clicodigo = "";
+        clisuministro = "";
+        clideuda = "";
+        clifechavencimiento = "";
+        clicantidad = "";
+        clifechacorte = "";
+        clihora = "";
+        clifecha = "";
+        clidireccion;
+        for (var i = 0; i < data.length; i++) {
+            if (data.charAt(i) != "$" && j == 0) {
+                clifecha = clifecha + data.charAt(i);
+            } else if (data.charAt(i) != "$" && j == 1) {
+                clihora = clihora + data.charAt(i);
+            } else if (data.charAt(i) != "$" && j == 2) {
+                clidireccion = clidireccion + data.charAt(i);
+            } else if (data.charAt(i) != "$" && j == 3) {
+                clicodigo = clicodigo + data.charAt(i);
+            } else if (data.charAt(i) != "$" && j == 4) {
+                if (data.charCodeAt(i) >= 48 && data.charCodeAt(i) <= 57) {
+                    clisuministro = clisuministro + data.charAt(i);
+                } else {
+                    clinombre = clinombre + data.charAt(i);
+                }
+            } else if (data.charAt(i) != "$" && j == 5) {
+                clideuda = clideuda + data.charAt(i);
+            } else if (data.charAt(i) != "$" && j == 6) {
+                clifechavencimiento = clifechavencimiento + data.charAt(i);
+               
+            } else if (data.charAt(i) != "$" && j == 7) {
+                clifechacorte = clifechacorte + data.charAt(i)
+            } else if (data.charAt(i) != "$" && j == 8) {
+                
+                 clicantidad = clicantidad + data.charAt(i);
+            } else {
+                j++;
+                i++;
+            }
+        }
+        localStorage.setItem('fecha_actualizacion', clifecha)
+        localStorage.setItem('hora_actualizacion', clihora)
+        localStorage.setItem("codigo_cliente", clicodigo);
+        localStorage.setItem("suministro_cliente", clisuministro);
+        localStorage.setItem("nombre_cliente", clinombre);
+        localStorage.setItem("deuda_cliente", parseFloat(clideuda));
+        localStorage.setItem("cantidad_cliente", clicantidad);
+        localStorage.setItem("fchVencimiento_cliente", clifechavencimiento);
+        localStorage.setItem("fchCorte_cliente", clifechacorte);
+        localStorage.setItem("direccion_cliente", clidireccion);
+        document.getElementById("suministro_cliente").innerHTML = localStorage.getItem("codigo_cliente");
+        document.getElementById("deuda_cliente").innerHTML = localStorage.getItem("deuda_cliente");
+        document.getElementById("nombre_cliente").innerHTML = localStorage.getItem("nombre_cliente");
+            if (localStorage.getItem('deuda_cliente') == 0) {
+                document.getElementById("vencimiento").innerHTML = "AL DÍA";
+                document.getElementById("corte").innerHTML = "AL DÍA";
+                document.getElementById("cantidad_cliente").innerHTML = 0;
+            } else {
+                if (localStorage.getItem("fchVencimiento_cliente") && localStorage.getItem("fchCorte_cliente")) {
+                    document.getElementById("vencimiento").innerHTML = localStorage.getItem("fchVencimiento_cliente");
+                    document.getElementById("corte").innerHTML = localStorage.getItem("fchCorte_cliente");
+                    document.getElementById("cantidad_cliente").innerHTML = localStorage.getItem("cantidad_cliente");
+                } else {
+                    document.getElementById("vencimiento").innerHTML = "AL DÍA";
+                    document.getElementById("corte").innerHTML = "AL DÍA";
+
+                }
+            }
+            if (localStorage.getItem('deuda_cliente') == 0) {
+                $("#carta").css("background-color", "#4caf50");
+                document.getElementById("carita").src ="img/alegre.gif"
+                //$("#carita").attr("src", "../img/alegre.gif")
+            } else if (localStorage.getItem('cantidad_cliente') > 0 && localStorage.getItem('cantidad_cliente') < 3) {
+                $("#carta").css("background-color", "#ffeb3b");
+                document.getElementById("carita").src ="img/triste.gif"
+               // $("#carita").attr("src", "../img/triste.gif")
+            } else if (localStorage.getItem('cantidad_cliente') > 2) {
+                $("#carta").css("background-color", "#f44336");
+                document.getElementById("carita").src ="img/triste.gif"
+                //$("#carita").attr("src", "../img/triste.gif")
+            }
+        verPagos(localStorage.getItem("codigo_cliente"));
+
+        $.mobile.changePage("#usuarios", {
+                transition: "",
+                reverse: true,
+                changeHash: true
+            });
+    }
+   /* a = JSON.parse(data);
     console.log(a);
-    if (a.length == 0) {
+    if (data ==null || a.length == 0) {
         swal("Usuario no Registrado");
     } else {
         if (a.length > 7) {
@@ -201,7 +293,7 @@ function onSuccess(data) {
                 changeHash: true
             });
     }
-
+*/
 }
 
 function separar_nombre(a) {
@@ -409,7 +501,12 @@ function registrarBD(a, b, c, d, e) {
 }
 
 function onSuccess8(data) {
-    alert(data);
+    swal({ title:"<span style='color:#296fb7'>Usaurio Registrado<span>",   text: "Porfavor Revise su correo en unos minutos le llegara el mensaje de confirmación",   timer: 3000,   showConfirmButton: false });
+     $.mobile.changePage("#login", {
+        transition: "",
+        reverse: true,
+        changeHash: true
+    });
 }
 /**
  **
