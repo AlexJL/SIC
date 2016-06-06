@@ -501,12 +501,22 @@ function registrarBD(a, b, c, d, e) {
 }
 
 function onSuccess8(data) {
-    swal({ title:"<span style='color:#296fb7'>Usaurio Registrado<span>",   text: "Porfavor Revise su correo en unos minutos le llegara el mensaje de confirmación",   timer: 3000,   showConfirmButton: false });
-     $.mobile.changePage("#login", {
-        transition: "",
-        reverse: true,
-        changeHash: true
-    });
+    if(data == "Usuario ya Registrado"){
+             swal({ title:"Error", text: "Usuario Existente",   timer: 3000,   showConfirmButton: false });
+         $.mobile.changePage("#login", {
+            transition: "",
+            reverse: true,
+            changeHash: true
+        });
+    }else{
+         swal({ title:"Usuario Registrado", text: "Porfavor Revise su correo en unos minutos le llegara el mensaje de confirmación",   timer: 3000,   showConfirmButton: false });
+         $.mobile.changePage("#login", {
+            transition: "",
+            reverse: true,
+            changeHash: true
+        });
+        }
+   
 }
 /**
  **
