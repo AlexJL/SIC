@@ -182,13 +182,16 @@ function onSuccess(data) {
             }
             if (localStorage.getItem('deuda_cliente') == 0) {
                 $("#carta").css("background-color", "#4caf50");
-                $("#carita").attr("src", "../img/alegre.gif")
+                document.getElementById("carita").src ="img/alegre.gif"
+                //$("#carita").attr("src", "../img/alegre.gif")
             } else if (localStorage.getItem('cantidad_cliente') > 0 && localStorage.getItem('cantidad_cliente') < 3) {
                 $("#carta").css("background-color", "#ffeb3b");
-                $("#carita").attr("src", "../img/triste.gif")
+                document.getElementById("carita").src ="img/triste.gif"
+               // $("#carita").attr("src", "../img/triste.gif")
             } else if (localStorage.getItem('cantidad_cliente') > 2) {
                 $("#carta").css("background-color", "#f44336");
-                $("#carita").attr("src", "../img/triste.gif")
+                document.getElementById("carita").src ="img/triste.gif"
+                //$("#carita").attr("src", "../img/triste.gif")
             }
         verPagos(localStorage.getItem("codigo_cliente"));
 
@@ -1170,14 +1173,14 @@ function pagos() {
     if(device.platform == 'Android'){ // si estamos en android
 var successCallback = function() { // si está instalada….
 // alert(“Success!”);
-window.plugins.launcher.launch({packageName:'com.android.chrome'}); // debes conocer el package de la aplicación que tienes instalada para abrirla
+window.plugins.launcher.launch({packageName:'com.bcp.bank.bcp'}); // debes conocer el package de la aplicación que tienes instalada para abrirla
 };
 var errorCallback = function() { // no está instalada
 //alert(“Error! ” + errMsg);
-window.location.href="market://details?id=com.android.chrome"; //ruta google play de la aplicación
+window.location.href="market://details?id=com.bcp.bank.bcp"; //ruta google play de la aplicación
 
 };
-window.plugins.launcher.canLaunch({packageName:"com.android.chrome"}, successCallback, errorCallback); // compruebo si tengo instalada la aplicación
+window.plugins.launcher.canLaunch({packageName:"com.bcp.bank.bcp"}, successCallback, errorCallback); // compruebo si tengo instalada la aplicación
     }
 /*}else { // si en estamos en IOS por ejemplo
 var successCallback = function() { // si está instalada….
