@@ -416,7 +416,7 @@
                             <h1>DENUNCIAS</h1></a>
                     </th>
                     <th>
-                        <a onclick="pagos()"><img src="img/pagosonline.png">
+                        <a onclick="pagosOnline()"><img src="img/pagosonline.png">
                             <h1>PAGOS ONLINE</h1></a>
                     </th>
                     <th>
@@ -906,7 +906,25 @@
             <span class="banner">Pagos Online</span>
         </div>
         <div data-role="content">
-            
+            <div class="card2" id="bcp">
+                <center>
+                    <h3 class="pagos_title">Banco de Crédito del Perú</h3>
+                    <button class="btn_pagosOnline" data-role="none" onclick="pagosBCP()">BCP</button>
+                </center>
+            </div>
+            <div class="card2" id="interbank">
+                <center>
+                    <h3 class="pagos_title">Banco Interbank</h3>
+                    <button class="btn_pagosOnline" data-role="none" onclick="pagosInterbank()">Interbank</button>
+                </center>
+            </div>
+            <div class="card2" id="banbif">
+               <center>
+                   <h3 class="pagos_title">Banco Interamericano de Finanzas</h3>
+                   <button class="btn_pagosOnline" data-role="none" onclick="pagosBanbif()">Banbif</button>
+                </center>
+                
+            </div>
         </div>
     </div>
 </body>

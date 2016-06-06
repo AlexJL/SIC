@@ -1164,23 +1164,26 @@ function regresarInicio() {
     });
 }
 
-function pagos() {
-    /*$.mobile.changePage("#pagos", {
+function pagosOnline(){
+     $.mobile.changePage("#pagosOnline", {
         transition: "",
         reverse: true,
         changeHash: true
-    });*/
-    if(device.platform == 'Android'){ // si estamos en android
-var successCallback = function() { // si está instalada….
-// alert(“Success!”);
-window.plugins.launcher.launch({packageName:'com.bcp.bank.bcp'}); // debes conocer el package de la aplicación que tienes instalada para abrirla
-};
-var errorCallback = function() { // no está instalada
-//alert(“Error! ” + errMsg);
-window.location.href="market://details?id=com.bcp.bank.bcp"; //ruta google play de la aplicación
+    });
+}
 
-};
-window.plugins.launcher.canLaunch({packageName:"com.bcp.bank.bcp"}, successCallback, errorCallback); // compruebo si tengo instalada la aplicación
+
+function pagosBCP() {
+    if(device.platform == 'Android'){ // si estamos en android
+        var successCallback = function() { // si está instalada….
+        // alert(“Success!”);
+        window.plugins.launcher.launch({packageName:'com.bcp.bank.bcp'}); // debes conocer el package de la aplicación que tienes instalada para abrirla
+        };
+        var errorCallback = function() { // no está instalada
+        //alert(“Error! ” + errMsg);
+        window.location.href="market://details?id=com.bcp.bank.bcp"; //ruta google play de la aplicación
+        };
+        window.plugins.launcher.canLaunch({packageName:"com.bcp.bank.bcp"}, successCallback, errorCallback); // compruebo si tengo instalada la aplicación
     }
 /*}else { // si en estamos en IOS por ejemplo
 var successCallback = function() { // si está instalada….
@@ -1195,7 +1198,33 @@ window.plugins.launcher.canLaunch({uri:’example://’}, successCallback, error
 }*/
 }
 
+function pagosInterbank() {
+    if(device.platform == 'Android'){ // si estamos en android
+        var successCallback = function() { // si está instalada….
+        // alert(“Success!”);
+        window.plugins.launcher.launch({packageName:'pe.com.interbank.mobilebanking'}); // debes conocer el package de la aplicación que tienes instalada para abrirla
+        };
+        var errorCallback = function() { // no está instalada
+        //alert(“Error! ” + errMsg);
+        window.location.href="market://details?id=pe.com.interbank.mobilebanking"; //ruta google play de la aplicación
+        };
+        window.plugins.launcher.canLaunch({packageName:"pe.com.interbank.mobilebanking"}, successCallback, errorCallback); // compruebo si tengo instalada la aplicación
+    }
+}
 
+function pagosBanbif() {
+    if(device.platform == 'Android'){ // si estamos en android
+        var successCallback = function() { // si está instalada….
+        // alert(“Success!”);
+        window.plugins.launcher.launch({packageName:'pe.com.banBifBanking.icBanking.androidUI'}); // debes conocer el package de la aplicación que tienes instalada para abrirla
+        };
+        var errorCallback = function() { // no está instalada
+        //alert(“Error! ” + errMsg);
+        window.location.href="market://details?id=pe.com.banBifBanking.icBanking.androidUI"; //ruta google play de la aplicación
+        };
+        window.plugins.launcher.canLaunch({packageName:"pe.com.banBifBanking.icBanking.androidUI"}, successCallback, errorCallback); // compruebo si tengo instalada la aplicación
+    }
+}
 
 
 
@@ -1278,37 +1307,37 @@ function cambiarColor(a, b, cont) {
 
 function cambiarMes1(a) {
     var dia = a.substr(0, 2);
-    var mes = a.substr(3, 3);
-    var anio = a.substr(7, 2);
+    var mes = a.substr(3, 2);
+    var anio = a.substr(6, 4);
     mes = cambiarMes2(mes);
     return dia + "-" + mes + "-" + anio;
 }
 
 function cambiarMes2(a) {
     var mes = "";
-    if (a == "JAN") {
+    if (a == "01") {
         mes = "ENE";
-    } else if (a == "FEB") {
+    } else if (a == "02") {
         mes = "FEB";
-    } else if (a == "MAR") {
+    } else if (a == "03") {
         mes = "MAR";
-    } else if (a == "APR") {
+    } else if (a == "04") {
         mes = "ABR";
-    } else if (a == "MAY") {
+    } else if (a == "05") {
         mes = "MAY";
-    } else if (a == "JUN") {
+    } else if (a == "06") {
         mes = "JUN";
-    } else if (a == "JUL") {
+    } else if (a == "07") {
         mes = "JUL";
-    } else if (a == "AUG") {
+    } else if (a == "08") {
         mes = "AGO";
-    } else if (a == "SEP") {
+    } else if (a == "09") {
         mes = "SET";
-    } else if (a == "OCT") {
+    } else if (a == "10") {
         mes = "OCT";
-    } else if (a == "NOV") {
+    } else if (a == "11") {
         mes = "NOV";
-    } else if (a == "DEC") {
+    } else if (a == "12") {
         mes = "DIC";
     }
     return mes;

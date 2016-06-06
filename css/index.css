@@ -1416,3 +1416,44 @@ numero-docum {
     font-family: 'Yanone Kaffeesatz';
     text-shadow: none
 }
+
+/**
+**
+**  Pagos Online
+**
+**/
+.card2 {
+    position: relative;
+    display: inline-block;
+    width: 90%;
+    height: 120px;
+    vertical-align: top;
+    background-color: #fff;
+    box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24);
+    left: 5%;
+    margin-top: 10px
+}
+.pagos_title{
+     font-family: 'Yanone Kaffeesatz' !important;
+    text-shadow: none !important;
+    color:#FFF !important;
+}
+#bcp{
+    background: #00407e
+}
+#banbif{
+    background: #0f88d4
+}
+#interbank{
+    background: #009b3a
+}
+.btn_pagosOnline{
+    width: 70%;
+    height: 30px;
+    background: #FFF;
+    border: none;
+    box-shadow: 2px 4px 4px #000;
+    color: #296fb7;
+    font-family: 'Yanone Kaffeesatz' !important;
+        font-size: 17px;
+}
