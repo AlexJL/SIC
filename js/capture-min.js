@@ -100,7 +100,9 @@ function enviarPosicion() {
 }
 
 function onSuccess7(data) {
-    alert(data);
+    swal({ title:data, timer: 3000,   showConfirmButton: false });
+    regresar();
+
 }
 
 function win(r) {
