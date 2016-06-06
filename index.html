@@ -377,9 +377,7 @@
                     </tr>
                 </table>
                 <script>
-                    if (localStorage.getItem("codigo_cliente")) {
-                        document.getElementById("suministro_cliente").innerHTML = localStorage.getItem("codigo_cliente");
-
+                    if (localStorage.getItem("deuda_cliente")) {
                         document.getElementById("deuda_cliente").innerHTML = localStorage.getItem("deuda_cliente");
                     }
 
@@ -400,12 +398,13 @@
                     }
                     if (localStorage.getItem('deuda_cliente') == 0) {
                         $("#carta").css("background-color", "#4caf50");
+                        $("#carita").attr("src", "img/triste.gif")
                     } else if (localStorage.getItem('cantidad_cliente') > 0 && localStorage.getItem('cantidad_cliente') < 3) {
                         $("#carta").css("background-color", "#ffeb3b");
-                        $("#carita").attr("src", "../img/triste.gif")
+                        $("#carita").attr("src", "img/triste.gif")
                     } else if (localStorage.getItem('cantidad_cliente') > 2) {
                         $("#carta").css("background-color", "#f44336");
-                        $("#carita").attr("src", "../img/triste.gif")
+                        $("#carita").attr("src", "img/triste.gif")
                     }
 
                 </script>
@@ -892,6 +891,22 @@
             </script>
             <p id="numeropagos"><span id="numpagos"></span> pagos realizados</p>
             <table id="tabla5"></table>
+        </div>
+    </div>
+    <!--
+    --
+    -- Pagos Online
+    --
+    -->
+    <div data-role="page" id="pagosOnline">
+        <div data-role="header" id="pagos_header">
+            <a data-role="none" href="#usuarios">
+                <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+            </a>
+            <span class="banner">Pagos Online</span>
+        </div>
+        <div data-role="content">
+            
         </div>
     </div>
 </body>

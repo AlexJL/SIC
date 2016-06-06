@@ -52,6 +52,7 @@
         <gap:plugin name="org.apache.cordova.globalization" />
         <gap:plugin name="org.apache.cordova.network-information" version="0.2.7" />
         <gap:plugin name="org.apache.cordova.splashscreen" />
+        <gap:plugin name="com.hutchind.cordova.plugins.launcher" version="0.2.2" />
         <!-- Third party plugins -->
         <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
         <!--  

@@ -164,7 +164,7 @@ function onSuccess(data) {
             
         }
         document.getElementById("suministro_cliente").innerHTML = localStorage.getItem("codigo_cliente");
-                    document.getElementById("deuda_cliente").innerHTML = localStorage.getItem("deuda_cliente");
+        document.getElementById("deuda_cliente").innerHTML = localStorage.getItem("deuda_cliente");
             if (localStorage.getItem('deuda_cliente') == 0) {
                 document.getElementById("vencimiento").innerHTML = "AL DÍA";
                 document.getElementById("corte").innerHTML = "AL DÍA";
@@ -202,16 +202,16 @@ function onSuccess(data) {
 }
 
 function separar_nombre(a) {
-    var suministro_cliente = "";
+    var suministro_cliente1 = "";
     var nombre_cliente = "";
     for (var i = 0; i < a.length; i++) {
         if (a.charCodeAt(i) >= 48 && a.charCodeAt(i) <= 57) {
-            suministro_cliente = suministro_cliente + a.charAt(i);
+            suministro_cliente1 = suministro_cliente1 + a.charAt(i);
         } else {
             nombre_cliente = nombre_cliente + a.charAt(i);
         }
     }
-    localStorage.setItem('suministro_cliente', suministro_cliente)
+    localStorage.setItem('suministro_cliente', suministro_cliente1)
     localStorage.setItem('nombre_cliente', nombre_cliente)
     document.getElementById("nombre_cliente").innerHTML = localStorage.getItem("nombre_cliente");
 
@@ -1162,11 +1162,34 @@ function regresarInicio() {
 }
 
 function pagos() {
-    $.mobile.changePage("#pagos", {
+    /*$.mobile.changePage("#pagos", {
         transition: "",
         reverse: true,
         changeHash: true
-    });
+    });*/
+    if(device.platform == 'Android'){ // si estamos en android
+var successCallback = function() { // si está instalada….
+// alert(“Success!”);
+window.plugins.launcher.launch({packageName:'com.android.chrome'}); // debes conocer el package de la aplicación que tienes instalada para abrirla
+};
+var errorCallback = function() { // no está instalada
+//alert(“Error! ” + errMsg);
+window.location.href="market://details?id=com.android.chrome"; //ruta google play de la aplicación
+
+};
+window.plugins.launcher.canLaunch({packageName:"com.android.chrome"}, successCallback, errorCallback); // compruebo si tengo instalada la aplicación
+    }
+/*}else { // si en estamos en IOS por ejemplo
+var successCallback = function() { // si está instalada….
+window.location.href=”example://”; -> la aplicación que tienes en IOS instalada
+};
+var errorCallback = function() { // si no está instalada
+window.location.href=”itms-apps://itunes.apple.com/app/idExample”; // ruta al itunes de la aplicación si no la tienes instalada
+
+};
+window.plugins.launcher.canLaunch({uri:’example://’}, successCallback, errorCallback); // debes conocer el uri de la aplicación para comprobar si la tienes o no
+
+}*/
 }
 
 
