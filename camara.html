@@ -6,7 +6,9 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
         <link rel="stylesheet" type="text/css" href="css/camara.css" />
         <link rel="stylesheet" type="text/css" href="css/sweetalert.css" />
-        <title>Hello World</title>
+        <!-- Fuente utilizada para el aplicativo obtenida de google fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:700' rel='stylesheet' type='text/css' />
+        <title>Camara</title>
         <script>
 			var conexion="http://pekin.sedalib.com.pe/SIC/";
 		</script>
@@ -16,9 +18,9 @@
         <div id="foto"></div>
         <div id="menu">
             <div id="contenedorMenu">
-                <button id='btn-foto' ontouchend="capturePhoto()" title="Toma Una Foto"></button>
-                <button id='btn-galeria' ontouchend="getPhoto(pictureSource.PHOTOLIBRARY)" title="Cargar Foto Galeria"></button>
-                <button id='btn-enviar' onclick="enviarFoto(URIimg)" title="Enviar Imagen"></button>
+                <button id='btn-foto' ontouchend="capturePhoto()" title="Toma Una Foto"><h3 style="margin-top: 80px;color:#00207E;font-family: 'Yanone Kaffeesatz'">Tomar Foto</h3></button>
+                <button id='btn-galeria' ontouchend="getPhoto(pictureSource.PHOTOLIBRARY)" title="Cargar Foto Galeria"><h3 style="margin-top: 80px;color:#00207E;font-family: 'Yanone Kaffeesatz'">Escoger Foto</h3></button>
+                <button id='btn-enviar' onclick="enviarFoto(URIimg)" title="Enviar Imagen"><h3 style="margin-top: 80px;color:#00207E;font-family: 'Yanone Kaffeesatz'">Enviar Foto</h3></button>
             </div>
             
             <div id="pie-pagina">
@@ -35,12 +37,9 @@
         <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="js/sweetalert.min.js"></script>
         <script>
-            alert("Realice sus reclamos de Averias \n1.- Primer Boton - Tomar Foto \n2.- Segundo Boton - Escoger Foto\n3.- Enviar Foto ");
-            //alert(localStorage.getItem('nombre'));
-            var URIimg="";
-            var longitud;
-            var latitud;
-            var nombre;
+            swal("Denuncias", "Podra tomar fotos o buscar fotos de su galeria, para reportar cualquier incidencia")
+            longitud="";
+            latitud="";
             app.initialize();
         </script>
     </body>

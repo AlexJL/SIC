@@ -22,32 +22,22 @@
     padding-left: 5px;
     padding-top: 10px
 }
-#btn-foto,
-#btn-galeria {
-    background-color: #6EA976 !important;
-    border: none;
-    border-radius: 50px;
-    box-shadow: 26px 26px 72px -8px rgba(0, 0, 0, 0.68);
-    -webkit-box-shadow: 26px 26px 72px -8px rgba(0, 0, 0, 0.68);
-    -moz-box-shadow: 26px 26px 72px -8px rgba(0, 0, 0, 0.68);
-    float: left;
-    height: 80px;
-    margin: 10px;
-    width: 80px
+
+#tabla3{
+    margin-top: 20px;
+    width: 100%;
 }
-#btn-foto {
-    background-image: url(../img/mapa.png);
-    background-position: center center;
-    background-repeat: no-repeat;
-    float: right;
-    margin-right: 20%
+#tabla3 tr th {
+    width: 33%;
 }
-#btn-galeria {
-    background-image: url(../img/llamar.png);
-    background-position: center center;
-    background-repeat: no-repeat;
-    margin-left: 20%
+#tabla3 tr th a {
+    text-decoration: none;
 }
+#tabla3 tr th h1 {
+    font-family: 'Yanone Kaffeesatz';
+    font-size: 15px;
+}
+
 .button {
     display: inline-block;
     position: relative;

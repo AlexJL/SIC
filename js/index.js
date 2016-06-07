@@ -1454,50 +1454,13 @@ function configurar() {
     location.href = "#configuracion";
 }
 
-/*
-function registrar() {
-    var rnombre = document.getElementsByName("rnombre")[0].value;
-    var rcorreo = document.getElementsByName("rcorreo")[0].value;
-    var rsuministro = document.getElementsByName("rsuministro")[0].value;
-    var rcelular = document.getElementsByName("rcelular")[0].value;
-    var rdni = document.getElementsByName("rdni")[0].value;
-
-    if (rnombre == "" || rnombre == "NOMBRE COMPLETO" || rcorreo == "" || rcorreo == "CORREO" || rsuministro == "" || rsuministro == "SUMINISTRO" || rcelular == "" || rcelular == "CELULAR" || rdni == "" || rdni == "DNI") {
-        alert("Rellene todos los campos correctamente");
-    } else {
-        if (rcorreo.indexOf("@") == -1) {
-            alert("correo no valido");
-        } else if (rdni.length != 8) {
-            alert("DNI incorrecto, ingrese uno válido");
-        } else {
-            registrarBD(rnombre, rcorreo, rsuministro, rcelular, rdni);
-        }
-    }
-
-}
-
-
-function registrarBD(a, b, c, d, e) {
-    $.ajax({
-        type: "POST",
-        url: "http://192.168.22.10/correo.php",
-        data: "nombre=" + a + "&suministro=" + c + "&dni=" + c + "&email=" + d + "&tel=" + e,
-        cache: false,
-        dataType: "text",
-        success: onSuccess8
-    });
-}
-*/
-/*function onSuccess8(data) {
-    alert(data);
-}*/
-
-
 
 function regresar98() {
     if (localStorage.getItem("dondepagar") == 1) {
         location.href = "#usuarios";
     } else if (localStorage.getItem("dondepagar") == 2) {
-        location.href = "#noClientes";
+        location.href = "#noclientes";
+    } else if(localStorage.getItem("dondepagar")==3){
+        location.href = "#inicio";
     }
 }

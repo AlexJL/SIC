@@ -113,11 +113,13 @@ function win(r) {
 }
 
 function fail(error) {
-    alert("A ocurrido un error : code = " + error.code);
+    //alert("A ocurrido un error : code = " + error.code);
+    swal("","Error al envio de Foto");
 }
 
 function onFail(message) {
-    alert('Error por: ' + message);
+    //alert('Error por: ' + message);
+    swal("","Error encontrado en la camara");
 }
 
 
