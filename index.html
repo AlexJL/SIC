@@ -991,6 +991,28 @@
             </div>
         </div>
     </div>
+    <!--
+    --
+    -- Cambio de Contraseña
+    --
+    -->
+    <div data-role="page" id="cambioContra">
+          <div data-role="header" id="contra_header">
+            <span class="banner">Cambiar Contraseña</span>
+          </div>
+          <div data-role="content">
+            <label for="">Contraseña Antigua</label>
+            <input data-role="none" id="txt-pass1" class="input_login" type="password" placeholder="">
+            <label for="">Contraseña Nueva</label>
+            <input data-role="none" id="txt-pass2" class="input_login" type="password" placeholder="">
+            <label for="">Repetir Contraseña</label>
+            <input data-role="none" id="txt-pass3" class="input_login" type="password" placeholder="">
+            <div class="button raised blue" id="login_registrar" onclick="cambiarPass()">
+                <div class="center" fit>Guardar</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
+          </div>
+    </div>
 </body>
 
 </html>

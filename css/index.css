@@ -280,6 +280,9 @@ mapa_header {
 #login {
     font-family: 'Yanone Kaffeesatz';
 }
+label{
+    font-family: 'Yanone Kaffeesatz';
+}
 #login_back {
     text-decoration: none;
     color: #FFF
@@ -296,12 +299,12 @@ mapa_header {
     left: 10%;
     top: 20%;
 }
-#txt-email {
+#txt-email,#txt-email1 {
     background: rgba(1, 1, 1, 0);
     margin-bottom: 15px;
     text-shadow: none
 }
-#txt-pass {
+#txt-pass,#txt-pass1,#txt-pass2,#txt-pass3 {
     background: rgba(1, 1, 1, 0);
     margin-bottom: 20px
 }
@@ -1436,4 +1439,24 @@ numero-docum {
     color: #296fb7;
     font-family: 'Yanone Kaffeesatz' !important;
         font-size: 17px;
+}
+
+
+/**
+**
+** cambiar Contraseña
+**
+**/
+
+#contra_header {
+    height: 45px
+}
+#contra_header>a {
+    text-decoration: none;
+    color: #FFF
+}
+#contra_header>i {
+    margin-top: 5px;
+    margin-left: 5px;
+    text-shadow: none
 }

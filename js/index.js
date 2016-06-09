@@ -32,6 +32,7 @@ var clifecha = "";
 var clihora = "";
 var dias_transcurridos = "";
 var tipoCli = "";
+var estado = "";
 
 /**
  **
@@ -57,7 +58,15 @@ function handleBackButton() {
         navigator.app.exitApp();
     } else if ($.mobile.activePage.attr('id') == 'noClientes') {
         $.mobile.changePage('#inicio');
-    } else {
+    }else if ($.mobile.activePage.attr('id') == 'login') {
+        $.mobile.changePage('#inicio');
+    }else if ($.mobile.activePage.attr('id') == 'usuarios') {
+        $.mobile.changePage('#login');
+    } else if ($.mobile.activePage.attr('id') == 'estadoCuenta') {
+        $.mobile.changePage('#usuarios');
+    }else if ($.mobile.activePage.attr('id') == 'consultas') {
+        $.mobile.changePage('#usuarios');
+    }else {
         navigator.app.backHistory();
     }
 }
@@ -150,10 +159,10 @@ function login() {
 }
 
 function onSuccess(data) {
-
-    if(data == "$$$$$$$$$$$$$$$$0$$0"){
+    if(data == "$$$$$$$$$$$$$$$$0$$0$$"){
         swal("Usuario no Registrado");
     }else{
+        
         var j = 0;
         clinombre = "";
         clicodigo = "";
@@ -166,6 +175,7 @@ function onSuccess(data) {
         clifecha = "";
         clidireccion="";
         tipoCli ="";
+        estado = "";
         dias_transcurridos="";
         for (var i = 0; i < data.length; i++) {
             if (data.charAt(i) != "$" && j == 0) {
@@ -193,6 +203,8 @@ function onSuccess(data) {
                  clicantidad = clicantidad + data.charAt(i);
             } else if(data.charAt(i) != "$" && j == 9){
                 dias_transcurridos = dias_transcurridos + data.charAt(i);
+            }else if(data.charAt(i) != "$" && j == 10){
+                estado = estado + data.charAt(i);
             }else {
                 j++;
                 i++;
@@ -209,6 +221,7 @@ function onSuccess(data) {
         localStorage.setItem("fchCorte_cliente", clifechacorte);
         localStorage.setItem("direccion_cliente", clidireccion);
         localStorage.setItem("tipo_cliente", tipoCli);
+        localStorage.setItem("estado_cliente", parseInt(estado));
         localStorage.setItem("dias_transcurridos", parseInt(dias_transcurridos));
         document.getElementById("suministro_cliente").innerHTML = localStorage.getItem("codigo_cliente");
         document.getElementById("deuda_cliente").innerHTML = localStorage.getItem("deuda_cliente");
@@ -273,13 +286,22 @@ function onSuccess(data) {
             document.getElementById("fuera_fecha").style.display = "none";
         }
         
-        verPagos(localStorage.getItem("codigo_cliente"));
-
-        $.mobile.changePage("#usuarios", {
+        if(estado == 1){
+            $.mobile.changePage("#usuarios", {
                 transition: "",
                 reverse: true,
                 changeHash: true
             });
+            verPagos(localStorage.getItem("codigo_cliente"));
+        } else{
+             swal({   title: "",   text:"Porfavor Cambie su Contraseña por Seguridad",   timer: 2000,   showConfirmButton: false });
+            $.mobile.changePage("#cambioContra", {
+                transition: "",
+                reverse: true,
+                changeHash: true
+            });
+        }
+        
     }
 }
 
@@ -1058,7 +1080,6 @@ function onSuccess4(data) {
         location.href = "#cuotasxemitir";
     }
 }
-
 function regresar_de_reclamos(){
     if(localStorage.getItem("variable") == 1){
         location.href = "#consultas";
@@ -1066,7 +1087,6 @@ function regresar_de_reclamos(){
         location.href = "#estadoCuenta";
     }
 }
-
 function reclamos(a) {
  localStorage.setItem("variable",a);
     $.ajax({
@@ -1078,11 +1098,7 @@ function reclamos(a) {
         success: onSuccess6
     });
 }
-
 function onSuccess6(data) {
-    //alert(data);
-    //var tabla = document.getElementById('tabla4');
-    //$("#tabla4").empty();
     $("hr").remove(".bajo_reclamo");
     $("p").remove(".numero_reclamo");
     $("p").remove(".descripcion_reclamo");
@@ -1239,148 +1255,14 @@ function onSuccess6(data) {
         document.getElementById("rdireccion").innerHTML = localStorage.getItem("direccion_cliente");
         document.getElementById("fecha_actual4").innerHTML = localStorage.getItem("fecha_actualizacion") + "-" + localStorage.getItem("hora_actualizacion");
     location.href = "#reclamos";
-    }
-    /*if (data == "") {
-        swal("No cuenta con reclamos Regitrados");
-    } else {
-        var cad1 = "";
-        var cad2 = "";
-        var cad3 = "";
-        var cad4 = "";
-        var cad5 = "";
-        var cad6 = "";
-        var cad7 = "";
-        var cad8 = "";
-        var cad9 = "";
-        var p = 0;
-        var sum = 0;
-        var tr = document.createElement('tr');
-        var th1 = document.createElement('th');
-        th1.setAttribute('class', 'col_cod1');
-        th1.innerHTML = 'N. Recl';
-        var th2 = document.createElement('th');
-        th2.setAttribute('class', 'col_des1');
-        th2.innerHTML = 'Descripción';
-        var th3 = document.createElement('th');
-        th3.setAttribute('class', 'col_reg1');
-        th3.innerHTML = 'F. Registro';
-        var th4 = document.createElement('th');
-        th4.setAttribute('class', 'col_fin1');
-        th4.innerHTML = 'F. Final';
-        var th5 = document.createElement('th');
-        th5.setAttribute('class', 'col_pro1');
-        th5.innerHTML = 'Tipo Problema';
-        var th6 = document.createElement('th');
-        th6.setAttribute('class', 'col_est1');
-        th6.innerHTML = 'Estado';
-        var th7 = document.createElement('th');
-        th7.setAttribute('class', 'col_ins1');
-        th7.innerHTML = 'Instancia';
-        var th8 = document.createElement('th');
-        th8.setAttribute('class', 'col_per1');
-        th8.innerHTML = 'Periodo';
-        tr.appendChild(th1);
-        tr.appendChild(th2);
-        tr.appendChild(th3);
-        tr.appendChild(th4);
-        tr.appendChild(th5);
-        tr.appendChild(th6);
-        tr.appendChild(th7);
-        tr.appendChild(th8);
-        tabla.appendChild(tr);
-        for (var i = 0; i < data.length; i++) {
-            if (data.charAt(i) != "$" && p == 0) {
-                cad1 = cad1 + data.charAt(i);
-            } else if (data.charAt(i) != "$" && p == 1) {
-                cad2 = cad2 + data.charAt(i);
-            } else if (data.charAt(i) != "$" && p == 2) {
-                cad3 = cad3 + data.charAt(i);
-            } else if (data.charAt(i) != "$" && p == 3) {
-                cad4 = cad4 + data.charAt(i);
-            } else if (data.charAt(i) != "$" && p == 4) {
-                cad5 = cad5 + data.charAt(i);
-            } else if (data.charAt(i) != "$" && p == 5) {
-                cad6 = cad6 + data.charAt(i);
-            } else if (data.charAt(i) != "$" && p == 6) {
-                cad7 = cad7 + data.charAt(i);
-            } else if (data.charAt(i) != "$" && p == 7) {
-                cad8 = cad8 + data.charAt(i);
-            } else if (data.charAt(i) == "$") {
-                i++;
-                p++;
-                if (p == 8) {
-
-                    var tr = document.createElement('tr');
-                    var th1 = document.createElement('th');
-                    th1.setAttribute('class', 'col_cod');
-                    th1.innerHTML = cad1;
-                    var th2 = document.createElement('th');
-                    th2.setAttribute('class', 'col_des');
-                    th2.innerHTML = cad2;
-                    var th3 = document.createElement('th');
-                    th3.setAttribute('class', 'col_reg');
-                    th3.innerHTML = cad3;
-                    var th4 = document.createElement('th');
-                    th4.setAttribute('class', 'col_fin');
-                    th4.innerHTML = cad4;
-                    var th5 = document.createElement('th');
-                    th5.setAttribute('class', 'col_pro');
-                    th5.innerHTML = cad5;
-                    var th6 = document.createElement('th');
-                    th6.setAttribute('class', 'col_est');
-                    th6.innerHTML = cad6;
-                    var th7 = document.createElement('th');
-                    th7.setAttribute('class', 'col_ins');
-                    th7.innerHTML = cad7;
-                    var th8 = document.createElement('th');
-                    th8.setAttribute('class', 'col_per');
-                    th8.innerHTML = arreglar(cad8);
-                    tr.appendChild(th1);
-                    tr.appendChild(th2);
-                    tr.appendChild(th3);
-                    tr.appendChild(th4);
-                    tr.appendChild(th5);
-                    tr.appendChild(th6);
-                    tr.appendChild(th7);
-                    tr.appendChild(th8);
-                    tabla.appendChild(tr);
-                    cad1 = "";
-                    cad2 = "";
-                    cad3 = "";
-                    cad4 = "";
-                    cad5 = "";
-                    cad6 = "";
-                    cad7 = "";
-                    cad8 = "";
-                    cad9 = "";
-                    p = 0;
-                    sum++;
-                }
-            }
-            document.getElementById('numreclamos').innerHTML = sum;
-        }
-        document.getElementById("rcliente").innerHTML = localStorage.getItem("nombre_cliente");
-        document.getElementById("rdireccion").innerHTML = localStorage.getItem("direccion_cliente");
-        document.getElementById("fecha_actual4").innerHTML = localStorage.getItem("fecha_actualizacion") + "-" + localStorage.getItem("hora_actualizacion");
-        location.href = "#reclamos";
-    }*/
-     
+    }     
 }
-
 function obtener_periodo(a){
     var a1 = a.substr(0,4);
     var a2 = a.substr(4,2);
     var a3 = cambiarMes2(a2);
     return a3+" - "+a1;
 }
-/*function irclientes() {
-    $.mobile.changePage("#usuarios", {
-        transition: "",
-        reverse: true,
-        changeHash: true
-    });
-}*/
-
 function hpagos() {
     $.ajax({
         type: "POST",
@@ -1391,7 +1273,6 @@ function hpagos() {
         success: onSuccess7
     });
 }
-
 function onSuccess7(data) {
     if (data == "") {
         swal("No tiene Pagos Registrados")
@@ -1494,9 +1375,7 @@ function onSuccess7(data) {
         location.href = "#historicopagos";
     }
 }
-
-function restarFechas(f1,f2)
- {
+function restarFechas(f1,f2) {
  var aFecha1 = f1.split('/'); 
  var aFecha2 = f2.split('/'); 
  var fFecha1 = Date.UTC(aFecha1[2],aFecha1[1]-1,aFecha1[0]); 
@@ -1505,20 +1384,11 @@ function restarFechas(f1,f2)
  var dias = Math.floor(dif / (1000 * 60 * 60 * 24)); 
  return dias;
  }
-
-
-
-
-
-//función para visualizar el diálogo de la página no Clientes
-localStorage.setItem('visitarNoClientes', 0);
-
 function noticias(a) {
     alert("En Construcción");
     //localStorage.setItem("noticias",a);
     //$.mobile.changePage( "#noticias", {transition: "",reverse: true,changeHash: true});
 }
-
 function verNoticia(id) {
     $.mobile.changePage("#noticiaCompleta", {
         transition: "",
@@ -1526,15 +1396,12 @@ function verNoticia(id) {
         changeHash: true
     });
 }
-
 function cambiarPla() {
     document.getElementById('txt-email').placeholder = "";
 }
-
 function cambiarPla1() {
     document.getElementById('txt-pass').placeholder = "";
 }
-
 function regresarInicio() {
     $.mobile.changePage("#inicio", {
         transition: "",
@@ -1542,7 +1409,6 @@ function regresarInicio() {
         changeHash: true
     });
 }
-
 function pagosOnline(){
      $.mobile.changePage("#pagosOnline", {
         transition: "",
@@ -1550,8 +1416,6 @@ function pagosOnline(){
         changeHash: true
     });
 }
-
-
 function pagosBCP() {
     if(device.platform == 'Android'){ // si estamos en android
         var successCallback = function() { // si está instalada….
@@ -1576,7 +1440,6 @@ window.plugins.launcher.canLaunch({uri:’example://’}, successCallback, error
 
 }*/
 }
-
 function pagosInterbank() {
     if(device.platform == 'Android'){ // si estamos en android
         var successCallback = function() { // si está instalada….
@@ -1590,7 +1453,6 @@ function pagosInterbank() {
         window.plugins.launcher.canLaunch({packageName:"pe.com.interbank.mobilebanking"}, successCallback, errorCallback); // compruebo si tengo instalada la aplicación
     }
 }
-
 function pagosBanbif() {
     if(device.platform == 'Android'){ // si estamos en android
         var successCallback = function() { // si está instalada….
@@ -1604,10 +1466,6 @@ function pagosBanbif() {
         window.plugins.launcher.canLaunch({packageName:"pe.com.banBifBanking.icBanking.androidUI"}, successCallback, errorCallback); // compruebo si tengo instalada la aplicación
     }
 }
-
-
-
-
 function volver() {
     if (localStorage.getItem("recibospendientes") == 1) {
         location.href = "#estadoCuenta";
@@ -1615,7 +1473,6 @@ function volver() {
         location.href = "#consultas";
     }
 }
-
 function volver1() {
     if (localStorage.getItem("consumos") == 1) {
         location.href = "#estadoCuenta";
@@ -1623,7 +1480,6 @@ function volver1() {
         location.href = "#consultas";
     }
 }
-
 function volver2() {
     if (localStorage.getItem("cuotasxemitir") == 1) {
         location.href = "#estadoCuenta";
@@ -1631,7 +1487,6 @@ function volver2() {
         location.href = "#consultas";
     }
 }
-
 function volver3() {
     if (localStorage.getItem("noticias") == 1) {
         location.href = "#noClientes";
@@ -1640,50 +1495,12 @@ function volver3() {
     }
 }
 //Función para obtener la data de cuotas por emitir
-
 function arreglar(a) {
     var a1 = a.substr(0, 4);
     var a2 = a.substr(4, 5);
     var cad = a1 + "-" + a2;
     return cad;
 }
-//función para obtener el consumo de los usuarios
-
-
-
-function cambiarColor(a, b, cont) {
-    var cad1 = a.substring(0, 2);
-    var cad2 = a.substring(3, 6);
-    var cad3 = a.substring(7, 9);
-
-    var cad4 = b.substring(0, 2);
-    var cad5 = b.substring(3, 6);
-    var cad6 = b.substring(7, 9);
-
-    var anio1 = parseInt(cad3);
-    var anio2 = parseInt(cad6);
-
-    var valor = cambiarMes(cad2);
-    var valor1 = cambiarMes(cad5);
-
-    var dia = parseInt(cad1);
-    var dia1 = parseInt(cad4);
-    if (anio1 > anio2) {
-        document.getElementById('fila' + cont).style.background = '#FFFFBF';
-    } else {
-        if (valor > valor1) {
-            document.getElementById('fila' + cont).style.background = '#FFFFBF';
-        } else {
-            if (dia > dia1) {
-                document.getElementById('fila' + cont).style.background = '#FFFFBF';
-            } else {
-                document.getElementById('fila' + cont).style.background = 'rgba(236, 245, 255,.9)';
-            }
-        }
-    }
-
-}
-
 function cambiarMes1(a) {
     var dia = a.substr(0, 2);
     var mes = a.substr(3, 2);
@@ -1691,7 +1508,6 @@ function cambiarMes1(a) {
     mes = cambiarMes2(mes);
     return dia + "-" + mes + "-" + anio;
 }
-
 function cambiarMes2(a) {
     var mes = "";
     if (a == "01") {
@@ -1721,12 +1537,9 @@ function cambiarMes2(a) {
     }
     return mes;
 }
-
 function configurar() {
     location.href = "#configuracion";
 }
-
-
 function regresar98() {
     if (localStorage.getItem("dondepagar") == 1) {
         location.href = "#usuarios";
@@ -1734,5 +1547,46 @@ function regresar98() {
         location.href = "#noclientes";
     } else if(localStorage.getItem("dondepagar")==3){
         location.href = "#inicio";
+    }
+}
+function cambiarPass(){
+   //$("#txt-email1").val(localStorage.getItem('email'));
+   var pass1 = $("#txt-pass1").val();
+   var pass2 = $("#txt-pass2").val();
+   var pass3 = $("#txt-pass3").val();
+    if(pass1 ==  localStorage.getItem('password')){
+        if(pass2.length >= 8){
+                if(pass2 ==  pass3){
+                $.ajax({
+                type: "POST",
+                url: conexion + "cambiarPass.php",
+                data: "pass=" +pass2+"&codigo="+localStorage.getItem("codigo_cliente")+ "&key=opaioncjwfg54aj",
+                cache: false,
+                dataType: "text",
+                success: onSuccess34
+                });
+                }else{
+                    swal("Error", "La  nueva contraseña deben coincidir", "error")
+            }
+        }else{
+            swal("Error", "La contraseña nueva debe tener al menos 8 caracteres", "error")
+        }
+        
+    } else{
+        swal("Error", "Las contraseña Antigua es incorrecta", "error")
+    }
+    
+    
+}
+
+function onSuccess34(data){
+    if(data == "Actualizaci+on Correcta"){
+       swal({   title: "",   text:data,   timer: 2000,   showConfirmButton: false });
+        $.mobile.changePage("#usuarios", {
+            transition: "",
+            reverse: true,
+            changeHash: true
+        });
+        swal({   title: "",   text:data,   timer: 2000,   showConfirmButton: false });
     }
 }
