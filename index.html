@@ -69,7 +69,7 @@
         <a class="btn-inicio" onclick="irLogin()"> Clientes </a>
         <a class="btn-inicio" onclick="irNoClientes()">No Clientes</a>
         <a class="btn-inicio" onclick="camara(1)" rel="external">Denuncias</a>
-        <table id="tabla3">
+        <table id="tabla31">
             <tr>
                 <td style="text-align: center;width:33%">
                     <a href="tel:044480555" style="text-decoration:none">
@@ -371,57 +371,92 @@
                 <table width="100%">
                     <tr>
                         <td colspan="2" id="colum_1">
-                            Debe: <span id="cantidad_cliente"></span> Recibo(s)
-                            <br> Deuda: S./ <span id="deuda_cliente"></span>
+                            Tiene: <span id="cantidad_cliente"></span> Recibo(s) Pendiente(s)
+                            <br> Deuda Total: S./ <span id="deuda_cliente"></span>
                             <br>
                             <img id="carita" src="">
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2" class="column2">
+                        <td colspan="2" class="column2" id="column2_0">
                             <span class="column2_span">Fch. Vencimiento: </span>
                             <span id="vencimiento"> </span>
                         </td>
                     </tr>
 
                     <tr>
-                        <td colspan="2" class="column2">
+                        <td colspan="2" class="column2" id="column2_1">
                             <span class="column2_span">Fch. Corte: </span>
                             <span id="corte"></span>
                         </td>
                     </tr>
+                    <tr>
+                        <td colspan="2" class="column2" id="fuera_fecha">
+                            <span class="column2_span">Días sin Pagar: </span>
+                            <span id="dias_sin_pagar"></span> días
+                        </td>
+                    </tr>
                 </table>
                 <script>
-                    if (localStorage.getItem("deuda_cliente")) {
-                        document.getElementById("deuda_cliente").innerHTML = localStorage.getItem("deuda_cliente");
-                    }
-
-                    if (localStorage.getItem('deuda_cliente') == 0) {
-                        document.getElementById("vencimiento").innerHTML = "AL DÍA";
-                        document.getElementById("corte").innerHTML = "AL DÍA";
-                        document.getElementById("cantidad_cliente").innerHTML = 0;
-                    } else {
-                        if (localStorage.getItem("fchVencimiento_cliente") && localStorage.getItem("fchCorte_cliente")) {
-                            document.getElementById("vencimiento").innerHTML = localStorage.getItem("fchVencimiento_cliente");
-                            document.getElementById("corte").innerHTML = localStorage.getItem("fchCorte_cliente");
-                            document.getElementById("cantidad_cliente").innerHTML = localStorage.getItem("cantidad_cliente");
-                        } else {
-                            document.getElementById("vencimiento").innerHTML = "AL DÍA";
-                            document.getElementById("corte").innerHTML = "AL DÍA";
-
-                        }
-                    }
-                    if (localStorage.getItem('deuda_cliente') == 0) {
-                        $("#carta").css("background-color", "#4caf50");
-                        $("#carita").attr("src", "img/triste.gif")
-                    } else if (localStorage.getItem('cantidad_cliente') > 0 && localStorage.getItem('cantidad_cliente') < 3) {
-                        $("#carta").css("background-color", "#ffeb3b");
-                        $("#carita").attr("src", "img/triste.gif")
-                    } else if (localStorage.getItem('cantidad_cliente') > 2) {
-                        $("#carta").css("background-color", "#f44336");
-                        $("#carita").attr("src", "img/triste.gif")
-                    }
-
+                    document.getElementById("deuda_cliente").innerHTML = localStorage.getItem("deuda_cliente");
+        if(localStorage.getItem('deuda_cliente') == 0){
+             document.getElementById("vencimiento").innerHTML = "No Tiene";
+             document.getElementById("column2_1").style.display = "none";
+             document.getElementById("corte").innerHTML = "AL DÍA";
+             document.getElementById("cantidad_cliente").innerHTML = 0;
+            $("#carta").css("background-color", "#4caf50");
+            document.getElementById("carita").src ="img/alegre.gif"
+            $("#colum_1").css("color","#FFF")
+            $("#column2_0").css("color","#FFF")
+            $("#column2_1").css("color","#FFF")
+            $("#fuera_fecha").css("color","#FFF")
+            document.getElementById("fuera_fecha").style.display = "none";
+        }
+        else if(localStorage.getItem("deuda_cliente")>0){
+            if(localStorage.getItem("cantidad_cliente") == 0){
+                document.getElementById("vencimiento").innerHTML = "No Tiene";
+                document.getElementById("column2_1").style.display = "none";
+                document.getElementById("corte").innerHTML = "AL DÍA";
+                document.getElementById("cantidad_cliente").innerHTML = 0;
+                $("#carta").css("background-color", "#4caf50");
+                document.getElementById("carita").src ="img/alegre.gif"
+                $("#colum_1").css("color","#FFF")
+                $("#column2_0").css("color","#FFF")
+                $("#column2_1").css("color","#FFF")
+                $("#fuera_fecha").css("color","#FFF")
+                document.getElementById("fuera_fecha").style.display = "none";
+            }
+            else if(localStorage.getItem("cantidad_cliente")>0 && localStorage.getItem("cantidad_cliente")<3){
+                document.getElementById("vencimiento").innerHTML = localStorage.getItem("fchVencimiento_cliente");
+                document.getElementById("column2_1").style.display = "block";
+                document.getElementById("corte").innerHTML = localStorage.getItem("fchCorte_cliente");
+                document.getElementById("cantidad_cliente").innerHTML = localStorage.getItem("cantidad_cliente");
+                $("#carta").css("background-color", "#ffeb3b");
+                document.getElementById("carita").src ="img/triste.gif"
+                $("#colum_1").css("color","#00207E")
+                $("#column2_0").css("color","#00207E")
+                $("#column2_1").css("color","#00207E")
+                $("#fuera_fecha").css("color","#00207E")
+            }else if(localStorage.getItem("cantidad_cliente")>2){
+                document.getElementById("vencimiento").innerHTML = localStorage.getItem("fchVencimiento_cliente");
+                document.getElementById("column2_1").style.display = "block";
+                document.getElementById("corte").innerHTML = localStorage.getItem("fchCorte_cliente");
+                document.getElementById("cantidad_cliente").innerHTML = localStorage.getItem("cantidad_cliente");
+                $("#carta").css("background-color", "#f44336");
+                document.getElementById("carita").src ="img/triste.gif"
+                $("#colum_1").css("color","#FFF")
+                $("#column2_0").css("color","#FFF")
+                $("#column2_1").css("color","#FFF")
+                $("#fuera_fecha").css("color","#FFF")
+            }
+        }
+                    if(localStorage.getItem("dias_transcurridos")>0){
+            document.getElementById("fuera_fecha").style.display = "block";
+            document.getElementById("dias_sin_pagar").innerHTML = localStorage.getItem("dias_transcurridos");
+        }else{
+            document.getElementById("fuera_fecha").style.display = "none";
+        }
+        
                 </script>
             </div>
             <table id="tabla">
@@ -483,7 +518,7 @@
                     </li>
                     <li id="dato-menu5" class="hvr-rectangle-out" class="lista-menu">
                         <a id="ayuda1" rel="external" onclick="mapa(3)">
-                            <img src="img/mapa1.png" />
+                            <img src="img/map2.png" width="32" height="32" />
                             <h3 id="text-menu" style="margin-left: -40px;">Lugares de Atención</h3>
                         </a>
                     </li>
@@ -562,6 +597,18 @@
 						<i class="subnota2" id="medidor"></i>
 					</STRONG>
                 </p>
+                <p class="nota1" id="d_p">
+                    <i class="subnota1">Días sin Pagar</i>
+                    <STRONG>
+						<i class="subnota2" id="dias_pago"></i>
+					</STRONG>
+                </p>
+                <p class="nota1" id="d_p">
+                    <i class="subnota1">Número Reclamos</i>
+                    <STRONG>
+						<i class="subnota2" id="numreclamos"></i>
+					</STRONG>
+                </p>
                 <p class="nota1">
                     <i class="subnota1" style="color:#296fb7">(A) TOTAL RECIBOS PENDIENTES </i>
                     <STRONG>
@@ -593,12 +640,12 @@
 					</STRONG>
                 </p>
                 <p class="nota1">
-                    <i class="subnota1" style="color:#296fb7">(F) TOTAL GASTOS COBRANZA + IGV</i>
+                    <i class="subnota1" style="color:#296fb7">(F) TOTAL GASTOS COBRANZA</i>
                     <STRONG>
 						<i class="subnota2" id="tgastoscobranza"></i>
 					</STRONG>
                 </p>
-                <p class="nota1">
+                <!--<p class="nota1">
                     <i class="subnota1" style="color:#296fb7">(G) TOTAL INTERÉS</i>
                     <STRONG>
 						<i class="subnota2" id="interese"></i>
@@ -609,10 +656,10 @@
                     <STRONG>
 						<i class="subnota2" id="totalinterese"></i>
 					</STRONG>
-                </p>
+                </p>-->
                 <p class="nota1">
                     <i class="subnota1">
-						<i style="color:#FF0000;font-style:normal">TOTAL DEUDA</i> (D+E+F+G+H)
+						<i style="color:#FF0000;font-style:normal">TOTAL DEUDA</i> (D+E+F)
                     </i>
                     <STRONG>
 						<i class="subnota2" id="deudatotal"></i>
@@ -635,10 +682,10 @@
                             <span>CONSUMOS</span></a>
                     </th>
                     <th>
-                        <a onclick="cuotasxemitir(1)">
-                            <img src="img/cuotasxemitir.png">
+                        <a onclick="reclamos(2)">
+                            <img src="img/reclamo1.png" width="80" height="80">
                             <br>
-                            <span>CUOTAS POR EMITIR</span>
+                            <span>RECLAMOS</span>
                         </a>
                     </th>
                 </tr>
@@ -655,17 +702,19 @@
                 document.getElementById("direccion").innerHTML = localStorage.getItem("direccion");
                 document.getElementById("conexion").innerHTML = localStorage.getItem("conexion");
                 document.getElementById("tarifa").innerHTML = localStorage.getItem("tarifa");
-                document.getElementById("medidor").innerHTML = localStorage.getItem("medidor");
-                document.getElementById("medidor").innerHTML = localStorage.getItem("medidor");
-                document.getElementById("medidor").innerHTML = localStorage.getItem("medidor");
+                if(localStorage.getItem("medidor") != " "){
+                    document.getElementById("medidor").innerHTML = localStorage.getItem("medidor");
+                }else{
+                    document.getElementById("medidor").innerHTML = "NO CUENTA CON MEDIDOR"
+                }
                 document.getElementById("recibospendientes").innerHTML = localStorage.getItem("recibospendientes");
                 document.getElementById("notasdebito").innerHTML = localStorage.getItem("notasdebito");
                 document.getElementById("notascredito").innerHTML = localStorage.getItem("notascredito");
                 document.getElementById("deudacapital").innerHTML = localStorage.getItem("deudacapital");
                 document.getElementById("cuotasemitir").innerHTML = localStorage.getItem("cuotasemitir");
                 document.getElementById("tgastoscobranza").innerHTML = localStorage.getItem("tgastoscobranza");
-                document.getElementById("interese").innerHTML = localStorage.getItem("interese");
-                document.getElementById("totalinterese").innerHTML = localStorage.getItem("totalinterese");
+                //document.getElementById("interese").innerHTML = localStorage.getItem("interese");
+                //document.getElementById("totalinterese").innerHTML = localStorage.getItem("totalinterese");
                 document.getElementById("deudatotal").innerHTML = localStorage.getItem("deudatotal");
                 document.getElementById("fpago").innerHTML = localStorage.getItem("fecha") + " - " + localStorage.getItem("hora");
 
@@ -818,7 +867,7 @@
                     </span>
                     <h2>CUOTAS POR EMITIR</h2>
                 </a>
-                <a class="btn2" onclick="reclamos()">
+                <a class="btn2" onclick="reclamos(1)">
                     <span>
                         <img src="img/reclamos.png">
                     </span>
@@ -842,7 +891,7 @@
     -->
     <div data-role="page" id="reclamos">
         <div data-role="header" id="reclamos_header">
-            <a data-role="none" href="#consultas">
+            <a data-role="none" href="#" onclick="regresar_de_reclamos()">
                 <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
             </a>
             <span class="banner">Reclamos</span>
@@ -865,7 +914,7 @@
 
             </script>
             <p id="numeroreclamos"><span id="numreclamos"></span> reclamos realizados</p>
-            <table id="tabla4"></table>
+            <div id="reclamos_obtenidos"></div>
         </div>
     </div>
     <!--
@@ -924,19 +973,19 @@
             <div class="card2" id="bcp">
                 <center>
                     <h3 class="pagos_title">Banco de Crédito del Perú</h3>
-                    <button class="btn_pagosOnline" data-role="none" onclick="pagosBCP()">BCP</button>
+                    <button class="btn_pagosOnline" style="background:#F36E29 !important;color:#FFF" data-role="none" onclick="pagosBCP()">BCP</button>
                 </center>
             </div>
             <div class="card2" id="interbank">
                 <center>
                     <h3 class="pagos_title">Banco Interbank</h3>
-                    <button class="btn_pagosOnline" data-role="none" onclick="pagosInterbank()">Interbank</button>
+                    <button class="btn_pagosOnline" style="background:#4981C9 !important;color:#FFF" data-role="none" onclick="pagosInterbank()">Interbank</button>
                 </center>
             </div>
             <div class="card2" id="banbif">
                <center>
                    <h3 class="pagos_title">Banco Interamericano de Finanzas</h3>
-                   <button class="btn_pagosOnline" data-role="none" onclick="pagosBanbif()">Banbif</button>
+                   <button class="btn_pagosOnline" style="background:#C1D72E !important;color:#FFF"data-role="none" onclick="pagosBanbif()">Banbif</button>
                 </center>
                 
             </div>

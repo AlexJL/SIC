@@ -23,20 +23,11 @@
     padding-top: 10px
 }
 
-#tabla3{
+#tabla31{
     margin-top: 20px;
     width: 100%;
 }
-#tabla3 tr th {
-    width: 33%;
-}
-#tabla3 tr th a {
-    text-decoration: none;
-}
-#tabla3 tr th h1 {
-    font-family: 'Yanone Kaffeesatz';
-    font-size: 15px;
-}
+
 
 .button {
     display: inline-block;
@@ -74,6 +65,7 @@
 .center {
     text-align: center;
     text-shadow: none;
+    font-size: 19px;
 }
 #inicio,
 #login,
@@ -569,7 +561,7 @@ mapa_header {
     font-size: 18px;
     letter-spacing: 1px;
 }
-#corte {
+#corte,#dias_sin_pagar {
     letter-spacing: 1.5px;
     color: #296fb7;
     font-size: 26px
@@ -828,6 +820,9 @@ usuarios .ui-body-c {
     font-family: 'Yanone Kaffeesatz';
     font-size: 16px !important;
 }
+#notascredito{
+    color: #990000;
+}
 
 /**
 **
@@ -899,7 +894,7 @@ usuarios .ui-body-c {
     font-style: normal;
     color: #990000
 }
-.numero-docum {
+.numero-docum,.numero_reclamo {
     font-family: 'Yanone Kaffeesatz';
     font-size: 19px !important;
     font-weight: bold;
@@ -925,7 +920,7 @@ numero-docum {
     margin-top: 10px;
     text-transform: uppercase
 }
-.bajo-doc {
+.bajo-doc,.bajo_reclamo {
     background: #296fb7;
     border: none;
     height: 2px;
@@ -934,33 +929,42 @@ numero-docum {
 .num-rec {
     margin-top: -2px
 }
+
+.numero_reclamo{
+     color: #00207E
+}
 .num-rec1,
 .monto-rec1,
 .femi-rec1,
-.fven-rec1 {
+.fven-rec1,.dias_trans1,.nota_credito1,.descripcion_reclamo1,.fecha_registro1,.fecha_final1,.tipo_problema1,.estado_reclamo1,.instancia_reclamo1,.periodo_reclamo1,.dias_reclamo1 {
     font-style: normal;
     font-weight: bold;
     font-size: 15px;
-    font-family: 'Yanone Kaffeesatz'
+    font-family: 'Yanone Kaffeesatz';
+    color: #000;
 }
 .num-rec2,
 .monto-rec2,
 .femi-rec2,
-.fven-rec2 {
+.fven-rec2,.dias_trans2,.nota_credito2,.descripcion_reclamo2,.fecha_registro2,.fecha_final2,.tipo_problema2,.estado_reclamo2,.instancia_reclamo2,.periodo_reclamo2,.dias_reclamo2{
     float: right;
     font-family: 'Yanone Kaffeesatz';
     font-size: 18px;
-    font-style: normal
+    font-style: normal;
+    color: #00207E
 }
 .num-rec,
 .monto-rec,
 .femi-rec,
-.fven-rec {
+.fven-rec,.dias_trans,.nota_credito,.descripcion_reclamo,.fecha_registro,.fecha_final,.tipo_problema,.estado_reclamo,.instancia_reclamo,.periodo_reclamo,.dias_reclamo {
     border-bottom: 1px solid rgba(41, 111, 183, 0.67);
     margin-bottom: -10px;
-    margin-left: 10px
+    margin-left: 10px;
+        color: #00207E !important;
 }
-
+.nota_credito2{
+    color: #990000;
+}
 /**
 **
 ** Consumos
@@ -1074,28 +1078,24 @@ numero-docum {
     .col_tle1,
     .col_ref1,
     .col_tle,
-    .col_ref {
+    .col_ref,.col_plugar,.col_plugar {
         display: none !important
     }
-    .col_reg1,
     .col_fin1,
-    .col_pro1,
+    .col_des1,
     .col_ins1,
     .col_per1 {
         display: none !important
     }
-    .col_reg,
     .col_fin,
-    .col_pro,
+    .col_des,
     .col_ins,
     .col_per {
         display: none !important
     }
-    .col_pfp1,
-    .col_pfv1,
-    .col_pfp,
-    .col_pfv {
-        display: none
+    .col_plugar1,.col_plugar,.nro_precibo1,.nro_precibo
+    {
+        display: none !important
     }
 }
 @media screen and (max-width: 500px) {
@@ -1131,11 +1131,7 @@ numero-docum {
     .col_ins,
     .col_per {
         display: none !important
-    }
-    .col_pfp1,
-    .col_pfv1,
-    .col_pfp,
-    .col_pfv {
+    }.col_plugar1,.nro_precibo {
         display: none
     }
     .button,
@@ -1159,12 +1155,6 @@ numero-docum {
     .col_fin,
     .col_per {
         display: none !important
-    }
-    .col_pfp1,
-    .col_pfv1,
-    .col_pfp,
-    .col_pfv {
-        display: none
     }
     #cabezera {
         left: 39.5% !IMPORTANT

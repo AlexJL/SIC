@@ -5,10 +5,21 @@ var numeroRecibos = new Array();
 var totalRecibos = new Array();
 var femiRecibos = new Array();
 var fvenRecibos = new Array();
+var dias_recibos = new Array();
 var mes = new Array();
 var consumido = new Array();
 var facturado = new Array();
 var datospersonales = new Array();
+var nc = new Array();
+var r1 = new Array();
+var r2 = new Array();
+var r3 = new Array();
+var r4 = new Array();
+var r5 = new Array();
+var r6 = new Array();
+var r7 = new Array();
+var r8 = new Array();
+var r9 = new Array();
 var clinombre = "";
 var clicodigo = "";
 var clisuministro = "";
@@ -19,6 +30,8 @@ var clifechacorte = "";
 var clidireccion = "";
 var clifecha = "";
 var clihora = "";
+var dias_transcurridos = "";
+var tipoCli = "";
 
 /**
  **
@@ -137,7 +150,8 @@ function login() {
 }
 
 function onSuccess(data) {
-    if(data == "$$$$$$$$$$$$$$$$0"){
+
+    if(data == "$$$$$$$$$$$$$$$$0$$0"){
         swal("Usuario no Registrado");
     }else{
         var j = 0;
@@ -150,7 +164,9 @@ function onSuccess(data) {
         clifechacorte = "";
         clihora = "";
         clifecha = "";
-        clidireccion;
+        clidireccion="";
+        tipoCli ="";
+        dias_transcurridos="";
         for (var i = 0; i < data.length; i++) {
             if (data.charAt(i) != "$" && j == 0) {
                 clifecha = clifecha + data.charAt(i);
@@ -174,9 +190,10 @@ function onSuccess(data) {
             } else if (data.charAt(i) != "$" && j == 7) {
                 clifechacorte = clifechacorte + data.charAt(i)
             } else if (data.charAt(i) != "$" && j == 8) {
-                
                  clicantidad = clicantidad + data.charAt(i);
-            } else {
+            } else if(data.charAt(i) != "$" && j == 9){
+                dias_transcurridos = dias_transcurridos + data.charAt(i);
+            }else {
                 j++;
                 i++;
             }
@@ -187,104 +204,75 @@ function onSuccess(data) {
         localStorage.setItem("suministro_cliente", clisuministro);
         localStorage.setItem("nombre_cliente", clinombre);
         localStorage.setItem("deuda_cliente", parseFloat(clideuda));
-        localStorage.setItem("cantidad_cliente", clicantidad);
+        localStorage.setItem("cantidad_cliente", parseInt(clicantidad));
         localStorage.setItem("fchVencimiento_cliente", clifechavencimiento);
         localStorage.setItem("fchCorte_cliente", clifechacorte);
         localStorage.setItem("direccion_cliente", clidireccion);
+        localStorage.setItem("tipo_cliente", tipoCli);
+        localStorage.setItem("dias_transcurridos", parseInt(dias_transcurridos));
         document.getElementById("suministro_cliente").innerHTML = localStorage.getItem("codigo_cliente");
         document.getElementById("deuda_cliente").innerHTML = localStorage.getItem("deuda_cliente");
         document.getElementById("nombre_cliente").innerHTML = localStorage.getItem("nombre_cliente");
-            if (localStorage.getItem('deuda_cliente') == 0) {
-                document.getElementById("vencimiento").innerHTML = "AL DÍA";
-                document.getElementById("corte").innerHTML = "AL DÍA";
-                document.getElementById("cantidad_cliente").innerHTML = 0;
-            } else {
-                if (localStorage.getItem("fchVencimiento_cliente") && localStorage.getItem("fchCorte_cliente")) {
-                    document.getElementById("vencimiento").innerHTML = localStorage.getItem("fchVencimiento_cliente");
-                    document.getElementById("corte").innerHTML = localStorage.getItem("fchCorte_cliente");
-                    document.getElementById("cantidad_cliente").innerHTML = localStorage.getItem("cantidad_cliente");
-                } else {
-                    document.getElementById("vencimiento").innerHTML = "AL DÍA";
-                    document.getElementById("corte").innerHTML = "AL DÍA";
-
-                }
-            }
-            if (localStorage.getItem('deuda_cliente') == 0) {
-                $("#carta").css("background-color", "#4caf50");
-                document.getElementById("carita").src ="img/alegre.gif"
-                //$("#carita").attr("src", "../img/alegre.gif")
-            } else if (localStorage.getItem('cantidad_cliente') > 0 && localStorage.getItem('cantidad_cliente') < 3) {
-                $("#carta").css("background-color", "#ffeb3b");
-                document.getElementById("carita").src ="img/triste.gif"
-               // $("#carita").attr("src", "../img/triste.gif")
-            } else if (localStorage.getItem('cantidad_cliente') > 2) {
-                $("#carta").css("background-color", "#f44336");
-                document.getElementById("carita").src ="img/triste.gif"
-                //$("#carita").attr("src", "../img/triste.gif")
-            }
-        verPagos(localStorage.getItem("codigo_cliente"));
-
-        $.mobile.changePage("#usuarios", {
-                transition: "",
-                reverse: true,
-                changeHash: true
-            });
-    }
-   /* a = JSON.parse(data);
-    console.log(a);
-    if (data ==null || a.length == 0) {
-        swal("Usuario no Registrado");
-    } else {
-        if (a.length > 7) {
-            localStorage.setItem('fecha_actualizacion', a[0])
-            localStorage.setItem('hora_actualizacion', a[1])
-            localStorage.setItem('direccion_cliente', a[2])
-            localStorage.setItem('codigo_cliente', a[3])
-            localStorage.setItem('deuda_cliente', a[5])
-            localStorage.setItem('cantidad_cliente', a[a.length - 1])
-            localStorage.setItem('fchVencimiento_cliente', a[a.length - 3])
-            localStorage.setItem('fchCorte_cliente', a[a.length - 2])
-            separar_nombre(a[4]);
-        } else {
-            localStorage.setItem('fecha_actualizacion', a[0])
-            localStorage.setItem('hora_actualizacion', a[1])
-            localStorage.setItem('direccion_cliente', a[2])
-            localStorage.setItem('codigo_cliente', a[3])
-            localStorage.setItem('deuda_cliente', a[5])
-            localStorage.setItem('cantidad_cliente', a[6])
-            separar_nombre(a[4]);
-            
+        
+        if(localStorage.getItem('deuda_cliente') == 0){
+             document.getElementById("vencimiento").innerHTML = "No Tiene";
+             document.getElementById("column2_1").style.display = "none";
+             document.getElementById("corte").innerHTML = "AL DÍA";
+             document.getElementById("cantidad_cliente").innerHTML = 0;
+            $("#carta").css("background-color", "#4caf50");
+            document.getElementById("carita").src ="img/alegre.gif"
+            $("#colum_1").css("color","#FFF")
+            $("#column2_0").css("color","#FFF")
+            $("#column2_1").css("color","#FFF")
+            $("#fuera_fecha").css("color","#FFF")
+            document.getElementById("fuera_fecha").style.display = "none";
         }
-        document.getElementById("suministro_cliente").innerHTML = localStorage.getItem("codigo_cliente");
-        document.getElementById("deuda_cliente").innerHTML = localStorage.getItem("deuda_cliente");
-            if (localStorage.getItem('deuda_cliente') == 0) {
-                document.getElementById("vencimiento").innerHTML = "AL DÍA";
+        else if(localStorage.getItem("deuda_cliente")>0){
+            if(localStorage.getItem("cantidad_cliente") == 0){
+                document.getElementById("vencimiento").innerHTML = "No Tiene";
+                document.getElementById("column2_1").style.display = "none";
                 document.getElementById("corte").innerHTML = "AL DÍA";
                 document.getElementById("cantidad_cliente").innerHTML = 0;
-            } else {
-                if (localStorage.getItem("fchVencimiento_cliente") && localStorage.getItem("fchCorte_cliente")) {
-                    document.getElementById("vencimiento").innerHTML = localStorage.getItem("fchVencimiento_cliente");
-                    document.getElementById("corte").innerHTML = localStorage.getItem("fchCorte_cliente");
-                    document.getElementById("cantidad_cliente").innerHTML = localStorage.getItem("cantidad_cliente");
-                } else {
-                    document.getElementById("vencimiento").innerHTML = "AL DÍA";
-                    document.getElementById("corte").innerHTML = "AL DÍA";
-
-                }
-            }
-            if (localStorage.getItem('deuda_cliente') == 0) {
                 $("#carta").css("background-color", "#4caf50");
                 document.getElementById("carita").src ="img/alegre.gif"
-                //$("#carita").attr("src", "../img/alegre.gif")
-            } else if (localStorage.getItem('cantidad_cliente') > 0 && localStorage.getItem('cantidad_cliente') < 3) {
+                $("#colum_1").css("color","#FFF")
+                $("#column2_0").css("color","#FFF")
+                $("#column2_1").css("color","#FFF")
+                $("#fuera_fecha").css("color","#FFF")
+                document.getElementById("fuera_fecha").style.display = "none";
+            }
+            else if(localStorage.getItem("cantidad_cliente")>0 && localStorage.getItem("cantidad_cliente")<3){
+                document.getElementById("vencimiento").innerHTML = localStorage.getItem("fchVencimiento_cliente");
+                document.getElementById("column2_1").style.display = "block";
+                document.getElementById("corte").innerHTML = localStorage.getItem("fchCorte_cliente");
+                document.getElementById("cantidad_cliente").innerHTML = localStorage.getItem("cantidad_cliente");
                 $("#carta").css("background-color", "#ffeb3b");
                 document.getElementById("carita").src ="img/triste.gif"
-               // $("#carita").attr("src", "../img/triste.gif")
-            } else if (localStorage.getItem('cantidad_cliente') > 2) {
+                $("#colum_1").css("color","#00207E")
+                $("#column2_0").css("color","#00207E")
+                $("#column2_1").css("color","#00207E")
+                $("#fuera_fecha").css("color","#00207E")
+            }else if(localStorage.getItem("cantidad_cliente")>2){
+                document.getElementById("vencimiento").innerHTML = localStorage.getItem("fchVencimiento_cliente");
+                document.getElementById("column2_1").style.display = "block";
+                document.getElementById("corte").innerHTML = localStorage.getItem("fchCorte_cliente");
+                document.getElementById("cantidad_cliente").innerHTML = localStorage.getItem("cantidad_cliente");
                 $("#carta").css("background-color", "#f44336");
                 document.getElementById("carita").src ="img/triste.gif"
-                //$("#carita").attr("src", "../img/triste.gif")
+                $("#colum_1").css("color","#FFF")
+                $("#column2_0").css("color","#FFF")
+                $("#column2_1").css("color","#FFF")
+                $("#fuera_fecha").css("color","#FFF")
+                
             }
+        }
+        if(localStorage.getItem("dias_transcurridos")>0){
+            document.getElementById("fuera_fecha").style.display = "block";
+            document.getElementById("dias_sin_pagar").innerHTML = localStorage.getItem("dias_transcurridos");
+        }else{
+            document.getElementById("fuera_fecha").style.display = "none";
+        }
+        
         verPagos(localStorage.getItem("codigo_cliente"));
 
         $.mobile.changePage("#usuarios", {
@@ -293,7 +281,6 @@ function onSuccess(data) {
                 changeHash: true
             });
     }
-*/
 }
 
 function separar_nombre(a) {
@@ -362,6 +349,7 @@ function estadoCuenta() {
 function onSuccess1(data) {
     var cad = "";
     var k = 0;
+    datospersonales.length = 0;
     for (var i = 0; i < data.length; i++) {
         if (data.charAt(i) != '$') {
             cad = cad + data.charAt(i);
@@ -386,37 +374,55 @@ function onSuccess1(data) {
     localStorage.setItem("medidor", datospersonales[6]);
     localStorage.setItem("recibospendientes", "S./" + datospersonales[7]);
     localStorage.setItem("notasdebito", "S./" + datospersonales[8]);
-    localStorage.setItem("notascredito", "S./" + datospersonales[9]);
+    if(parseFloat(datospersonales[9])>0){
+        localStorage.setItem("notascredito", "S./ - " + datospersonales[9]);
+    }else{
+        localStorage.setItem("notascredito", "S./ " + datospersonales[9]);
+    }
     var deudacapital = parseFloat(datospersonales[7]) + parseFloat(datospersonales[8]) - parseFloat(datospersonales[9]);
     deudacapital = Math.round(deudacapital * 100) / 100;
     localStorage.setItem("deudacapital", "S./" + deudacapital);
     localStorage.setItem("cuotasemitir", "S./" + datospersonales[10]);
     var tgastoscobranza = parseFloat(datospersonales[11]) + parseFloat(datospersonales[12]);
     tgastoscobranza = Math.round(tgastoscobranza * 100) / 100;
+    tgastoscobranza = tgastoscobranza +  parseFloat(datospersonales[13]) + parseFloat(datospersonales[14]);
     localStorage.setItem("tgastoscobranza", "S./" + tgastoscobranza);
-    localStorage.setItem("interese", "S./" + datospersonales[13]);
-    localStorage.setItem("totalinterese", "S./" + datospersonales[14]);
-    var deudatotal = deudacapital + parseFloat(datospersonales[10]) + tgastoscobranza + parseFloat(datospersonales[13]) + parseFloat(datospersonales[14]);
-    localStorage.setItem("deudatotal", "S./" + deudatotal);
+    //localStorage.setItem("interese", "S./" + parseFloat(datospersonales[13]));
+    //localStorage.setItem("totalinterese", "S./" + parseFloat(datospersonales[14]));
+    var deudatotal = deudacapital + parseFloat(datospersonales[10]) + tgastoscobranza;
+    localStorage.setItem("numreclamos",parseInt(datospersonales[15]));
+    localStorage.setItem("numreclamos_cerrados",parseInt(datospersonales[16]));
+    deudatotal = Math.round(deudatotal*100)/100;;
+    localStorage.setItem("deudatotal", "S./" +deudatotal );
     document.getElementById("suministro").innerHTML = localStorage.getItem("codigo_cliente");
     document.getElementById("usuario").innerHTML = localStorage.getItem("nombre_cliente");
     document.getElementById("localidad").innerHTML = localStorage.getItem("localidad");
     document.getElementById("direccion").innerHTML = localStorage.getItem("direccion");
     document.getElementById("conexion").innerHTML = localStorage.getItem("conexion");
     document.getElementById("tarifa").innerHTML = localStorage.getItem("tarifa");
-    document.getElementById("medidor").innerHTML = localStorage.getItem("medidor");
-    document.getElementById("medidor").innerHTML = localStorage.getItem("medidor");
-    document.getElementById("medidor").innerHTML = localStorage.getItem("medidor");
+    if(localStorage.getItem("medidor") != " "){
+        document.getElementById("medidor").innerHTML = localStorage.getItem("medidor");
+    }else{
+        document.getElementById("medidor").innerHTML = "NO CUENTA CON MEDIDOR"
+    }
     document.getElementById("recibospendientes").innerHTML = localStorage.getItem("recibospendientes");
     document.getElementById("notasdebito").innerHTML = localStorage.getItem("notasdebito");
     document.getElementById("notascredito").innerHTML = localStorage.getItem("notascredito");
     document.getElementById("deudacapital").innerHTML = localStorage.getItem("deudacapital");
     document.getElementById("cuotasemitir").innerHTML = localStorage.getItem("cuotasemitir");
     document.getElementById("tgastoscobranza").innerHTML = localStorage.getItem("tgastoscobranza");
-    document.getElementById("interese").innerHTML = localStorage.getItem("interese");
-    document.getElementById("totalinterese").innerHTML = localStorage.getItem("totalinterese");
+    document.getElementById("numreclamos").innerHTML = "Total: " + localStorage.getItem("numreclamos")+" | Cerrados: "+localStorage.getItem("numreclamos_cerrados") + " | Abiertos: "+ (localStorage.getItem("numreclamos") - localStorage.getItem("numreclamos_cerrados"));
+    //document.getElementById("interese").innerHTML = localStorage.getItem("interese");
+    //document.getElementById("interese").innerHTML = localStorage.getItem("interese");
+    //document.getElementById("totalinterese").innerHTML = localStorage.getItem("totalinterese");
     document.getElementById("deudatotal").innerHTML = localStorage.getItem("deudatotal");
     document.getElementById("fpago").innerHTML = localStorage.getItem("fecha") + " - " + localStorage.getItem("hora");
+    if(localStorage.getItem("dias_transcurridos")>0 && localStorage.getItem('deuda_cliente') > 0){
+        document.getElementById("d_p").style.display = "block";
+        document.getElementById("dias_pago").innerHTML = localStorage.getItem("dias_transcurridos");
+    }else{
+        document.getElementById("d_p").style.display = "none";
+    }
     $.mobile.changePage("#estadoCuenta", {
         transition: "",
         reverse: true,
@@ -571,6 +577,8 @@ function onSuccess3(data) {
     $("p").remove(".monto-rec");
     $("p").remove(".femi-rec");
     $("p").remove(".fven-rec");
+    $("p").remove(".dias_trans");
+    $("p").remove(".nota_credito");
     var div = document.getElementById('recibos-pen');
     if (data == "") {
         swal("No cuenta con recibos pendientes");
@@ -579,10 +587,14 @@ function onSuccess3(data) {
         var cad2 = "";
         var cad3 = "";
         var cad4 = "";
+        var cad5 = "";
+        var cad6 = "";
         var k1 = 0;
         var k2 = 0;
         var k3 = 0;
         var k4 = 0;
+        var k5 = 0;
+        var k6 = 0;
         var p = 0;
         var z = 0;
         for (var i = 0; i < data.length; i++) {
@@ -594,7 +606,11 @@ function onSuccess3(data) {
                 cad3 = cad3 + data.charAt(i);
             } else if (data.charAt(i) != '$' && p == 3) {
                 cad4 = cad4 + data.charAt(i);
-            } else if (data.charAt(i) == '$' && p == 0) {
+            } else if (data.charAt(i) != '$' && p == 4){
+                cad5 = cad5 + data.charAt(i);
+            }else if (data.charAt(i) != '$' && p == 5){
+                cad6 = cad6 + data.charAt(i);
+            }else if (data.charAt(i) == '$' && p == 0) {
                 numeroRecibos[k1] = cad1;
                 k1++;
                 cad1 = "";
@@ -617,7 +633,21 @@ function onSuccess3(data) {
                 k4++;
                 cad4 = "";
                 i++;
-                p = 0;
+                p = 4;
+                
+            }else if(data.charAt(i) == '$' && p == 4){
+                dias_recibos[k5] = parseInt(cad5);
+                k5++;
+                cad5 ="";
+                i++;
+                p=5;
+            }
+            else if(data.charAt(i) == '$' && p == 5){
+                nc[k6] = parseFloat(cad6);
+                k6++;
+                cad6 ="";
+                i++;
+                p=0;
                 z++;
             }
         }
@@ -625,7 +655,8 @@ function onSuccess3(data) {
             /****************** Docuemnto nro -- *************/
             var p3 = document.createElement("p");
             p3.setAttribute('class', 'numero-docum');
-            p3.innerHTML = "DOCUMENTO N° " + (j + 1);
+            var f123 = subcadena1(femiRecibos[j]);
+            p3.innerHTML = "DOCUMENTO N° " + (j + 1) + " - "+f123;
             var hr1 = document.createElement("hr");
             hr1.setAttribute('class', 'bajo-doc');
             div.appendChild(p3);
@@ -650,7 +681,7 @@ function onSuccess3(data) {
             i3.innerHTML = "Total";
             var i4 = document.createElement("i");
             i4.setAttribute("class", "monto-rec2");
-            i4.innerHTML = totalRecibos[j];
+            i4.innerHTML = "S./ " + totalRecibos[j];
             p5.appendChild(i3);
             p5.appendChild(i4);
             div.appendChild(p5);
@@ -678,6 +709,33 @@ function onSuccess3(data) {
             p7.appendChild(i7);
             p7.appendChild(i8);
             div.appendChild(p7);
+            /************* Dias Transcurridos *******************/
+            if(dias_recibos[j]>0){
+                var p8 = document.createElement("p");
+                p8.setAttribute('class',"dias_trans")
+                var i9 = document.createElement("i");
+                i9.setAttribute("class","dias_trans1")
+                i9.innerHTML = "Días transcurridos sin pagar";
+                var i10 = document.createElement("i");
+                i10.setAttribute("class", "dias_trans2");
+                i10.innerHTML = dias_recibos[j] + " dias";
+                p8.appendChild(i9);
+                p8.appendChild(i10);
+                div.appendChild(p8);
+            }
+            if(nc[j]>0){
+                var p9 = document.createElement("p");
+                p9.setAttribute('class',"nota_credito")
+                var i11 = document.createElement("i");
+                i11.setAttribute("class","nota_credito1")
+                i11.innerHTML = "Nota Crédito Asociada";
+                var i12 = document.createElement("i");
+                i12.setAttribute("class", "nota_credito2");
+                i12.innerHTML = "S./ - " + nc[j];
+                p9.appendChild(i11);
+                p9.appendChild(i12);
+                div.appendChild(p9);
+            }
         }
         document.getElementById('cantidad_recibos').innerHTML = localStorage.getItem("cantidad_cliente");
         document.getElementById('fecha_actual1').innerHTML = localStorage.getItem('fecha_actualizacion') + " - " + localStorage.getItem("hora_actualizacion");
@@ -689,6 +747,13 @@ function onSuccess3(data) {
             changeHash: true
         });
     }
+}
+
+function subcadena1(a){
+    var r = a.substr(3,2);
+    var r1 = a.substr(6,4);
+    var r2 = cambiarMes2(r);
+    return r2+" - "+r1;
 }
 
 function consumos(a) {
@@ -833,6 +898,23 @@ function salirApp() {
     localStorage.removeItem("cantidad_cliente");
     localStorage.removeItem("fchVencimiento_cliente");
     localStorage.removeItem("fchCorte_cliente");
+    localStorage.removeItem("codigo_cliente");
+    localStorage.removeItem("localidad");
+    localStorage.removeItem("direccion");
+    localStorage.removeItem("conexion");
+    localStorage.removeItem("tarifa");
+    localStorage.removeItem("medidor");
+    localStorage.removeItem("recibospendientes");
+    localStorage.removeItem("notasdebito");
+    localStorage.removeItem("notascredito");
+    localStorage.removeItem("deudacapital");
+    localStorage.removeItem("cuotasemitir");
+    localStorage.removeItem("tgastoscobranza");
+    localStorage.removeItem("deudatotal")
+    localStorage.removeItem("fecha");
+    localStorage.removeItem("hora");
+    localStorage.removeItem('deuda_cliente');
+    localStorage.removeItem("dias_transcurridos");
     $("#txt-email").val("");
     $("#txt-pass").val("");
 
@@ -977,8 +1059,16 @@ function onSuccess4(data) {
     }
 }
 
-function reclamos() {
+function regresar_de_reclamos(){
+    if(localStorage.getItem("variable") == 1){
+        location.href = "#consultas";
+    }else if(localStorage.getItem("variable") == 2){
+        location.href = "#estadoCuenta";
+    }
+}
 
+function reclamos(a) {
+ localStorage.setItem("variable",a);
     $.ajax({
         type: "POST",
         url: conexion + "reclamos.php",
@@ -990,9 +1080,167 @@ function reclamos() {
 }
 
 function onSuccess6(data) {
-    var tabla = document.getElementById('tabla4');
-    $("#tabla4").empty();
-    if (data == "") {
+    //alert(data);
+    //var tabla = document.getElementById('tabla4');
+    //$("#tabla4").empty();
+    $("hr").remove(".bajo_reclamo");
+    $("p").remove(".numero_reclamo");
+    $("p").remove(".descripcion_reclamo");
+    $("p").remove(".fecha_registro");
+    $("p").remove(".fecha_final");
+    $("p").remove(".tipo_problema");
+    $("p").remove(".estado_reclamo");
+    $("p").remove(".instancia_reclamo");
+    $("p").remove(".periodo_reclamo");
+    $("p").remove(".dias_reclamo");
+    var div = document.getElementById('reclamos_obtenidos');
+    if(data == ""){
+        swal("No cuenta con reclamos Regitrados");
+    }else{
+        var cad1 = "",cad2 = "", cad3 = "",cad4 = "",cad5 = "",cad6 = "",cad7="",cad8="",cad9="";
+        var k1 = 0, k2 = 0, k3 = 0, k4 = 0, k5 = 0, k6 = 0,k7=0,k8=0,k9=0, p = 0, z = 0;
+        for(var i= 0;i<data.length;i++){
+            if(data.charAt(i) != '$' && p ==0){cad1 = cad1 + data.charAt(i);}
+            else if(data.charAt(i) != '$' && p ==1){cad2 = cad2 + data.charAt(i);}
+            else if(data.charAt(i) != '$' && p ==2){cad3 = cad3 + data.charAt(i);}
+            else if(data.charAt(i) != '$' && p ==3){cad4 = cad4 + data.charAt(i);}
+            else if(data.charAt(i) != '$' && p ==4){cad5 = cad5 + data.charAt(i);}
+            else if(data.charAt(i) != '$' && p ==5){cad6 = cad6 + data.charAt(i);}
+            else if(data.charAt(i) != '$' && p ==6){cad7 = cad7 + data.charAt(i);}
+            else if(data.charAt(i) != '$' && p ==7){cad8 = cad8 + data.charAt(i);}
+            else if(data.charAt(i) != '$' && p ==8){cad9 = cad9 + data.charAt(i);}
+            else if(data.charAt(i) == '$' && p ==0){r1[k1] = cad1;k1++;cad1="";i++;p=1}
+            else if(data.charAt(i) == '$' && p ==1){r2[k2] = cad2;k2++;cad2="";i++;p=2}
+            else if(data.charAt(i) == '$' && p ==2){r3[k3] = cad3;k3++;cad3="";i++;p=3}
+            else if(data.charAt(i) == '$' && p ==3){r4[k4] = cad4;k4++;cad4="";i++;p=4}
+            else if(data.charAt(i) == '$' && p ==4){r5[k5] = cad5;k5++;cad5="";i++;p=5}
+            else if(data.charAt(i) == '$' && p ==5){r6[k6] = cad6;k6++;cad6="";i++;p=6}
+            else if(data.charAt(i) == '$' && p ==6){r7[k7] = cad7;k7++;cad7="";i++;p=7}
+            else if(data.charAt(i) == '$' && p ==7){r8[k8] = cad8;k8++;cad8="";i++;p=8}
+            else if(data.charAt(i) == '$' && p ==8){r9[k9] = cad9;k9++;cad9="";i++;p=0;z++}
+        }
+        for(var j =0 ;j<z;j++){
+            /****************** Número de Reclamo *************/
+            var p3 = document.createElement("p");
+            p3.setAttribute('class', 'numero_reclamo');
+            p3.innerHTML = "N° RECLAMO - " + r1[j] ;
+            var hr1 = document.createElement("hr");
+            hr1.setAttribute('class', 'bajo_reclamo');
+            div.appendChild(p3);
+            div.appendChild(hr1);
+            /****************** Descripción de Reclamo ***************/
+            var p4 = document.createElement("p");
+            p4.setAttribute('class', 'descripcion_reclamo');
+            var i1 = document.createElement("i");
+            i1.setAttribute('class', 'descripcion_reclamo1')
+            i1.innerHTML = "Descripción";
+            var i2 = document.createElement("i");
+            i2.setAttribute('class', 'descripcion_reclamo2')
+            i2.innerHTML = r2[j];
+            p4.appendChild(i1);
+            p4.appendChild(i2);
+            div.appendChild(p4);
+            /*************** Fecha Registro **********************/
+            var p5 = document.createElement("p");
+            p5.setAttribute('class', 'fecha_registro');
+            var i3 = document.createElement("i");
+            i3.setAttribute('class', 'fecha_registro1');
+            i3.innerHTML = "Fecha Registro";
+            var i4 = document.createElement("i");
+            i4.setAttribute("class", "fecha_registro2");
+            i4.innerHTML = r3[j];
+            p5.appendChild(i3);
+            p5.appendChild(i4);
+            div.appendChild(p5);
+            /************* Fecha final ***********************/
+            if(r4[j]!="01/01/0001"){
+                 var p6 = document.createElement("p");
+                p6.setAttribute('class', 'fecha_final');
+                var i5 = document.createElement("i");
+                i5.setAttribute('class', 'fecha_final1');
+                i5.innerHTML = "Fecha Final";
+                var i6 = document.createElement("i");
+                i6.setAttribute("class", "fecha_final2");
+                i6.innerHTML = r4[j];
+                p6.appendChild(i5);
+                p6.appendChild(i6);
+                div.appendChild(p6);
+            }
+           
+            /************* Fecha Vencimiento ***********************/
+            var p7 = document.createElement("p");
+            p7.setAttribute('class', 'tipo_problema');
+            var i7 = document.createElement("i");
+            i7.setAttribute('class', 'tipo_problema1');
+            i7.innerHTML = "Tipo Problema";
+            var i8 = document.createElement("i");
+            i8.setAttribute("class", "tipo_problema2");
+            i8.innerHTML = r5[j];
+            p7.appendChild(i7);
+            p7.appendChild(i8);
+            div.appendChild(p7);
+            /************** Estado Reclamo ***********************/
+            var p8 = document.createElement("p");
+            p8.setAttribute('class',"estado_reclamo")
+            var i9 = document.createElement("i");
+            i9.setAttribute("class","estado_reclamo1")
+            i9.innerHTML = "Estado Reclamo";
+            var i10 = document.createElement("i");
+            i10.setAttribute("class", "estado_reclamo2");
+            i10.setAttribute("id", "estado_reclamo2"+j);
+            i10.innerHTML = r6[j];
+            p8.appendChild(i9);
+            p8.appendChild(i10);
+            div.appendChild(p8);
+            if(r6[j] == "CERRADO"){
+                 $("#estado_reclamo2"+j).css("color","#FF0000")
+            }else{
+                $("#estado_reclamo2"+j).css("color","#4caf50")
+            }
+            /************** Instancia Reclamo ***********************/
+            var p9 = document.createElement("p");
+            p9.setAttribute('class',"instancia_reclamo")
+            var i11 = document.createElement("i");
+            i11.setAttribute("class","instancia_reclamo1")
+            i11.innerHTML = "Instancia Reclamo";
+            var i12 = document.createElement("i");
+            i12.setAttribute("class", "instancia_reclamo2");
+            i12.innerHTML = r7[j];
+            p9.appendChild(i11);
+            p9.appendChild(i12);
+            div.appendChild(p9);
+            /************** Periodo Reclamo ***********************/
+            var p10 = document.createElement("p");
+            p10.setAttribute('class',"periodo_reclamo")
+            var i13 = document.createElement("i");
+            i13.setAttribute("class","periodo_reclamo1")
+            i13.innerHTML = "Periodo Reclamo";
+            var i14 = document.createElement("i");
+            i14.setAttribute("class", "periodo_reclamo2");
+            var rq34r = obtener_periodo(r8[j]);
+            i14.innerHTML = rq34r;
+            p10.appendChild(i13);
+            p10.appendChild(i14);
+            div.appendChild(p10);
+            /************** Días Reclamo ***********************/
+            var p10 = document.createElement("p");
+            p10.setAttribute('class',"dias_reclamo")
+            var i13 = document.createElement("i");
+            i13.setAttribute("class","dias_reclamo1")
+            i13.innerHTML = "Dias de Reclamo";
+            var i14 = document.createElement("i");
+            i14.setAttribute("class", "dias_reclamo2");
+            i14.innerHTML = r9[j];
+            p10.appendChild(i13);
+            p10.appendChild(i14);
+            div.appendChild(p10);
+        }
+        document.getElementById("rcliente").innerHTML = localStorage.getItem("nombre_cliente");
+        document.getElementById("rdireccion").innerHTML = localStorage.getItem("direccion_cliente");
+        document.getElementById("fecha_actual4").innerHTML = localStorage.getItem("fecha_actualizacion") + "-" + localStorage.getItem("hora_actualizacion");
+    location.href = "#reclamos";
+    }
+    /*if (data == "") {
         swal("No cuenta con reclamos Regitrados");
     } else {
         var cad1 = "";
@@ -1009,7 +1257,7 @@ function onSuccess6(data) {
         var tr = document.createElement('tr');
         var th1 = document.createElement('th');
         th1.setAttribute('class', 'col_cod1');
-        th1.innerHTML = 'Código';
+        th1.innerHTML = 'N. Recl';
         var th2 = document.createElement('th');
         th2.setAttribute('class', 'col_des1');
         th2.innerHTML = 'Descripción';
@@ -1115,9 +1363,16 @@ function onSuccess6(data) {
         document.getElementById("rdireccion").innerHTML = localStorage.getItem("direccion_cliente");
         document.getElementById("fecha_actual4").innerHTML = localStorage.getItem("fecha_actualizacion") + "-" + localStorage.getItem("hora_actualizacion");
         location.href = "#reclamos";
-    }
+    }*/
+     
 }
 
+function obtener_periodo(a){
+    var a1 = a.substr(0,4);
+    var a2 = a.substr(4,2);
+    var a3 = cambiarMes2(a2);
+    return a3+" - "+a1;
+}
 /*function irclientes() {
     $.mobile.changePage("#usuarios", {
         transition: "",
@@ -1214,7 +1469,14 @@ function onSuccess7(data) {
                     tr.appendChild(th4);
                     tr.appendChild(th5);
                     tabla.appendChild(tr);
-                    cambiarColor(cad1, cad2, sum);
+                    var aaa = restarFechas(cad1,cad2);
+                    //alert(aaa);
+                    //cambiarColor(cad1, cad2, sum);
+                    if(aaa<0){
+                        $("#fila"+sum).css("background","#FFFFBF")
+                    }else{
+                        $("#fila"+sum).css("background","rgba(236, 245, 255, .9)")
+                    }
                     cad1 = "";
                     cad2 = "";
                     cad3 = "";
@@ -1233,6 +1495,16 @@ function onSuccess7(data) {
     }
 }
 
+function restarFechas(f1,f2)
+ {
+ var aFecha1 = f1.split('/'); 
+ var aFecha2 = f2.split('/'); 
+ var fFecha1 = Date.UTC(aFecha1[2],aFecha1[1]-1,aFecha1[0]); 
+ var fFecha2 = Date.UTC(aFecha2[2],aFecha2[1]-1,aFecha2[0]); 
+ var dif = fFecha2 - fFecha1;
+ var dias = Math.floor(dif / (1000 * 60 * 60 * 24)); 
+ return dias;
+ }
 
 
 
