@@ -1580,13 +1580,11 @@ function cambiarPass(){
 }
 
 function onSuccess34(data){
-    if(data == "Actualizaci+on Correcta"){
-       swal({   title: "",   text:data,   timer: 2000,   showConfirmButton: false });
+    if(data == "Actualización Correcta"){
         $.mobile.changePage("#usuarios", {
             transition: "",
             reverse: true,
             changeHash: true
         });
-        swal({   title: "",   text:data,   timer: 2000,   showConfirmButton: false });
     }
 }
