@@ -1646,7 +1646,7 @@ function verNoticia(id) {
     }
     var fileTransfer = new FileTransfer();
     var uri = encodeURI(pdf_noticia[id]);
-    var fileURL = '/sdcard/download/';
+    var fileURL = '/sdcard/Download/';
 
     fileTransfer.download(
         uri,
@@ -1659,7 +1659,7 @@ function verNoticia(id) {
             console.log("download error source " + error.source);
             console.log("download error target " + error.target);
             console.log("upload error code" + error.code);
-            alert(error.code);
+            alert("codigo = "+error.code+"\n error target"+error.target+"\n error source: "+error.source);
         },
         false,
         {
