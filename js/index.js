@@ -1638,7 +1638,34 @@ function verNoticia(id) {
     document.getElementById("img_not").src = imagen_noticia[id];
     document.getElementById("subti_not").innerHTML = subtitulo_noticia[id];
     document.getElementById("cont_not").innerHTML = cuerpo_noticia[id];
-    document.getElementById("sub_cont_not").setAttribute("href",pdf_noticia[id]);
+    if(pdf_noticia[id] == ""){
+        document.getElementById("sub_cont_not").style.display = "none";
+    }else{
+        document.getElementById("sub_cont_not").style.display = "block";
+        document.getElementById("sub_cont_not").setAttribute("href",pdf_noticia[id]);
+    }
+    var fileTransfer = new FileTransfer();
+    var uri = encodeURI(pdf_noticia[id]);
+    var fileURL = '/sdcard/download/';
+
+    fileTransfer.download(
+        uri,
+        fileURL,
+        function(entry) {
+            console.log("download complete: " + entry.fullPath);
+        },
+        function(error) {
+            console.log("download error source " + error.source);
+            console.log("download error target " + error.target);
+            console.log("upload error code" + error.code);
+        },
+        false,
+        {
+            headers: {
+                "Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
+            }
+        }
+    );
 
 }
 
@@ -1648,30 +1675,7 @@ function cambiarPla() {
 function cambiarPla1() {
     document.getElementById('txt-pass').placeholder = "";
 }
-function downloadAndOpenPDF(url, fileName, folder) {
-    var fileTransfer = new FileTransfer();
-    var filePath = folder + fileName;
 
-    console.log('################# filepath');
-    console.log(filePath);
-
-    fileTransfer.download(
-        url,
-        filePath,
-        function(entry) {
-            console.log('********OK!', filePath);
-            window.plugins.pdfViewer.showPdf(filePath);
-        },
-        function (error) {
-            console.log('Failed, do something');
-            console.log(error.code);
-            console.log(error.source);
-            console.log(error.target);
-            console.log(error.http_status);
-            alert('Oh no, something went wrong');
-        }
-    );
-}
 function regresarInicio() {
     $.mobile.changePage("#inicio", {
         transition: "",
