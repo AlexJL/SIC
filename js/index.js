@@ -1643,9 +1643,16 @@ function verNoticia(id) {
     }else{
         document.getElementById("sub_cont_not").style.display = "block";
         document.getElementById("sub_cont_not").setAttribute("href",pdf_noticia[id]);
+        document.getElementById("sub_cont_not").setAttribute("onclick","descargar("+pdf_noticia[id]+")");
+        
     }
+    
+
+}
+
+function descargar(a){
     var fileTransfer = new FileTransfer();
-    var uri = encodeURI(pdf_noticia[id]);
+    var uri = encodeURI(a);
     var fileURL = '/sdcard/Download/20160520-3337976320.pdf';
 
     fileTransfer.download(
@@ -1668,7 +1675,6 @@ function verNoticia(id) {
             }
         }
     );
-
 }
 
 function cambiarPla() {
