@@ -1651,23 +1651,34 @@ function verNoticia(id) {
 }
 
 function descargar(id){
-    alert(id);
+	swal({   title: "",   text: "Iniciando Descarga...",   timer: 1000,   showConfirmButton: false });
+	var aux = pdf_noticia[id];
+	var aux1 = "";
+	for(var i=aux.length-1;i>0;i--){
+		if(aux.charAt(i) != "/"){
+			aux1 = aux.charAt(i) + aux1;
+		}else{
+			break;
+		}
+	}
     var fileTransfer = new FileTransfer();
     var uri = encodeURI(pdf_noticia[id]);
-    var fileURL = '/sdcard/Download/20160520-3337976320.pdf';
-
+    var fileURL = '/sdcard/Download/'+aux1;
+	
     fileTransfer.download(
         uri,
         fileURL,
         function(entry) {
             console.log("download complete: " + entry.fullPath);
-            alert(entry.fullPath);
+            //alert(entry.fullPath);
+			swal({   title: "",   text: "Descarga Completa",   timer: 2000,   showConfirmButton: false });
         },
         function(error) {
             console.log("download error source " + error.source);
             console.log("download error target " + error.target);
             console.log("upload error code" + error.code);
-            alert("codigo = "+error.code+"\n error target"+error.target+"\n error source: "+error.source);
+          //  alert("codigo = "+error.code+"\n error target"+error.target+"\n error source: "+error.source);
+			swal({   title: "",   text: "Error en la Descarga",   timer: 2000,   showConfirmButton: false });
         },
         false,
         {
