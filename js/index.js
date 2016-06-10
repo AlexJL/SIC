@@ -1638,32 +1638,10 @@ function verNoticia(id) {
     document.getElementById("img_not").src = imagen_noticia[id];
     document.getElementById("subti_not").innerHTML = subtitulo_noticia[id];
     document.getElementById("cont_not").innerHTML = cuerpo_noticia[id];
-    document.getElementById("sub_cont_not").setAttribute("onlick","descargar("+pdf_noticia[id]+")");
-    var ft = new FileTransfer();
-    ft.upload('http://www.sedalib.com.pe/upload/drive/52016/20160520-3337976320.pdf', '/sdcard/Donwload/', win, fail, opciones);
+    document.getElementById("sub_cont_not").setAttribute("href",pdf_noticia[id]);
+
 }
 
-function win(r) {
-    console.log("code = " + r.responseCode);
-    console.log("response = " + r.response);
-    console.log("Sent = " + r.bytesSent);
-    alert(r.response);
-}
-
-function fail(error) {
-    alert("A ocurrido un error : code = " + error.code);
-    //swal("","Error al envio de Foto");
-}
-
-function onFail(message) {
-    alert('Error por: ' + message);
-    //swal("","Error encontrado en la camara");
-}
-
-function descargar(a){
-ft = new FileTransfer();
-ft.download( a , '/sdcard/download/', successDownload, errorDownload);
-}
 function cambiarPla() {
     document.getElementById('txt-email').placeholder = "";
 }
