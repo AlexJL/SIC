@@ -71,6 +71,15 @@ function handleBackButton() {
         $.mobile.changePage('#usuarios');
     }else if ($.mobile.activePage.attr('id') == 'consultas') {
         $.mobile.changePage('#usuarios');
+    }else if ($.mobile.activePage.attr('id') == 'noticia_especifica') {
+        $.mobile.changePage('#noticias');
+    }else if ($.mobile.activePage.attr('id') == 'noticias') {
+		if(localStorage.getItem("noticias") == 1){
+			$.mobile.changePage('#noclientes');
+		}else{
+			$.mobile.changePage('#usuarios');
+		}
+        
     }else {
         navigator.app.backHistory();
     }
@@ -1634,6 +1643,7 @@ function verNoticia(id) {
         reverse: true,
         changeHash: true
     });
+    document.getElementById("fecha_not").innerHTML = fecha_noticia[id];
     document.getElementById("titu_not").innerHTML = titulo_noticia[id];
     document.getElementById("img_not").src = imagen_noticia[id];
     document.getElementById("subti_not").innerHTML = subtitulo_noticia[id];
@@ -1651,7 +1661,7 @@ function verNoticia(id) {
 }
 
 function descargar(id){
-	swal({   title: "",   text: "Iniciando Descarga...",   timer: 1000,   showConfirmButton: false });
+	swal({   title: "",   text: "Iniciando Descarga...",   timer: 2000,   showConfirmButton: false });
 	var aux = pdf_noticia[id];
 	var aux1 = "";
 	for(var i=aux.length-1;i>0;i--){
