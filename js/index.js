@@ -61,7 +61,7 @@ function onDeviceReady() {
 function handleBackButton() {
     if ($.mobile.activePage.attr('id') == 'inicio') {
         navigator.app.exitApp();
-    } else if ($.mobile.activePage.attr('id') == 'noClientes') {
+    } else if ($.mobile.activePage.attr('id') == 'noclientes') {
         $.mobile.changePage('#inicio');
     }else if ($.mobile.activePage.attr('id') == 'login') {
         $.mobile.changePage('#inicio');
