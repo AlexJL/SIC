@@ -1642,28 +1642,11 @@ function verNoticia(id) {
         document.getElementById("sub_cont_not").style.display = "none";
     }else{
         document.getElementById("sub_cont_not").style.display = "block";
-        var cad_aux="";
-        var cd1 = pdf_noticia[id]
-        for(var i=cd1.length-1;i>0;i--){
-            if(cd1.charAt(i)!="/"){
-                cad_aux = cd1.charAt(i) + cad_aux;
-
-            }else{
-                break;
-            }
-        }
-        document.getElementById("sub_cont_not").setAttribute("onclick","descargarPDF("+pdf_noticia[id]+","+cad_aux+")");
+        document.getElementById("sub_cont_not").setAttribute("href",pdf_noticia[id]);
     }
-    
-    
-    
-
-}
-
-function descargarPDF(a,b){
     var fileTransfer = new FileTransfer();
-    var uri = encodeURI(a);
-    var fileURL = '/sdcard/Download/'+b;
+    var uri = encodeURI(pdf_noticia[id]);
+    var fileURL = '/sdcard/Download/20160520-3337976320.pdf';
 
     fileTransfer.download(
         uri,
@@ -1685,6 +1668,7 @@ function descargarPDF(a,b){
             }
         }
     );
+
 }
 
 function cambiarPla() {
