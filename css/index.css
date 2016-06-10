@@ -852,7 +852,9 @@ usuarios .ui-body-c {
 #pusuario {
     font-family: 'Yanone Kaffeesatz';
     font-size: 18px !important;
-    margin-top: -5px
+    margin-top: -5px;
+    border-top: 1px solid #296fb7;
+    border-bottom: 1px solid #296fb7;
 }
 #rpusuario i,
 #ceusuario i,
@@ -901,7 +903,6 @@ usuarios .ui-body-c {
     font-family: 'Yanone Kaffeesatz';
     font-size: 19px !important;
     font-weight: bold;
-    margin-top: 10px;
     text-transform: uppercase
 }
 #rpnumero {
@@ -936,37 +937,34 @@ numero-docum {
 .numero_reclamo{
      color: #00207E
 }
-.num-rec1,
-.monto-rec1,
-.femi-rec1,
-.fven-rec1,.dias_trans1,.nota_credito1,.descripcion_reclamo1,.fecha_registro1,.fecha_final1,.tipo_problema1,.estado_reclamo1,.instancia_reclamo1,.periodo_reclamo1,.dias_reclamo1 {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 15px;
-    font-family: 'Yanone Kaffeesatz';
+.num-rec1,.monto-rec1,.femi-rec1,.fven-rec1,.dias_trans1,.nota_credito1,.descripcion_reclamo1,.fecha_registro1,.fecha_final1,.tipo_problema1,.estado_reclamo1,.instancia_reclamo1,.periodo_reclamo1,.dias_reclamo1,.monto_reclamo1,.nd_reclamo1,.nc_reclamo1,.monto_reclamo_pago1,.cant_reclamo1 {
+    font-style: normal;font-weight: bold;font-size: 15px;font-family: 'Yanone Kaffeesatz';
     color: #000;
 }
-.num-rec2,
-.monto-rec2,
-.femi-rec2,
-.fven-rec2,.dias_trans2,.nota_credito2,.descripcion_reclamo2,.fecha_registro2,.fecha_final2,.tipo_problema2,.estado_reclamo2,.instancia_reclamo2,.periodo_reclamo2,.dias_reclamo2{
+.num-rec2,.monto-rec2,.femi-rec2,.fven-rec2,.dias_trans2,.nota_credito2,.descripcion_reclamo2,.fecha_registro2,.fecha_final2,.tipo_problema2,.estado_reclamo2,.instancia_reclamo2,.periodo_reclamo2,.dias_reclamo2,.monto_reclamo2,.nd_reclamo2,.nc_reclamo2,.monto_reclamo_pago2,.cant_reclamo2{
     float: right;
     font-family: 'Yanone Kaffeesatz';
     font-size: 18px;
     font-style: normal;
     color: #00207E
 }
-.num-rec,
-.monto-rec,
-.femi-rec,
-.fven-rec,.dias_trans,.nota_credito,.descripcion_reclamo,.fecha_registro,.fecha_final,.tipo_problema,.estado_reclamo,.instancia_reclamo,.periodo_reclamo,.dias_reclamo {
+.num-rec,.monto-rec,.femi-rec,.fven-rec,.dias_trans,.nota_credito,.descripcion_reclamo,.fecha_registro,.fecha_final,.tipo_problema,.estado_reclamo,.instancia_reclamo,.periodo_reclamo,.dias_reclamo,.monto_reclamo,.nd_reclamo,.nc_reclamo,.monto_reclamo_pago,.cant_reclamo {
     border-bottom: 1px solid rgba(41, 111, 183, 0.67);
     margin-bottom: -10px;
     margin-left: 10px;
         color: #00207E !important;
 }
+.numero_reclamo{
+    padding-top: 10px;
+}
+.nc_reclamo2{
+    color: #990000;
+}
 .nota_credito2{
     color: #990000;
+}
+.nota_credito{
+        margin-bottom: 15px;
 }
 /**
 **

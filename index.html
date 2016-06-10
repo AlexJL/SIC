@@ -130,7 +130,6 @@
 
         <div data-role="footer" data-position="fixed"></div>
     </div>
-
     <!--- 
     --
     -- Página de Registro En la caul te permitira registrarte en la aplicación 
@@ -148,11 +147,11 @@
                 <!--<label for="">Nombre Clompleto</label>-->
                 <input data-role="none" class="input_login" id="registro_nombre" name="rnombre" type="text" placeholder="Escriba su nombre">
                 <!--<label for="">Suministro</label>-->
-                <input data-role="none" class="input_login" id="registro_suministro" name="rsuministro" type="text" placeholder="Escriba su suministro">
+                <input data-role="none" class="input_login" id="registro_suministro" name="rsuministro" type="tel" placeholder="Escriba su suministro">
                 <!--<label for="">Correo Electronico</label>-->
-                <input data-role="none" class="input_login" id="registro_correo" name="rcorreo" type="text" placeholder="Escriba su correo">
-                <input data-role="none" class="input_login" id="registro_dni" name="rdni" type="text" placeholder="Escriba su dni">
-                <input data-role="none" class="input_login" id="registro_celular" name="rcelular" type="text" placeholder="Escriba su celular">
+                <input data-role="none" class="input_login" id="registro_correo" name="rcorreo" type="email" placeholder="Escriba su correo">
+                <input data-role="none" class="input_login" id="registro_dni" name="rdni" type="tel" placeholder="Escriba su dni">
+                <input data-role="none" class="input_login" id="registro_celular" name="rcelular" type="tel" placeholder="Escriba su celular">
                 <div class="button raised blue" id="login_ingresar" onclick="registrar()">
                     <div class="center" fit>Registrar</div>
                     <paper-ripple fit></paper-ripple>
@@ -734,16 +733,30 @@
             <span class="banner">Recibos Pendientes</span>
         </div>
         <div data-role="content">
-            <h5 id="rpusuario">Cliente: 
+           <table style="width: 100%;background: beige;font-family: 'Yanone Kaffeesatz';">
+               <tr>
+                   <td style="border-bottom: 1px solid;padding: 5px 4px;width:15%">Nombre:</td>
+                   <td style="border-bottom: 1px solid;color: #00207E">
+                       <i id="rpcliente" style="font-style: normal;"></i>
+                   </td>
+               </tr>
+               <tr>
+                   <td style="border-bottom: 1px solid;padding: 5px 4px;width:15%">Dirección: </td>
+                   <td style="border-bottom: 1px solid;color: #00207E"><i id="rpdireccion" style="font-style: normal;"></i></td>
+               </tr>
+           </table>
+            <!--<h5 id="rpusuario">Cliente: 
                  <i id="rpcliente"></i>
 			</h5>
             <h5 id="rpdirec">Dirección: 
 				 <i id="rpdireccion"></i>
-			</h5>
-            <i id="rpfecha">La información aún no incluye los pagos realizados despúes  del 
-				 <i id="fecha_actual1"></i>
-            <strong>Ignore la deuda  si está al día en sus pagos.</strong>
-            </i>
+			</h5>--><br>
+           <div style="background:#eee;padding:5px">
+                <i id="rpfecha">La información aún no incluye los pagos realizados despúes  del 
+                     <i id="fecha_actual1"></i>
+                <strong>Ignore la deuda  si está al día en sus pagos.</strong>
+                </i>
+            </div>
             <br>
             <p id="rpnumero">
                 <i>
@@ -778,16 +791,32 @@
             <span class="banner">Consumos</span>
         </div>
         <div data-role="content">
-            <h5 id="cusuario">Cliente: 
+           <table style="width: 100%;background: beige;font-family: 'Yanone Kaffeesatz';">
+               <tr>
+                   <td style="border-bottom: 1px solid;padding: 5px 4px;width:15%">Nombre:</td>
+                   <td style="border-bottom: 1px solid;color: #00207E">
+                       <i id="ccliente" style="font-style: normal;"></i>
+                   </td>
+               </tr>
+               <tr>
+                   <td style="border-bottom: 1px solid;padding: 5px 4px;width:15%">Dirección: </td>
+                   <td style="border-bottom: 1px solid;color: #00207E">
+                       <i id="cdireccion" style="font-style: normal;"></i>
+                   </td>
+               </tr>
+           </table><br>
+            <!--<h5 id="cusuario">Cliente: 
 				 <i id="ccliente"></i>
 			</h5>
             <h5 id="cdirec">Dirección: 
 				 <i id="cdireccion"></i>
-			</h5>
-            <i id="cfecha">La información aún no incluye los pagos realizados despúes  del 
-				 <i id="fecha_actual3"></i>
-            <strong>Ignore la deuda  si está al día en sus pagos.</strong>
-            </i>
+			</h5>-->
+           <div style="background:#eee;padding:5px">
+                <i id="cfecha">La información aún no incluye los pagos realizados despúes  del 
+                     <i id="fecha_actual3"></i>
+                <strong>Ignore la deuda  si está al día en sus pagos.</strong>
+                </i>
+            </div>
             <script>
                 document.getElementById("ccliente").innerHTML = localStorage.getItem("clinombre");
                 document.getElementById("cdireccion").innerHTML = localStorage.getItem("clidireccion");
@@ -811,16 +840,32 @@
             <span class="banner">Cuotas Emitir</span>
         </div>
         <div data-role="content">
+           <table style="width: 100%;background: beige;font-family: 'Yanone Kaffeesatz';">
+               <tr>
+                   <td style="border-bottom: 1px solid;padding: 5px 4px;width:15%">Nombre:</td>
+                   <td style="border-bottom: 1px solid;color: #00207E">
+                       <i id="cecliente" style="font-style: normal;"></i>
+                   </td>
+               </tr>
+               <tr>
+                   <td style="border-bottom: 1px solid;padding: 5px 4px;width:15%">Dirección: </td>
+                   <td style="border-bottom: 1px solid;color: #00207E">
+                       <i id="cedireccion" style="font-style: normal;"></i>
+                   </td>
+               </tr>
+           </table><br><!--
             <h5 id="ceusuario">Cliente: 
 				 <i id="cecliente"></i>
 			</h5>
             <h5 id="cedirec">Dirección: 
 				 <i id="cedireccion"></i>
-			</h5>
-            <i id="cefecha">La información aún no incluye los pagos realizados despúes  del 
-				 <i id="fecha_actual2"></i>
-            <strong>Ignore la deuda  si está al día en sus pagos.</strong>
-            </i>
+			</h5>-->
+           <div style="background:#eee;padding:5px">
+                <i id="cefecha">La información aún no incluye los pagos realizados despúes  del 
+                     <i id="fecha_actual2"></i>
+                <strong>Ignore la deuda  si está al día en sus pagos.</strong>
+                </i>
+            </div>
             <script>
                 document.getElementById('fecha_actual2').innerHTML = localStorage.getItem('fecha_actualizacion') + " - " + localStorage.getItem("hora_actualizacion");
                 document.getElementById('cecliente').innerHTML = localStorage.getItem("nombre_cliente");
@@ -897,23 +942,39 @@
             <span class="banner">Reclamos</span>
         </div>
         <div data-role="content">
+           <table style="width: 100%;background: beige;font-family: 'Yanone Kaffeesatz';">
+               <tr>
+                   <td style="border-bottom: 1px solid;padding: 5px 4px;width:15%">Nombre:</td>
+                   <td style="border-bottom: 1px solid;color: #00207E">
+                       <i id="rcliente" style="font-style: normal;"></i>
+                   </td>
+               </tr>
+               <tr>
+                   <td style="border-bottom: 1px solid;padding: 5px 4px;width:15%">Dirección: </td>
+                   <td style="border-bottom: 1px solid;color: #00207E">
+                       <i id="rdireccion" style="font-style: normal;"></i>
+                   </td>
+               </tr>
+           </table><br><!--
             <h5 id="rusuario">Cliente: 
 				 <i id="rcliente"></i>
 			</h5>
             <h5 id="rdirec">Dirección: 
 				 <i id="rdireccion"></i>
-			</h5>
-            <i id="rfecha">La información aún no incluye los pagos realizados despúes  del 
-				 <i id="fecha_actual4"></i>
-            <strong>Ignore la deuda  si está al día en sus pagos.</strong>
-            </i>
+			</h5>-->
+           <div style="background:#eee;padding:5px">
+                <i id="rfecha">La información aún no incluye los pagos realizados despúes  del 
+                     <i id="fecha_actual4"></i>
+                <strong>Ignore la deuda  si está al día en sus pagos.</strong>
+                </i>
+            </div>
             <script>
                 document.getElementById("rcliente").innerHTML = localStorage.getItem("clinombre");
                 document.getElementById("rdireccion").innerHTML = localStorage.getItem("clidireccion");
                 document.getElementById("fecha_actual4").innerHTML = localStorage.getItem("clifecha") + "-" + localStorage.getItem("clihora");
 
             </script>
-            <p id="numeroreclamos"><span id="numreclamos"></span> reclamos realizados</p>
+            <p id="numeroreclamos"><span id="numreclamos1"></span> reclamos realizados</p>
             <div id="reclamos_obtenidos"></div>
         </div>
     </div>
@@ -930,16 +991,32 @@
             <span class="banner">Pagos</span>
         </div>
         <div data-role="content">
+           <table style="width: 100%;background: beige;font-family: 'Yanone Kaffeesatz';">
+               <tr>
+                   <td style="border-bottom: 1px solid;padding: 5px 4px;width:15%">Nombre:</td>
+                   <td style="border-bottom: 1px solid;color: #00207E">
+                       <i id="pcliente" style="font-style: normal;"></i>
+                   </td>
+               </tr>
+               <tr>
+                   <td style="border-bottom: 1px solid;padding: 5px 4px;width:15%">Dirección: </td>
+                   <td style="border-bottom: 1px solid;color: #00207E">
+                       <i id="pdireccion" style="font-style: normal;"></i>
+                   </td>
+               </tr>
+           </table><br><!--
             <h5 id="pusuario">Cliente: 
 				 <i id="pcliente"></i>
 			</h5>
             <h5 id="pdirec">Dirección: 
 				 <i id="pdireccion"></i>
-			</h5>
-            <i id="pfecha">La información aún no incluye los pagos realizados despúes  del 
-				 <i id="fecha_actual5"></i>
-            <strong>Ignore la deuda  si está al día en sus pagos.</strong>
-            </i>
+			</h5>-->
+           <div style="background:#eee;padding:5px">
+                <i id="pfecha">La información aún no incluye los pagos realizados despúes  del 
+                     <i id="fecha_actual5"></i>
+                <strong>Ignore la deuda  si está al día en sus pagos.</strong>
+                </i>
+            </div>
             <p id="leyenda">
                 <span>LEYENDA</span>
                 <br>
@@ -1012,6 +1089,45 @@
                 <paper-ripple fit></paper-ripple>
             </div>
           </div>
+    </div>
+    <!--
+    --
+    -- Noticias
+    --
+    -->
+    <div data-role="page" id="noticias">
+          <div data-role="header" id="pagos_header">
+            <a data-role="none" href="#" onclick="volver3()">
+                <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+            </a>
+            <span class="banner">Noticias</span>
+        </div>
+        <div data-role="content">
+            <table id="noticas_generales" width="100%" style="border-bottom:1px solid #eee"></table>
+        </div>
+        
+    </div>
+    <!--
+    --
+    -- Ver Noticia Especifica
+    --
+    -->
+    <div data-role="page" id="noticia_especifica">
+        <div data-role="header" id="pagos_header">
+            <a data-role="none" href="#noticias">
+                <i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i>
+            </a>
+            <span class="banner">Noticias</span>
+        </div>
+        <div data-role="content">
+            <table>
+                <tr><td><span id="titu_not"></span></td></tr>
+                <tr><td><img src="" width="60%" style="margin-left:20%" id="img_not"></td></tr>
+                <tr><td><span id="subti_not"></span></td></tr>
+                <tr><td><span id="cont_not"></span></td></tr>
+                <tr><td><a id="sub_cont_not">Descargar PDF</a></td></tr>
+            </table>
+        </div>
     </div>
 </body>
 
