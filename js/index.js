@@ -96,7 +96,7 @@ function checkConnection() {
     states[Connection.CELL] = 'Cell generic connection';
     states[Connection.NONE] = 'No network connection';
     if (states[networkState] == "Unknown connection" || states[networkState] == 'No network connection') {
-        alert('No tiene conexión a Red. Porfavor Conectesé a la red a traves de sus datos o  un red WiFi');
+		swal({   title: "No tiene Conexión a Red",   text: "Porfavor Conectesé a la red a traves de sus datos o  un red WiFi, para poder usar nuestro servicio. Gracias",   timer: 3000,   showConfirmButton: false });
         navigator.app.exitApp();
     }
 }
@@ -292,6 +292,7 @@ function onSuccess(data) {
                 
             }
         }
+		
         if(localStorage.getItem("dias_transcurridos")>0){
             document.getElementById("fuera_fecha").style.display = "block";
             document.getElementById("dias_sin_pagar").innerHTML = localStorage.getItem("dias_transcurridos");
@@ -357,6 +358,7 @@ function onSuccess2(data) {
     });
 }*/
 function estadoCuenta() {
+	
     var codigo = localStorage.getItem('codigo_cliente');
     $.ajax({
         type: "POST",
@@ -375,6 +377,7 @@ function estadoCuenta() {
     });
 }
 function onSuccess1(data) {
+	
     var cad = "";
     var k = 0;
     datospersonales.length = 0;
@@ -422,13 +425,15 @@ function onSuccess1(data) {
     localStorage.setItem("numreclamos_cerrados",parseInt(datospersonales[16]));
     localStorage.setItem("estado_agua",datospersonales[17]);
     localStorage.setItem("estado_desague",datospersonales[18]);
+    localStorage.setItem("estado_agua_fecha",datospersonales[19]);
+    localStorage.setItem("estado_desagua_fecha",datospersonales[20]);
     deudatotal = Math.round(deudatotal*100)/100;;
     localStorage.setItem("deudatotal", "S./" +deudatotal );
     document.getElementById("suministro").innerHTML = localStorage.getItem("codigo_cliente");
     document.getElementById("usuario").innerHTML = localStorage.getItem("nombre_cliente");
     document.getElementById("localidad").innerHTML = localStorage.getItem("localidad");
     document.getElementById("direccion").innerHTML = localStorage.getItem("direccion");
-    document.getElementById("conexion").innerHTML = "AGUA: "+localStorage.getItem("estado_agua") + " | DESAGUE: "+localStorage.getItem("estado_agua");
+    document.getElementById("conexion").innerHTML = "AGUA: <span style='color:#6EA976'>"+localStorage.getItem("estado_agua") + "</span> | DESAGUE: <span style='color:#6EA976'> "+localStorage.getItem("estado_agua")+"</span>";
     document.getElementById("tarifa").innerHTML = localStorage.getItem("tarifa");
     if(localStorage.getItem("medidor") != " "){
         document.getElementById("medidor").innerHTML = localStorage.getItem("medidor");
@@ -441,7 +446,14 @@ function onSuccess1(data) {
     document.getElementById("deudacapital").innerHTML = localStorage.getItem("deudacapital");
     document.getElementById("cuotasemitir").innerHTML = localStorage.getItem("cuotasemitir");
     document.getElementById("tgastoscobranza").innerHTML = localStorage.getItem("tgastoscobranza");
-    document.getElementById("numreclamos").innerHTML = "Total: " + localStorage.getItem("numreclamos")+" | Cerrados: "+localStorage.getItem("numreclamos_cerrados") + " | Abiertos: "+ (localStorage.getItem("numreclamos") - localStorage.getItem("numreclamos_cerrados"));
+    document.getElementById("numreclamos").innerHTML = "Total: <span style='color:#6EA976'>" +
+		localStorage.getItem("numreclamos")+"</span> | Cerrados: <span style='color:#6EA976'>"+
+		localStorage.getItem("numreclamos_cerrados") + "</span> | Abiertos: <span style='color:#6EA976'>"+
+		(localStorage.getItem("numreclamos") - localStorage.getItem("numreclamos_cerrados"))+"</span>";
+	document.getElementById("fecha_conexion").innerHTML = "AGUA: <span style='color:#6EA976'>"+localStorage.getItem("estado_agua_fecha")+"</span> | DESAGÜE: <span style='color:#6EA976'>" + localStorage.getItem("estado_desagua_fecha")+"</span>";
+	document.getElementById("fecha_conexion").style.color ="#296fb7";
+	document.getElementById("numreclamos").style.color ="#296fb7";
+	document.getElementById("conexion").style.color ="#296fb7";
     //document.getElementById("interese").innerHTML = localStorage.getItem("interese");
     //document.getElementById("interese").innerHTML = localStorage.getItem("interese");
     //document.getElementById("totalinterese").innerHTML = localStorage.getItem("totalinterese");
@@ -628,6 +640,7 @@ function onSuccess3(data) {
     $("p").remove(".fven-rec");
     $("p").remove(".dias_trans");
     $("p").remove(".nota_credito");
+    $("div").remove(".div_recibos");
     var div = document.getElementById('recibos-pen');
     if (data == "") {
         swal("No cuenta con recibos pendientes");
@@ -701,6 +714,15 @@ function onSuccess3(data) {
             }
         }
         for (var j = 0; j < z; j++) {
+			var div3 = document.createElement("div");
+			div3.setAttribute("class","div_recibos")
+			var color = "";
+			if(j%2==0){
+				color = "background:#eee;margin-bottom:10px;padding-left: 10px;padding-bottom: 30px;padding-top: 10px;padding-right: 10px;";
+			}else{
+				color = "background:#ffffff;margin-bottom:10px;padding-left: 10px;padding-bottom: 30px;padding-top: 10px;padding-right: 10px;";
+			}
+			div3.setAttribute("style",color)
             /****************** Docuemnto nro -- *************/
             var p3 = document.createElement("p");
             p3.setAttribute('class', 'numero-docum');
@@ -708,8 +730,8 @@ function onSuccess3(data) {
             p3.innerHTML = "DOCUMENTO N° " + (j + 1) + " - Período: "+f123;
             var hr1 = document.createElement("hr");
             hr1.setAttribute('class', 'bajo-doc');
-            div.appendChild(p3);
-            div.appendChild(hr1);
+            div3.appendChild(p3);
+            div3.appendChild(hr1);
             /****************** Nro del Recibo ***************/
             var p4 = document.createElement("p");
             p4.setAttribute('class', 'num-rec');
@@ -721,7 +743,7 @@ function onSuccess3(data) {
             i2.innerHTML = numeroRecibos[j];
             p4.appendChild(i1);
             p4.appendChild(i2);
-            div.appendChild(p4);
+            div3.appendChild(p4);
             /*************** Total Recibo **********************/
             var p5 = document.createElement("p");
             p5.setAttribute('class', 'monto-rec');
@@ -733,7 +755,7 @@ function onSuccess3(data) {
             i4.innerHTML = "S./ " + totalRecibos[j];
             p5.appendChild(i3);
             p5.appendChild(i4);
-            div.appendChild(p5);
+            div3.appendChild(p5);
             /************* Fecha Emision ***********************/
             var p6 = document.createElement("p");
             p6.setAttribute('class', 'femi-rec');
@@ -745,7 +767,7 @@ function onSuccess3(data) {
             i6.innerHTML = femiRecibos[j];
             p6.appendChild(i5);
             p6.appendChild(i6);
-            div.appendChild(p6);
+            div3.appendChild(p6);
             /************* Fecha Vencimiento ***********************/
             var p7 = document.createElement("p");
             p7.setAttribute('class', 'fven-rec');
@@ -757,7 +779,7 @@ function onSuccess3(data) {
             i8.innerHTML = fvenRecibos[j];
             p7.appendChild(i7);
             p7.appendChild(i8);
-            div.appendChild(p7);
+            div3.appendChild(p7);
             /************* Dias Transcurridos *******************/
             if(dias_recibos[j]>0){
                 var p8 = document.createElement("p");
@@ -770,7 +792,7 @@ function onSuccess3(data) {
                 i10.innerHTML = dias_recibos[j] + " dias";
                 p8.appendChild(i9);
                 p8.appendChild(i10);
-                div.appendChild(p8);
+                div3.appendChild(p8);
             }
             if(nc[j]>0){
                 var p9 = document.createElement("p");
@@ -783,8 +805,9 @@ function onSuccess3(data) {
                 i12.innerHTML = "S./ - " + nc[j];
                 p9.appendChild(i11);
                 p9.appendChild(i12);
-                div.appendChild(p9);
+                div3.appendChild(p9);
             }
+			div.appendChild(div3);
         }
         document.getElementById('cantidad_recibos').innerHTML = localStorage.getItem("cantidad_cliente");
         document.getElementById('fecha_actual1').innerHTML = localStorage.getItem('fecha_actualizacion') + " - " + localStorage.getItem("hora_actualizacion");
@@ -1192,7 +1215,8 @@ function onSuccess6(data) {
     $("p").remove(".nc_reclamo");
     $("p").remove(".monto_reclamo_pago");
     $("p").remove(".cant_reclamo");
-    var div = document.getElementById('reclamos_obtenidos');
+    $("div").remove(".div_recibos");
+    var div2 = document.getElementById('reclamos_obtenidos');
     if(data == ""){
         swal("No cuenta con reclamos Regitrados");
     }else{
@@ -1220,6 +1244,15 @@ function onSuccess6(data) {
         }
         document.getElementById("numreclamos1").innerHTML = z;
         for(var j =0 ;j<z;j++){
+			var div = document.createElement("div");
+			div.setAttribute("class","div_recibos")
+			var color = "";
+			if(j%2==0){
+				color = "background:#eee;margin-bottom:10px;padding-left: 10px;padding-bottom: 30px;padding-top: 10px;padding-right: 10px;";
+			}else{
+				color = "background:#ffffff;margin-bottom:10px;padding-left: 10px;padding-bottom: 30px;padding-top: 10px;padding-right: 10px;";
+			}
+			div.setAttribute("style",color)
             /****************** Número de Reclamo *************/
             var p3 = document.createElement("p");
             p3.setAttribute('class', 'numero_reclamo');
@@ -1288,15 +1321,10 @@ function onSuccess6(data) {
             var i10 = document.createElement("i");
             i10.setAttribute("class", "estado_reclamo2");
             i10.setAttribute("id", "estado_reclamo2"+j);
-            i10.innerHTML = r6[j];
+			i10.innerHTML = r6[j];            
             p8.appendChild(i9);
             p8.appendChild(i10);
             div.appendChild(p8);
-            if(r6[j] == "CERRADO"){
-                 $("#estado_reclamo2"+j).css("color","#FF0000")
-            }else{
-                $("#estado_reclamo2"+j).css("color","#4caf50")
-            }
             /************** Instancia Reclamo ***********************/
             var p9 = document.createElement("p");
             p9.setAttribute('class',"instancia_reclamo")
@@ -1408,7 +1436,12 @@ function onSuccess6(data) {
                 p15.appendChild(i23);
                 p15.appendChild(i24);
                 div.appendChild(p15);
-            
+            div2.appendChild(div);
+			if(r6[j] == "CERRADO"){
+                 $("#estado_reclamo2"+j).css("color","#FF0000")
+            }else{
+                $("#estado_reclamo2"+j).css("color","#4caf50")
+            }
         }
         document.getElementById("rcliente").innerHTML = localStorage.getItem("nombre_cliente");
         document.getElementById("rdireccion").innerHTML = localStorage.getItem("direccion_cliente");
@@ -1571,6 +1604,7 @@ var cuerpo_noticia = new Array();
 var fecha_noticia = new Array();
 var imagen_noticia = new Array();
 var pdf_noticia = new Array();
+
 function onSuccess611(data){
     var cad1="",cad2="",cad3="",cad4="",cad5="",cad6="";
     var k=0,p=0,k1=0,k2=0,k3=0,k4=0,k5=0;
@@ -1591,8 +1625,13 @@ function onSuccess611(data){
     }
     var div = document.getElementById("noticas_generales");
     for(var i=0;i<titulo_noticia.length;i++){
+		if(i%2 == 0){
+			var color= "background:#e4e6e5";
+		}else{
+			var color= "background:#ffffff";
+		}
         var tr = document.createElement('tr');
-        tr.setAttribute("style","background:#eae7ec")
+        tr.setAttribute("style",color)
         var td = document.createElement('td');
         td.setAttribute("width","30%")
         var td1 = document.createElement('td');
@@ -1603,7 +1642,7 @@ function onSuccess611(data){
         var tr2 = document.createElement("tr");
         var tr3 = document.createElement("tr");
         var td2 = document.createElement("td")
-        td2.setAttribute("style","font-family: 'Yanone Kaffeesatz'")
+        td2.setAttribute("style","font-family: 'Yanone Kaffeesatz';text-shadow: none;")
         var td3 = document.createElement("td")
         td3.setAttribute("style","font-family: 'Yanone Kaffeesatz';color:#296fb7;text-shadow:none")
         var td4 = document.createElement("td")
@@ -1659,7 +1698,6 @@ function verNoticia(id) {
     
 
 }
-
 function descargar(id){
 	swal({   title: "",   text: "Iniciando Descarga...",   timer: 2000,   showConfirmButton: false });
 	var aux = pdf_noticia[id];
@@ -1681,7 +1719,7 @@ function descargar(id){
         function(entry) {
             console.log("download complete: " + entry.fullPath);
             //alert(entry.fullPath);
-			swal({   title: "",   text: "Descarga Completa",   timer: 2000,   showConfirmButton: false });
+			swal({   title: "",   text: "Descarga Completa, Revise su carpeta de descargas!",   timer: 3000,   showConfirmButton: false });
         },
         function(error) {
             console.log("download error source " + error.source);
@@ -1698,14 +1736,12 @@ function descargar(id){
         }
     );
 }
-
 function cambiarPla() {
     document.getElementById('txt-email').placeholder = "";
 }
 function cambiarPla1() {
     document.getElementById('txt-pass').placeholder = "";
 }
-
 function regresarInicio() {
     $.mobile.changePage("#inicio", {
         transition: "",

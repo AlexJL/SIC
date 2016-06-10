@@ -69,7 +69,7 @@
 }
 #inicio,
 #login,
-#registro,#noticia_especifica,#noclientes,#consultas {
+#registro,#noticia_especifica,#noclientes,#consultas,#recibospendientes1 {
     background: url(../img/fondo.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -1001,8 +1001,8 @@ numero-docum {
 .col_vf1,
 .col_tle1,
 .col_ref1 {
-    background: rgba(41, 161, 183, 0.48);
-    color: #990000 !important;
+    background: #6EA976 !important;
+    color: #ffffff !important;
     font-family: 'Yanone Kaffeesatz';
     padding: 5px;
     text-shadow: none
@@ -1013,7 +1013,7 @@ numero-docum {
 .col_vf,
 .col_tle,
 .col_ref {
-    background: rgba(41, 111, 183, 0.25);
+    background: rgba(41, 111, 183, 0.31);
     font-family: 'Yanone Kaffeesatz';
     text-shadow: none
 }
@@ -1383,8 +1383,8 @@ numero-docum {
 .col_plugar1,
 .nro_precibo1,
 .col_ppago1 {
-    background: rgba(41, 161, 183, 0.48);
-    color: #990000 !important;
+        background: #6EA976 !important;
+    color: #FFF;
     font-family: 'Yanone Kaffeesatz';
     padding: 5px;
     text-shadow: none

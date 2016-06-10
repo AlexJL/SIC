@@ -585,6 +585,12 @@
 					</STRONG>
                 </p>
                 <p class="nota1">
+                    <i class="subnota1">Fecha Conexión</i>
+                    <STRONG>
+						<i class="subnota2" id="fecha_conexion"></i>
+					</STRONG>
+                </p>
+                <p class="nota1">
                     <i class="subnota1">Tarifa</i>
                     <STRONG>
 						<i class="subnota2" id="tarifa"></i>
@@ -694,29 +700,43 @@
 					<i id="fpago"></i>. Ignore la deuda si está al día en sus pagos.
             </strong>
             </i>
-            <script>
-                document.getElementById("suministro").innerHTML = localStorage.getItem("codigo_cliente");
-                document.getElementById("usuario").innerHTML = localStorage.getItem("nombre_cliente");
-                document.getElementById("localidad").innerHTML = localStorage.getItem("localidad");
-                document.getElementById("direccion").innerHTML = localStorage.getItem("direccion");
-                document.getElementById("conexion").innerHTML = localStorage.getItem("conexion");
-                document.getElementById("tarifa").innerHTML = localStorage.getItem("tarifa");
-                if(localStorage.getItem("medidor") != " "){
-                    document.getElementById("medidor").innerHTML = localStorage.getItem("medidor");
-                }else{
-                    document.getElementById("medidor").innerHTML = "NO CUENTA CON MEDIDOR"
-                }
-                document.getElementById("recibospendientes").innerHTML = localStorage.getItem("recibospendientes");
-                document.getElementById("notasdebito").innerHTML = localStorage.getItem("notasdebito");
-                document.getElementById("notascredito").innerHTML = localStorage.getItem("notascredito");
-                document.getElementById("deudacapital").innerHTML = localStorage.getItem("deudacapital");
-                document.getElementById("cuotasemitir").innerHTML = localStorage.getItem("cuotasemitir");
-                document.getElementById("tgastoscobranza").innerHTML = localStorage.getItem("tgastoscobranza");
-                //document.getElementById("interese").innerHTML = localStorage.getItem("interese");
-                //document.getElementById("totalinterese").innerHTML = localStorage.getItem("totalinterese");
-                document.getElementById("deudatotal").innerHTML = localStorage.getItem("deudatotal");
-                document.getElementById("fpago").innerHTML = localStorage.getItem("fecha") + " - " + localStorage.getItem("hora");
-
+            <script>       				
+				document.getElementById("suministro").innerHTML = localStorage.getItem("codigo_cliente");
+				document.getElementById("usuario").innerHTML = localStorage.getItem("nombre_cliente");
+				document.getElementById("localidad").innerHTML = localStorage.getItem("localidad");
+				document.getElementById("direccion").innerHTML = localStorage.getItem("direccion");
+				document.getElementById("conexion").innerHTML = "AGUA: <span style='color:#6EA976'>"+localStorage.getItem("estado_agua") + "</span> | DESAGUE: <span style='color:#6EA976'> "+localStorage.getItem("estado_agua")+"</span>";
+				document.getElementById("tarifa").innerHTML = localStorage.getItem("tarifa");
+				if(localStorage.getItem("medidor") != " "){
+					document.getElementById("medidor").innerHTML = localStorage.getItem("medidor");
+				}else{
+					document.getElementById("medidor").innerHTML = "NO CUENTA CON MEDIDOR"
+				}
+				document.getElementById("recibospendientes").innerHTML = localStorage.getItem("recibospendientes");
+				document.getElementById("notasdebito").innerHTML = localStorage.getItem("notasdebito");
+				document.getElementById("notascredito").innerHTML = localStorage.getItem("notascredito");
+				document.getElementById("deudacapital").innerHTML = localStorage.getItem("deudacapital");
+				document.getElementById("cuotasemitir").innerHTML = localStorage.getItem("cuotasemitir");
+				document.getElementById("tgastoscobranza").innerHTML = localStorage.getItem("tgastoscobranza");
+				document.getElementById("numreclamos").innerHTML = "Total: <span style='color:#6EA976'>" +
+					localStorage.getItem("numreclamos")+"</span> | Cerrados: <span style='color:#6EA976'>"+
+					localStorage.getItem("numreclamos_cerrados") + "</span> | Abiertos: <span style='color:#6EA976'>"+
+					(localStorage.getItem("numreclamos") - localStorage.getItem("numreclamos_cerrados"))+"</span>";
+				document.getElementById("fecha_conexion").innerHTML = "AGUA: <span style='color:#6EA976'>"+localStorage.getItem("estado_agua_fecha")+"</span> | DESAGÜE: <span style='color:#6EA976'>" + localStorage.getItem("estado_desagua_fecha")+"</span>";
+				document.getElementById("fecha_conexion").style.color ="#296fb7";
+				document.getElementById("numreclamos").style.color ="#296fb7";
+				document.getElementById("conexion").style.color ="#296fb7";
+				//document.getElementById("interese").innerHTML = localStorage.getItem("interese");
+				//document.getElementById("interese").innerHTML = localStorage.getItem("interese");
+				//document.getElementById("totalinterese").innerHTML = localStorage.getItem("totalinterese");
+				document.getElementById("deudatotal").innerHTML = localStorage.getItem("deudatotal");
+				document.getElementById("fpago").innerHTML = localStorage.getItem("fecha") + " - " + localStorage.getItem("hora");
+				if(localStorage.getItem("dias_transcurridos")>0 && localStorage.getItem('deuda_cliente') > 0){
+					document.getElementById("d_p").style.display = "block";
+					document.getElementById("dias_pago").innerHTML = localStorage.getItem("dias_transcurridos");
+				}else{
+					document.getElementById("d_p").style.display = "none";
+				}
             </script>
         </div>
     </div>
@@ -751,16 +771,15 @@
             <h5 id="rpdirec">Dirección: 
 				 <i id="rpdireccion"></i>
 			</h5>--><br>
-           <div style="background:#eee;padding:5px">
+           <div style="padding:5px;background:#eee">
                 <i id="rpfecha">La información aún no incluye los pagos realizados despúes  del 
                      <i id="fecha_actual1"></i>
                 <strong>Ignore la deuda  si está al día en sus pagos.</strong>
                 </i>
             </div>
-            <br>
             <p id="rpnumero">
                 <i>
-				 	<i id="cantidad_recibos"></i> Recibo(s) Pendiente(s) de pago
+				 	<i id="cantidad_recibos" style="color:#990000"></i> Recibo(s) Pendiente(s) de pago
                 </i>
                 <br>
                 <br>
