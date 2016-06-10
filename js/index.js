@@ -1646,7 +1646,7 @@ function verNoticia(id) {
     }
     var fileTransfer = new FileTransfer();
     var uri = encodeURI(pdf_noticia[id]);
-    var fileURL = '/sdcard/Download/';
+    var fileURL = '/sdcard/Download/20160520-3337976320.pdf';
 
     fileTransfer.download(
         uri,
