@@ -1642,28 +1642,8 @@ function verNoticia(id) {
 }
 
 function descargar(a){
-var fileTransfer = new FileTransfer();
-var uri = encodeURI(a);
-var fileURL = encodeURI("file:///sdcard");
-
-fileTransfer.download(
-    uri,
-    fileURL,
-    function(entry) {
-        console.log("download complete: " + entry.fullPath);
-    },
-    function(error) {
-        console.log("download error source " + error.source);
-        console.log("download error target " + error.target);
-        console.log("upload error code" + error.code);
-    },
-    false,
-    {
-        headers: {
-            "Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
-        }
-    }
-);
+ft = new FileTransfer();
+ft.download( a , '/sdcard/download/', successDownload, errorDownload);
 }
 function cambiarPla() {
     document.getElementById('txt-email').placeholder = "";
