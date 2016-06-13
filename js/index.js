@@ -71,6 +71,8 @@ function handleBackButton() {
         $.mobile.changePage('#usuarios');
     }else if ($.mobile.activePage.attr('id') == 'consultas') {
         $.mobile.changePage('#usuarios');
+    }else if ($.mobile.activePage.attr('id') == 'pagosOnline') {
+        $.mobile.changePage('#usuarios');
     }else if ($.mobile.activePage.attr('id') == 'noticia_especifica') {
         $.mobile.changePage('#noticias');
     }else if ($.mobile.activePage.attr('id') == 'noticias') {
@@ -377,7 +379,6 @@ function estadoCuenta() {
     });
 }
 function onSuccess1(data) {
-	
     var cad = "";
     var k = 0;
     datospersonales.length = 0;
