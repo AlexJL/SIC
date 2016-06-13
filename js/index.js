@@ -75,6 +75,8 @@ function handleBackButton() {
         $.mobile.changePage('#usuarios');
     }else if ($.mobile.activePage.attr('id') == 'noticia_especifica') {
         $.mobile.changePage('#noticias');
+    }else if ($.mobile.activePage.attr('id') == 'camara') {
+        $.mobile.changePage('#inicio');
     }else if ($.mobile.activePage.attr('id') == 'noticias') {
 		if(localStorage.getItem("noticias") == 1){
 			$.mobile.changePage('#noclientes');
