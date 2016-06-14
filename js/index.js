@@ -1620,10 +1620,20 @@ var cuerpo_noticia = new Array();
 var fecha_noticia = new Array();
 var imagen_noticia = new Array();
 var pdf_noticia = new Array();
+var vistas_noticia = new Array();
+var pk_noticia = new Array();
 
 function onSuccess611(data){
-    var cad1="",cad2="",cad3="",cad4="",cad5="",cad6="";
-    var k=0,p=0,k1=0,k2=0,k3=0,k4=0,k5=0;
+	titulo_noticia.length = 0;
+	subtitulo_noticia.length = 0;
+	cuerpo_noticia.length = 0;
+	fecha_noticia.length = 0;
+	imagen_noticia.length = 0;
+	pdf_noticia.length = 0;
+	vistas_noticia.length = 0;
+	pk_noticia.length = 0;
+    var cad1="",cad2="",cad3="",cad4="",cad5="",cad6="",cad7="",cad8="";
+    var k=0,p=0,k1=0,k2=0,k3=0,k4=0,k5=0,k6=0,k7=0;
     for(var i=0;i<data.length;i++){
         if(data.charAt(i)!='$' && p==0){
             cad1 = cad1 + data.charAt(i);
@@ -1632,12 +1642,16 @@ function onSuccess611(data){
         else if(data.charAt(i)!='$' && p==3){cad4 = cad4 + data.charAt(i);}
         else if(data.charAt(i)!='$' && p==4){cad5 = cad5 + data.charAt(i);}
         else if(data.charAt(i)!='$' && p==5){cad6 = cad6 + data.charAt(i);}
+        else if(data.charAt(i)!='$' && p==6){cad7 = cad7 + data.charAt(i);}
+        else if(data.charAt(i)!='$' && p==7){cad8 = cad8 + data.charAt(i);}
         else if(data.charAt(i)=='$' && p==0){titulo_noticia[k]=cad1;cad1="";i++;k++;p=1;}
         else if(data.charAt(i)=='$' && p==1){subtitulo_noticia[k1]=cad2;cad2="";i++;k1++;p=2;}
         else if(data.charAt(i)=='$' && p==2){cuerpo_noticia[k2]=cad3;cad3="";i++;k2++;p=3;}
         else if(data.charAt(i)=='$' && p==3){fecha_noticia[k3]=cad4;cad4="";i++;k3++;p=4}
         else if(data.charAt(i)=='$' && p==4){imagen_noticia[k4]=cad5;cad5="";i++;k4++;p=5;}
-        else if(data.charAt(i)=='$' && p==5){pdf_noticia[k5]=cad6;cad6="";i++;k5++;p=0;}
+        else if(data.charAt(i)=='$' && p==5){pdf_noticia[k5]=cad6;cad6="";i++;k5++;p=6;}
+        else if(data.charAt(i)=='$' && p==6){vistas_noticia[k6]=cad7;cad7="";i++;k6++;p=7;}
+        else if(data.charAt(i)=='$' && p==7){pk_noticia[k7]=parseInt(cad8);cad8="";i++;k7++;p=0;}
     }
     var div = document.getElementById("noticas_generales");
     for(var i=0;i<titulo_noticia.length;i++){
@@ -1660,9 +1674,17 @@ function onSuccess611(data){
         var td2 = document.createElement("td")
         td2.setAttribute("style","font-family: 'Yanone Kaffeesatz';text-shadow: none;")
         var td3 = document.createElement("td")
+		td3.setAttribute("colspan",2);
         td3.setAttribute("style","font-family: 'Yanone Kaffeesatz';color:#296fb7;text-shadow:none")
         var td4 = document.createElement("td")
+        var td41 = document.createElement("td")
+        td41.innerHTML = "N° Visitas: ";
+		var span = document.createElement("span")
+		span.innerHTML = vistas_noticia[i];
+		span.setAttribute("style","font-family: 'Yanone Kaffeesatz';text-shadow:none;color: #990000;")
         var btn = document.createElement("a")
+		td41.appendChild(span);
+		td41.setAttribute("style","font-family: 'Yanone Kaffeesatz';text-shadow:none")
         td4.appendChild(btn);
         td4.setAttribute("style","padding:15px;text-align: right;")
         btn.setAttribute("id",i);
@@ -1673,6 +1695,7 @@ function onSuccess611(data){
         td2.innerHTML = "Publicado : "+ fecha_noticia[i];
         tr1.appendChild(td2);
         tr2.appendChild(td3);
+        tr3.appendChild(td41);
         tr3.appendChild(td4);
         table.appendChild(tr1);
         table.appendChild(tr2);
@@ -1693,6 +1716,16 @@ function onSuccess611(data){
     });
 }
 function verNoticia(id) {
+	$.ajax({
+        type: "POST",
+        url: "http://pekin.sedalib.com.pe:90/SIC/actualizar_noticias.php",
+        data: "cod="+pk_noticia[id],
+        cache: false,
+        dataType: "text",
+        success: function(data){
+			
+		}
+    });
     $.mobile.changePage("#noticia_especifica", {
         transition: "",
         reverse: true,

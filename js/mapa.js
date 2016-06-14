@@ -29,8 +29,30 @@ postionLongitud[7] = -79.00881; //Agencia Moche
 postionLongitud[8] = -79.4364685; //Agencia Puerto Malabrigo
 postionLongitud[9] = -78.9762672; //Agencia Salaverry
 var ruta = new Array();
+var metodo = "walking";
+
+function reFresh(a) {
+	metodo = a;
+	
+	if(a == "walking"){
+		swal("Método de Movilidad: Caminando");
+		document.getElementById("btn_caminar").disabled = true;
+		document.getElementById("btn_caminar").style.background = "#9b9ea2"
+		document.getElementById("btn_auto").disabled = false;
+		document.getElementById("btn_auto").style.background = "#6EA976";
+	}else if(a == "driving"){
+		swal("Método de Movilidad: En Auto");
+		document.getElementById("btn_auto").disabled = true;
+		document.getElementById("btn_auto").style.background = "#9b9ea2";
+		document.getElementById("btn_caminar").disabled = false;
+		document.getElementById("btn_caminar").style.background = "#296fb7"
+	}
+}
+
 // función para cargar el mapa
 $(document).ready(function () {
+	document.getElementById("btn_caminar").disabled = true;
+		document.getElementById("btn_caminar").style.background = "#9b9ea2"
     document.getElementById("map").style.display = "block";
     document.getElementById("map").style.height = altoCadena;
     map = new GMaps({
@@ -61,7 +83,7 @@ $(document).ready(function () {
             map.travelRoute({
                 origin: [latitud, longitud],
                 destination: [postionLatitud[0], postionLongitud[0]],
-                travelMode: 'driving',
+                travelMode: metodo,
                 step: function (e) {
                     $('#instructions').append('<li>' + e.instructions + '</li>');
                     ruta.push(e.instructions);
@@ -110,7 +132,7 @@ $(document).ready(function () {
             map.travelRoute({
                 origin: [latitud, longitud],
                 destination: [postionLatitud[1], postionLongitud[1]],
-                travelMode: 'driving',
+                travelMode: metodo,
                 step: function (e) {
                     $('#instructions').append('<li>' + e.instructions + '</li>');
                     $('#instructions li:eq(' + e.step_number + ')').delay(550 * e.step_number).fadeIn(200, function () {
@@ -159,7 +181,7 @@ $(document).ready(function () {
             map.travelRoute({
                 origin: [latitud, longitud],
                 destination: [postionLatitud[2], postionLongitud[2]],
-                travelMode: 'driving',
+                travelMode: metodo,
                 step: function (e) {
                     $('#instructions').append('<li>' + e.instructions + '</li>');
                     $('#instructions li:eq(' + e.step_number + ')').delay(550 * e.step_number).fadeIn(200, function () {
@@ -208,7 +230,7 @@ $(document).ready(function () {
             map.travelRoute({
                 origin: [latitud, longitud],
                 destination: [postionLatitud[3], postionLongitud[3]],
-                travelMode: 'driving',
+                travelMode: metodo,
                 step: function (e) {
                     $('#instructions').append('<li>' + e.instructions + '</li>');
                     $('#instructions li:eq(' + e.step_number + ')').delay(550 * e.step_number).fadeIn(200, function () {
@@ -257,7 +279,7 @@ $(document).ready(function () {
             map.travelRoute({
                 origin: [latitud, longitud],
                 destination: [postionLatitud[4], postionLongitud[4]],
-                travelMode: 'driving',
+                travelMode: metodo,
                 step: function (e) {
                     $('#instructions').append('<li>' + e.instructions + '</li>');
                     $('#instructions li:eq(' + e.step_number + ')').delay(550 * e.step_number).fadeIn(200, function () {
@@ -306,7 +328,7 @@ $(document).ready(function () {
             map.travelRoute({
                 origin: [latitud, longitud],
                 destination: [postionLatitud[7], postionLongitud[7]],
-                travelMode: 'driving',
+                travelMode: metodo,
                 step: function (e) {
                     $('#instructions').append('<li>' + e.instructions + '</li>');
                     $('#instructions li:eq(' + e.step_number + ')').delay(550 * e.step_number).fadeIn(200, function () {
@@ -355,7 +377,7 @@ $(document).ready(function () {
             map.travelRoute({
                 origin: [latitud, longitud],
                 destination: [postionLatitud[8], postionLongitud[8]],
-                travelMode: 'driving',
+                travelMode: metodo,
                 step: function (e) {
                     $('#instructions').append('<li>' + e.instructions + '</li>');
                     $('#instructions li:eq(' + e.step_number + ')').delay(550 * e.step_number).fadeIn(200, function () {
@@ -403,7 +425,7 @@ $(document).ready(function () {
             map.travelRoute({
                 origin: [latitud, longitud],
                 destination: [postionLatitud[9], postionLongitud[9]],
-                travelMode: 'driving',
+                travelMode: metodo,
                 step: function (e) {
                     $('#instructions').append('<li>' + e.instructions + '</li>');
                     $('#instructions li:eq(' + e.step_number + ')').delay(550 * e.step_number).fadeIn(200, function () {
@@ -452,7 +474,7 @@ $(document).ready(function () {
             map.travelRoute({
                 origin: [latitud, longitud],
                 destination: [postionLatitud[5], postionLongitud[5]],
-                travelMode: 'driving',
+                travelMode: metodo,
                 step: function (e) {
                     $('#instructions').append('<li>' + e.instructions + '</li>');
                     $('#instructions li:eq(' + e.step_number + ')').delay(550 * e.step_number).fadeIn(200, function () {
@@ -500,7 +522,7 @@ $(document).ready(function () {
             map.travelRoute({
                 origin: [latitud, longitud],
                 destination: [postionLatitud[6], postionLongitud[6]],
-                travelMode: 'driving',
+                travelMode: metodo,
                 step: function (e) {
                     $('#instructions').append('<li>' + e.instructions + '</li>');
                     $('#instructions li:eq(' + e.step_number + ')').delay(550 * e.step_number).fadeIn(200, function () {
