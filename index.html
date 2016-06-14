@@ -74,7 +74,7 @@
                 <td style="text-align: center;width:33%">
                     <a href="tel:044480555" style="text-decoration:none">
                         <img src="img/call.png" width="64" height="64">
-                        <h4 style="margin-top: 5px;font-family: 'Yanone Kaffeesatz'">Consultas</h4>
+                        <h4 style="margin-top: 5px;font-family: 'Yanone Kaffeesatz'">FonoLib</h4>
                     </a>
                 </td>
                 <td style="text-align: center;width:33%">
@@ -91,7 +91,7 @@
                 </td>
             </tr>
         </table>
-		<a href="intent://send/986859308#Intent;scheme=smsto;package=com.whatsapp;action=android.intent.action.SENDTO;end">enviar</a>
+		
         <div id="footer">
             <h5>Sedalib&copy; - Todos los Derechos Reservados 2016</h5>
         </div>
@@ -475,6 +475,7 @@
                     </th>
                 </tr>
             </table>
+            <h4 style="color:#296fb7;font-family: 'Yanone Kaffeesatz';"><span style="color:#FF0000">Nota: </span>Si tiene mas de 1 día sin pagar despues de la fecha de vencimiento, tendra gastos administrativos y moratorios.</h4>
         </div>
         <!-- /content -->
 
@@ -601,6 +602,12 @@
                     <i class="subnota1">Medidor</i>
                     <STRONG>
 						<i class="subnota2" id="medidor"></i>
+					</STRONG>
+                </p>
+                <p class="nota1" >
+                	<i class="subnota1">N° Recibos Pendientes</i>
+                    <STRONG>
+						<i class="subnota2" id="num_recibos_pendientes1"></i>
 					</STRONG>
                 </p>
                 <p class="nota1" id="d_p">
@@ -731,6 +738,7 @@
 				//document.getElementById("interese").innerHTML = localStorage.getItem("interese");
 				//document.getElementById("totalinterese").innerHTML = localStorage.getItem("totalinterese");
 				document.getElementById("deudatotal").innerHTML = localStorage.getItem("deudatotal");
+				document.getElementById("num_recibos_pendientes1").innerHTML = localStorage.getItem("cantidad_cliente");
 				document.getElementById("fpago").innerHTML = localStorage.getItem("fecha") + " - " + localStorage.getItem("hora");
 				if(localStorage.getItem("dias_transcurridos")>0 && localStorage.getItem('deuda_cliente') > 0){
 					document.getElementById("d_p").style.display = "block";
@@ -765,6 +773,10 @@
                    <td style="border-bottom: 1px solid;padding: 5px 4px;width:15%">Dirección: </td>
                    <td style="border-bottom: 1px solid;color: #00207E"><i id="rpdireccion" style="font-style: normal;"></i></td>
                </tr>
+               <tr>
+               		<td style="border-bottom: 1px solid;padding: 5px 4px;width:15%">Suministro: </td>
+               		<td style="border-bottom: 1px solid;color: #00207E"><i id="rp_cli" style="font-style: normal;"></i></td>
+               </tr>
            </table>
             <!--<h5 id="rpusuario">Cliente: 
                  <i id="rpcliente"></i>
@@ -792,6 +804,7 @@
                 document.getElementById('fecha_actual1').innerHTML = localStorage.getItem('clifecha') + " - " + localStorage.getItem("clihora");
                 document.getElementById('rpcliente').innerHTML = localStorage.getItem("clinombre");
                 document.getElementById('rpdireccion').innerHTML = localStorage.getItem("clidireccion");
+                document.getElementById('rp_cli').innerHTML = localStorage.getItem("codigo_cliente");
 
             </script>
             <div id="recibos-pen">
@@ -824,6 +837,10 @@
                        <i id="cdireccion" style="font-style: normal;"></i>
                    </td>
                </tr>
+               <tr>
+               		<td style="border-bottom: 1px solid;padding: 5px 4px;width:15%">Suministro: </td>
+               		<td style="border-bottom: 1px solid;color: #00207E"><i id="con_cli" style="font-style: normal;"></i></td>
+               </tr>
            </table><br>
             <!--<h5 id="cusuario">Cliente: 
 				 <i id="ccliente"></i>
@@ -840,6 +857,7 @@
             <script>
                 document.getElementById("ccliente").innerHTML = localStorage.getItem("clinombre");
                 document.getElementById("cdireccion").innerHTML = localStorage.getItem("clidireccion");
+                document.getElementById("con_cli").innerHTML = localStorage.getItem("codigo_cliente");
                 document.getElementById("fecha_actual3").innerHTML = localStorage.getItem("clifecha") + "-" + localStorage.getItem("clihora");
 
             </script>
@@ -873,6 +891,10 @@
                        <i id="cedireccion" style="font-style: normal;"></i>
                    </td>
                </tr>
+               <tr>
+               		<td style="border-bottom: 1px solid;padding: 5px 4px;width:15%">Suministro: </td>
+               		<td style="border-bottom: 1px solid;color: #00207E"><i id="ce_cli" style="font-style: normal;"></i></td>
+               </tr>
            </table><br><!--
             <h5 id="ceusuario">Cliente: 
 				 <i id="cecliente"></i>
@@ -889,6 +911,7 @@
             <script>
                 document.getElementById('fecha_actual2').innerHTML = localStorage.getItem('fecha_actualizacion') + " - " + localStorage.getItem("hora_actualizacion");
                 document.getElementById('cecliente').innerHTML = localStorage.getItem("nombre_cliente");
+                document.getElementById('ce_cli').innerHTML = localStorage.getItem("codigo_cliente");
                 document.getElementById('cedireccion').innerHTML = localStorage.getItem("direccion_cliente");
 
             </script>
@@ -975,6 +998,10 @@
                        <i id="rdireccion" style="font-style: normal;"></i>
                    </td>
                </tr>
+               <tr>
+               		<td style="border-bottom: 1px solid;padding: 5px 4px;width:15%">Suministro: </td>
+               		<td style="border-bottom: 1px solid;color: #00207E"><i id="recla_cli" style="font-style: normal;"></i></td>
+               </tr>
            </table><br><!--
             <h5 id="rusuario">Cliente: 
 				 <i id="rcliente"></i>
@@ -991,6 +1018,7 @@
             <script>
                 document.getElementById("rcliente").innerHTML = localStorage.getItem("clinombre");
                 document.getElementById("rdireccion").innerHTML = localStorage.getItem("clidireccion");
+                document.getElementById("recla_cli").innerHTML = localStorage.getItem("codigo_cliente");
                 document.getElementById("fecha_actual4").innerHTML = localStorage.getItem("clifecha") + "-" + localStorage.getItem("clihora");
 
             </script>
@@ -1024,6 +1052,10 @@
                        <i id="pdireccion" style="font-style: normal;"></i>
                    </td>
                </tr>
+               <tr>
+               		<td style="border-bottom: 1px solid;padding: 5px 4px;width:15%">Suministro: </td>
+               		<td style="border-bottom: 1px solid;color: #00207E"><i id="hp_cli" style="font-style: normal;"></i></td>
+               </tr>
            </table><br><!--
             <h5 id="pusuario">Cliente: 
 				 <i id="pcliente"></i>
@@ -1040,17 +1072,35 @@
             <p id="leyenda">
                 <span>LEYENDA</span>
                 <br>
-                <span><button data-role="none" id="button"></button><span>Recibos Pagados despúes de laFecha Vencimiento.</span></span>
+                <span><button data-role="none" id="button"></button><span>Recibos Pagados despúes de la Fecha Vencimiento.</span></span>
                 <br>
                 <span><button data-role="none" id="button2"></button><span>Recibos Pagados a tiempo.</span></span>
             </p>
             <script>
                 document.getElementById("pcliente").innerHTML = localStorage.getItem("clinombre");
                 document.getElementById("pdireccion").innerHTML = localStorage.getItem("clidireccion");
+                document.getElementById("hp_cli").innerHTML = localStorage.getItem("codigo_cliente");
                 document.getElementById("fecha_actual5").innerHTML = localStorage.getItem("clifecha") + "-" + localStorage.getItem("clihora");
 
             </script>
-            <p id="numeropagos"><span id="numpagos"></span> pagos realizados</p>
+            <table style="width: 100%;background: beige;font-family: 'Yanone Kaffeesatz';">
+            	<tr>
+            		<td style="border-bottom: 1px solid;padding: 5px 4px;width:80%;padding-left: 20px;">N° Recibos Pagados </td>
+            		<td style="border-bottom: 1px solid;color: #00207E;text-align:right" id="numpagos"></td>
+            	</tr
+            	<tr>
+            		<td style="border-bottom: 1px solid;padding: 5px 4px;width:80%;padding-left: 20px;">N° Recibos Pagados a tiempo</td>
+            		<td style="border-bottom: 1px solid;color: #00207E;text-align:right" id="pag_tiempo"></td>
+            	</tr>
+            	<tr>
+            		<td style="border-bottom: 1px solid;padding: 5px 4px;width:80%;padding-left: 20px;">N° Recibos Pagados despúes de la Fecha Vencimiento</td>
+            		<td style="border-bottom: 1px solid;color: #00207E;text-align:right"  id="pag_destiempo"></td>
+            	</tr>
+            	<tr>
+					<td style="border-bottom: 1px solid;padding: 5px 4px;width:80%;padding-left: 20px;">Porcentaje de Puntualidad (%)</td>
+           			<td  style="border-bottom: 1px solid;color: #00207E;text-align:right" id="por_puntualidad"></td>
+            	</tr>
+            </table><br>
             <table id="tabla5"></table>
         </div>
     </div>
@@ -1151,5 +1201,4 @@
         </div>
     </div>
 </body>
-
 </html>

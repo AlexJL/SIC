@@ -64,9 +64,9 @@ function onPhotoURISuccess(imageURI) {
 
 function enviarFoto(URIimg) {
     enviarPosicion();
-    var nombreArchivo = prompt("Ingrese un nombre para la imagen", "");
+    var nombreArchivo = prompt("Ingrese una descripción a la imagen", "");
     while (nombreArchivo == "") {
-        var nombreArchivo = prompt("Ingrese un nombre para la imagen", "");
+        var nombreArchivo = prompt("Ingrese una descripción a la imagen", "");
     }
 
     var opciones = new FileUploadOptions();

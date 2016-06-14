@@ -38,17 +38,6 @@
         <script type="text/javascript" src="js/sweetalert.min.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script>
-			function onLoad() {
-				document.addEventListener("deviceready", onDeviceReady, true);
-			}
-			function onDeviceReady() {
-				document.addEventListener("backbutton", handleBackButton, true);
-			}
-			function handleBackButton() {
-				if ($.mobile.activePage.attr('id') == 'camara') {
-					$.mobile.changePage('index.html#inicio');
-				}
-			}
             swal("Denuncias", "A traves de la presente opción Ud. podra efectuar alguna denuncia por el uso irregular del servicio de Agua, alcantarillado y otras observaciones vinculadas con el servicio. La denuncia tendra caracter Anónimo")
             longitud="";
             latitud="";

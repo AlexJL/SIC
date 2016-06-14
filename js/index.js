@@ -170,7 +170,10 @@ function login() {
         data: "correo=" + email + "&contrasenia=" + password,
         cache: false,
         dataType: "text",
-        success: onSuccess
+        success: onSuccess,
+		error: function(jqXHR, textStatus, errorThrown){
+			swal("Lo sentimos!", "Nuestros Servidores se encuentran en mantenimiento. \n Intente nuevamente en 30 min. Gracias", "error")
+			}
     });
 }
 function onSuccess(data) {
@@ -459,6 +462,7 @@ function onSuccess1(data) {
     //document.getElementById("interese").innerHTML = localStorage.getItem("interese");
     //document.getElementById("totalinterese").innerHTML = localStorage.getItem("totalinterese");
     document.getElementById("deudatotal").innerHTML = localStorage.getItem("deudatotal");
+    document.getElementById("num_recibos_pendientes1").innerHTML = localStorage.getItem("cantidad_cliente");
     document.getElementById("fpago").innerHTML = localStorage.getItem("fecha") + " - " + localStorage.getItem("hora");
     if(localStorage.getItem("dias_transcurridos")>0 && localStorage.getItem('deuda_cliente') > 0){
         document.getElementById("d_p").style.display = "block";
@@ -946,6 +950,7 @@ function onSuccess5(data) {
         }
         document.getElementById("ccliente").innerHTML = localStorage.getItem("nombre_cliente");
         document.getElementById("cdireccion").innerHTML = localStorage.getItem("direccion_cliente");
+		document.getElementById("con_cli").innerHTML = localStorage.getItem("codigo_cliente");
         document.getElementById("fecha_actual3").innerHTML = localStorage.getItem("fecha_actualizacion") + "-" + localStorage.getItem("hora_actualizacion");
         location.href = "#consumo";
     }
@@ -1120,6 +1125,7 @@ function onSuccess4(data) {
         document.getElementById('fecha_actual2').innerHTML = localStorage.getItem('fecha_actualizacion') + " - " + localStorage.getItem("hora_actualizacion");
         document.getElementById('cecliente').innerHTML = localStorage.getItem("nombre_cliente");
         document.getElementById('cedireccion').innerHTML = localStorage.getItem("direccion_cliente");
+		document.getElementById('ce_cli').innerHTML = localStorage.getItem("codigo_cliente");
         location.href = "#cuotasxemitir";
     }
 }
@@ -1369,7 +1375,7 @@ function onSuccess6(data) {
             p11.setAttribute('class',"monto_reclamo")
             var i15 = document.createElement("i");
             i15.setAttribute("class","monto_reclamo1")
-            i15.innerHTML = "Monto Estancado";
+            i15.innerHTML = "Valor Reclamado";
             var i16 = document.createElement("i");
             i16.setAttribute("class", "monto_reclamo2");
             i16.innerHTML = "S./ "+total_estancado[tra];
@@ -1414,7 +1420,7 @@ function onSuccess6(data) {
                 p14.setAttribute('class',"monto_reclamo_pago")
                 var i21 = document.createElement("i");
                 i21.setAttribute("class","monto_reclamo_pago1")
-                i21.innerHTML = "Monto Obtenido";
+                i21.innerHTML = "Valor Pagado";
                 var i22 = document.createElement("i");
                 i22.setAttribute("class", "monto_reclamo_pago2");
                 if(neto_obtenido[tra]<0){
@@ -1446,7 +1452,7 @@ function onSuccess6(data) {
         }
         document.getElementById("rcliente").innerHTML = localStorage.getItem("nombre_cliente");
         document.getElementById("rdireccion").innerHTML = localStorage.getItem("direccion_cliente");
-        
+        document.getElementById("recla_cli").innerHTML = localStorage.getItem("codigo_cliente");
         document.getElementById("fecha_actual4").innerHTML = localStorage.getItem("fecha_actualizacion") + "-" + localStorage.getItem("hora_actualizacion");
     location.href = "#reclamos";
     }     
@@ -1477,6 +1483,8 @@ function hpagos() {
     });
 }
 function onSuccess7(data) {
+	var cont = 0;
+	var cont1 = 0;
     if (data == "") {
         swal("No tiene Pagos Registrados")
     } else {
@@ -1558,8 +1566,10 @@ function onSuccess7(data) {
                     //cambiarColor(cad1, cad2, sum);
                     if(aaa<0){
                         $("#fila"+sum).css("background","#FFFFBF")
+						cont++;
                     }else{
                         $("#fila"+sum).css("background","rgba(236, 245, 255, .9)")
+						cont1++
                     }
                     cad1 = "";
                     cad2 = "";
@@ -1574,7 +1584,12 @@ function onSuccess7(data) {
         document.getElementById('numpagos').innerHTML = sum;
         document.getElementById("pcliente").innerHTML = localStorage.getItem("nombre_cliente");
         document.getElementById("pdireccion").innerHTML = localStorage.getItem("direccion_cliente");
+		document.getElementById("hp_cli").innerHTML = localStorage.getItem("codigo_cliente");
         document.getElementById("fecha_actual5").innerHTML = localStorage.getItem("fecha_actualizacion") + "-" + localStorage.getItem("hora_actualizacion");
+		document.getElementById('rp_cli').innerHTML = localStorage.getItem("codigo_cliente");
+		document.getElementById('pag_tiempo').innerHTML = cont1;
+		document.getElementById('pag_destiempo').innerHTML = cont;
+		document.getElementById('por_puntualidad').innerHTML = (Math.round((cont1*100/sum)*100)/100) + "%";		
         location.href = "#historicopagos";
     }
 }
@@ -1721,6 +1736,7 @@ function descargar(id){
             console.log("download complete: " + entry.fullPath);
             //alert(entry.fullPath);
 			swal({   title: "",   text: "Descarga Completa, Revise su carpeta de descargas!",   timer: 3000,   showConfirmButton: false });
+			window.open('file:///sdcard/Download/'+aux1, '_system', 'location=yes');
         },
         function(error) {
             console.log("download error source " + error.source);
