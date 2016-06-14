@@ -162,10 +162,6 @@
     color: #FFF;
     background: #296fb7;
     text-shadow: none;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-direction: column;
     text-align: center;
     font-family: 'Yanone Kaffeesatz';
     font-size: 22px;
