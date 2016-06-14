@@ -799,16 +799,149 @@
             </p>
             <br>
             <br>
-            <script>
-                document.getElementById('cantidad_recibos').innerHTML = localStorage.getItem("clicantidad");
-                document.getElementById('fecha_actual1').innerHTML = localStorage.getItem('clifecha') + " - " + localStorage.getItem("clihora");
-                document.getElementById('rpcliente').innerHTML = localStorage.getItem("clinombre");
-                document.getElementById('rpdireccion').innerHTML = localStorage.getItem("clidireccion");
-                document.getElementById('rp_cli').innerHTML = localStorage.getItem("codigo_cliente");
-
-            </script>
             <div id="recibos-pen">
             </div>
+            <script>
+                document.getElementById('cantidad_recibos').innerHTML = localStorage.getItem("clicantidad");
+                document.getElementById('fecha_actual1').innerHTML = localStorage.getItem('fecha_actualizacion') + " - " + localStorage.getItem("hora_actualizacion");
+                document.getElementById('rpcliente').innerHTML = localStorage.getItem("nombre_cliente");
+                document.getElementById('rpdireccion').innerHTML = localStorage.getItem("direccion_cliente");
+                document.getElementById('rp_cli').innerHTML = localStorage.getItem("codigo_cliente");
+				if(localStorage.getItem("var1")){
+					var variable1 = new Array();
+					var variable2 = new Array();
+					var variable3 = new Array();
+					var variable4 = new Array();
+					var variable5 = new Array();
+					var variable6 = new Array();
+					var div = document.getElementById('recibos-pen');
+					variable1= JSON.parse(localStorage.getItem("var1"));
+					variable2= JSON.parse(localStorage.getItem("var2"));
+					variable3= JSON.parse(localStorage.getItem("var3"));
+					variable4= JSON.parse(localStorage.getItem("var4"));
+					variable5= JSON.parse(localStorage.getItem("var5"));
+					variable6= JSON.parse(localStorage.getItem("var6"));
+					for (var j = 0; j < variable1.length; j++) {
+						var div3 = document.createElement("div");
+						div3.setAttribute("class","div_recibos")
+						var color = "";
+						if(j%2==0){
+							color = "background:#eee;margin-bottom:10px;padding-left: 10px;padding-bottom: 30px;padding-top: 10px;padding-right: 10px;";
+						}else{
+							color = "background:#ffffff;margin-bottom:10px;padding-left: 10px;padding-bottom: 30px;padding-top: 10px;padding-right: 10px;";
+						}
+						div3.setAttribute("style",color)
+					
+						/****************** Docuemnto nro -- *************/
+						var p3 = document.createElement("p");
+						p3.setAttribute('class', 'numero-docum');
+						var f123 = subcadena1(variable3[j]);
+						p3.innerHTML = "DOCUMENTO N° " + (j + 1) + " - Período: "+f123;
+						var hr1 = document.createElement("hr");
+						hr1.setAttribute('class', 'bajo-doc');
+						div3.appendChild(p3);
+						div3.appendChild(hr1);
+						
+						/****************** Nro del Recibo ***************/
+						var p4 = document.createElement("p");
+						p4.setAttribute('class', 'num-rec');
+						var i1 = document.createElement("i");
+						i1.setAttribute('class', 'num-rec1')
+						i1.innerHTML = "Nro de Recibo";
+						var i2 = document.createElement("i");
+						i2.setAttribute('class', 'num-rec2')
+						i2.innerHTML = variable1[j];
+						p4.appendChild(i1);
+						p4.appendChild(i2);
+						div3.appendChild(p4);
+						
+						/*************** Total Recibo **********************/
+						var p5 = document.createElement("p");
+						p5.setAttribute('class', 'monto-rec');
+						var i3 = document.createElement("i");
+						i3.setAttribute('class', 'monto-rec1');
+						i3.innerHTML = "Total";
+						var i4 = document.createElement("i");
+						i4.setAttribute("class", "monto-rec2");
+						i4.innerHTML = "S./ " + variable2[j];
+						p5.appendChild(i3);
+						p5.appendChild(i4);
+						div3.appendChild(p5);
+						
+						/************* Fecha Emision ***********************/
+						var p6 = document.createElement("p");
+						p6.setAttribute('class', 'femi-rec');
+						var i5 = document.createElement("i");
+						i5.setAttribute('class', 'femi-rec1');
+						i5.innerHTML = "Fecha Emisión";
+						var i6 = document.createElement("i");
+						i6.setAttribute("class", "femi-rec2");
+						i6.innerHTML = variable3[j];
+						p6.appendChild(i5);
+						p6.appendChild(i6);
+						div3.appendChild(p6);
+						
+						/************* Fecha Vencimiento ***********************/
+						var p7 = document.createElement("p");
+						p7.setAttribute('class', 'fven-rec');
+						var i7 = document.createElement("i");
+						i7.setAttribute('class', 'fven-rec1');
+						i7.innerHTML = "Fecha Vencimiento";
+						var i8 = document.createElement("i");
+						i8.setAttribute("class", "fven-rec2");
+						i8.innerHTML = variable4[j];
+						p7.appendChild(i7);
+						p7.appendChild(i8);
+						div3.appendChild(p7);
+						
+						/************* Dias Transcurridos *******************/
+						if(variable5[j]>0){
+							var p8 = document.createElement("p");
+							p8.setAttribute('class',"dias_trans")
+							var i9 = document.createElement("i");
+							i9.setAttribute("class","dias_trans1")
+							i9.innerHTML = "Días transcurridos sin pagar";
+							var i10 = document.createElement("i");
+							i10.setAttribute("class", "dias_trans2");
+							i10.innerHTML = variable5[j] + " dias";
+							p8.appendChild(i9);
+							p8.appendChild(i10);
+							div3.appendChild(p8);
+						}
+						
+						
+						if(variable6[j]>0){
+							var p9 = document.createElement("p");
+							p9.setAttribute('class',"nota_credito")
+							var i11 = document.createElement("i");
+							i11.setAttribute("class","nota_credito1")
+							i11.innerHTML = "Nota Crédito Asociada";
+							var i12 = document.createElement("i");
+							i12.setAttribute("class", "nota_credito2");
+							i12.innerHTML = "S./ - " + variable6[j];
+							p9.appendChild(i11);
+							p9.appendChild(i12);
+							div3.appendChild(p9);
+						}
+						
+						div.appendChild(div3);
+					}
+					document.getElementById('cantidad_recibos').innerHTML = variable1.length;
+					localStorage.removeItem("var1");
+					localStorage.removeItem("var2");
+					localStorage.removeItem("var3");
+					localStorage.removeItem("var4");
+					localStorage.removeItem("var5");
+					localStorage.removeItem("var6");
+				}
+            </script>
+            
+            <table width="100%">
+            	<tr>
+            		<td width="50%" style="text-align: center;"><a style="text-decoration:none;font-family: 'Yanone Kaffeesatz';" href="" onclick="dondepagar(4)"><img style="width: 64px;height: 64px;" src="img/pagos.png" alt=""><h3>¿Dondé Pagar?</h3></a></td>
+            		<td width="50%" style="text-align: center;"><a style="text-decoration:none;font-family: 'Yanone Kaffeesatz';" href="" onclick="mapa(4)"><img style="width: 64px;height: 64px;" src="img/map1.png" alt=""><h3>Lugares Atención</h3></a></td>
+            	</tr>
+            </table>
         </div>
     </div>
     <!--
@@ -1014,7 +1147,7 @@
                      <i id="fecha_actual4"></i>
                 <strong>Ignore la deuda  si está al día en sus pagos.</strong>
                 </i>
-            </div>
+            </div><br>
             <script>
                 document.getElementById("rcliente").innerHTML = localStorage.getItem("clinombre");
                 document.getElementById("rdireccion").innerHTML = localStorage.getItem("clidireccion");
@@ -1022,7 +1155,24 @@
                 document.getElementById("fecha_actual4").innerHTML = localStorage.getItem("clifecha") + "-" + localStorage.getItem("clihora");
 
             </script>
-            <p id="numeroreclamos"><span id="numreclamos1"></span> reclamos realizados</p>
+             <table  style="width: 100%;background: beige;font-family: 'Yanone Kaffeesatz';">
+            	<tr>
+            		<td style="border-bottom: 1px solid;padding: 5px 4px" colspan="2">Cantidad de Reclamos</td>
+            		<td style="border-bottom: 1px solid;color: #00207E" colspan="2" id="recla_num"></td>
+            	</tr>
+            	<tr>
+            		<td style="border-bottom: 1px solid;padding: 5px 4px">Reclamos Cerrados</td>
+            		<td style="border-bottom: 1px solid;color: #00207E" id="recla_cerrados"></td>
+            		<td style="border-bottom: 1px solid;padding: 5px 4px">Monto Fundado</td>
+            		<td style="border-bottom: 1px solid;color: #00207E" id="recla_fundado"></td>
+            	</tr>
+            	<tr>
+            		<td style="border-bottom: 1px solid;padding: 5px 4px">Reclamos Abiertos</td>
+            		<td style="border-bottom: 1px solid;color: #00207E" id="recla_abierto"></td>
+            		<td style="border-bottom: 1px solid;padding: 5px 4px">Monto Infundado</td>
+            		<td style="border-bottom: 1px solid;color: #00207E" id="recla_infundado"></td>
+            	</tr>
+            </table>
             <div id="reclamos_obtenidos"></div>
         </div>
     </div>

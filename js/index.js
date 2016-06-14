@@ -136,6 +136,14 @@ function camara(a) {
 function mapa(a) {
     localStorage.setItem("mapa", a);
     location.href = "pages/mapa.html";
+	if(a == 4){
+		localStorage.setItem("var1",JSON.stringify(numeroRecibos))
+		localStorage.setItem("var2",JSON.stringify(totalRecibos))
+		localStorage.setItem("var3",JSON.stringify(femiRecibos))
+		localStorage.setItem("var4",JSON.stringify(fvenRecibos))
+		localStorage.setItem("var5",JSON.stringify(dias_recibos))
+		localStorage.setItem("var6",JSON.stringify(nc))
+	}
 }
 /**
  **
@@ -1249,7 +1257,11 @@ function onSuccess6(data) {
             else if(data.charAt(i) == '$' && p ==7){r8[k8] = cad8;k8++;cad8="";i++;p=8}
             else if(data.charAt(i) == '$' && p ==8){r9[k9] = cad9;k9++;cad9="";i++;p=0;z++}
         }
-        document.getElementById("numreclamos1").innerHTML = z;
+        document.getElementById("recla_num").innerHTML = z;
+		var cont = 0;
+		var cont1 = 0;
+		var fundado = 0;
+		var infundado = 0;
         for(var j =0 ;j<z;j++){
 			var div = document.createElement("div");
 			div.setAttribute("class","div_recibos")
@@ -1415,6 +1427,7 @@ function onSuccess6(data) {
                 div.appendChild(p13);
             }
             /************** Monto Pagado ***********************/
+			var ayuda;
             if(r6[j] == "CERRADO"){
                 var p14 = document.createElement("p");
                 p14.setAttribute('class',"monto_reclamo_pago")
@@ -1425,8 +1438,10 @@ function onSuccess6(data) {
                 i22.setAttribute("class", "monto_reclamo_pago2");
                 if(neto_obtenido[tra]<0){
                     i22.innerHTML = "S./ 0.00";
+					ayuda = 0;
                 }else{
                     i22.innerHTML = "S./ "+neto_obtenido[tra];
+					ayuda = neto_obtenido[tra];
                 }
                 p14.appendChild(i21);
                 p14.appendChild(i22);
@@ -1446,11 +1461,19 @@ function onSuccess6(data) {
             div2.appendChild(div);
 			if(r6[j] == "CERRADO"){
                  $("#estado_reclamo2"+j).css("color","#FF0000")
+				 cont++;
+				fundado += ayuda; 
             }else{
                 $("#estado_reclamo2"+j).css("color","#4caf50")
+				cont1++;
+				infundado += total_estancado[tra];
             }
         }
         document.getElementById("rcliente").innerHTML = localStorage.getItem("nombre_cliente");
+        document.getElementById("recla_cerrados").innerHTML = cont;
+        document.getElementById("recla_infundado").innerHTML = "S/. " + Math.round(infundado*100)/100;
+        document.getElementById("recla_fundado").innerHTML = "S/. " + Math.round(fundado*100)/100;
+        document.getElementById("recla_abierto").innerHTML = cont1;
         document.getElementById("rdireccion").innerHTML = localStorage.getItem("direccion_cliente");
         document.getElementById("recla_cli").innerHTML = localStorage.getItem("codigo_cliente");
         document.getElementById("fecha_actual4").innerHTML = localStorage.getItem("fecha_actualizacion") + "-" + localStorage.getItem("hora_actualizacion");
@@ -1937,6 +1960,8 @@ function regresar98() {
         location.href = "#noclientes";
     } else if(localStorage.getItem("dondepagar")==3){
         location.href = "#inicio";
+    } else if(localStorage.getItem("dondepagar")==4){
+        location.href = "#recibospendientes1";
     }
 }
 function cambiarPass(){

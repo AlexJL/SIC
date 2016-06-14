@@ -615,5 +615,9 @@ function regresar() {
         location.href = "../index.html#noclientes";
     } else if (localStorage.getItem("mapa") == 3) {
         location.href = "../index.html#usuarios";
+    } else if (localStorage.getItem("mapa") == 4) {
+		location.href = "../index.html#recibospendientes1";
     }
+        
+		
 }
